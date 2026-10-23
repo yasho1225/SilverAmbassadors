@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+:root {
+  --color-white: #ffffff;
+  --color-off-white: #f8f9fa;
+  --color-light-gray: #e9ecef;
+  --color-muted: #6b7280;
+  --color-charcoal: #242424;
+  --color-black: #111111;
+  --background: var(--color-white);
+  --foreground: var(--color-charcoal);
+  --surface: var(--color-off-white);
+  --border: var(--color-light-gray);
+  --accent: var(--color-black);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-muted: var(--color-muted);
+  --color-charcoal: var(--color-charcoal);
+  --color-ink: var(--color-black);
+  --color-off-white: var(--color-off-white);
+  --color-light-gray: var(--color-light-gray);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-fraunces);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-manrope), sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-charcoal) 14%, transparent);
+  color: var(--color-black);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
+}
+
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+.site-container {
+  width: min(1120px, calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.site-container-wide {
+  width: min(1280px, calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.section-pad {
+  padding-block: clamp(4.5rem, 10vw, 7.5rem);
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.hero-grain {
+  background-image:
+    radial-gradient(
+      ellipse 80% 60% at 70% 40%,
+      rgba(255, 255, 255, 0.08),
+      transparent 55%
+    ),
+    linear-gradient(
+      135deg,
+      #1a1a1a 0%,
+      #2c2c2c 42%,
+      #3a3834 70%,
+      #242424 100%
+    );
+}
+
+.photo-placeholder {
+  background:
+    linear-gradient(145deg, #eceff2 0%, #dfe3e8 48%, #cfd5dc 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.35) 48%,
+      transparent 65%
+    );
+  opacity: 0.55;
+}
+
+.nav-blur {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}

@@ -60,3 +60,18 @@ Until club assets are provided, the site uses clearly labeled placeholders for:
 ## Content source
 
 Mission and activity copy were provided by club leadership. Do not invent statistics, partnerships, or contact channels.
+
+## Product requirements
+
+See [`docs/PRD.md`](docs/PRD.md) for the full Product Requirements Document.
+
+## Pages
+
+| Path | Purpose |
+| --- | --- |
+| `/` | Homepage: mission, activities, events preview, gallery, CTA |
+| `/about` | Mission and who the club serves |
+| `/events` | Google Calendar (or placeholder) |
+| `/volunteer-hours` | Official hours Google Form |
+| `/gallery` | Event photo placeholders / future photos |
+| `/contact` | Get involved + contact placeholders |

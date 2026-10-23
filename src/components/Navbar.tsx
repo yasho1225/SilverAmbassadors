@@ -59,9 +59,10 @@ export function Navbar() {
               href={volunteerForm.viewUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-white transition-[transform,opacity] hover:opacity-90 active:scale-[0.98] sm:inline-flex"
+              className="inline-flex rounded-full bg-ink px-3 py-2 text-xs font-semibold text-white transition-[transform,opacity] hover:opacity-90 active:scale-[0.98] sm:px-4 sm:py-2.5 sm:text-sm"
             >
-              Submit Hours
+              <span className="sm:hidden">Hours</span>
+              <span className="hidden sm:inline">Submit Hours</span>
             </a>
             <button
               type="button"

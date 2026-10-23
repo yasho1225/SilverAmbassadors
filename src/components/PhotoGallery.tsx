@@ -2,7 +2,8 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X } from "lucide-react";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FadeIn } from "@/components/FadeIn";
 import { galleryPlaceholders } from "@/lib/content";
 
@@ -11,6 +12,7 @@ type PhotoGalleryProps = {
   title?: string;
   description?: string;
   limit?: number;
+  showViewAll?: boolean;
 };
 
 export function PhotoGallery({
@@ -18,6 +20,7 @@ export function PhotoGallery({
   title = "Moments from our community",
   description = "Authentic event photographs will replace these placeholders once club media is available.",
   limit,
+  showViewAll = false,
 }: PhotoGalleryProps) {
   const items = limit
     ? galleryPlaceholders.slice(0, limit)
@@ -26,21 +29,40 @@ export function PhotoGallery({
   const reduceMotion = useReducedMotion();
   const active = items.find((item) => item.id === activeId) ?? null;
 
+  useEffect(() => {
+    if (!activeId) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveId(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [activeId]);
+
   return (
     <section className="section-pad bg-off-white" aria-labelledby="gallery-heading">
       <div className="site-container-wide">
         <FadeIn>
-          <div className="max-w-2xl">
-            <p className="eyebrow mb-3">{eyebrow}</p>
-            <h2
-              id="gallery-heading"
-              className="font-display text-3xl tracking-tight text-ink sm:text-4xl md:text-[2.75rem]"
-            >
-              {title}
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-              {description}
-            </p>
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <p className="eyebrow mb-3">{eyebrow}</p>
+              <h2
+                id="gallery-heading"
+                className="font-display text-3xl tracking-tight text-ink sm:text-4xl md:text-[2.75rem]"
+              >
+                {title}
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+                {description}
+              </p>
+            </div>
+            {showViewAll ? (
+              <Link
+                href="/gallery"
+                className="inline-flex shrink-0 text-sm font-semibold text-ink underline decoration-light-gray underline-offset-4 transition-colors hover:decoration-ink"
+              >
+                View full gallery
+              </Link>
+            ) : null}
           </div>
         </FadeIn>
 

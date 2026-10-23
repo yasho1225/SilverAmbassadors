@@ -18,11 +18,23 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://silverambassadors.example.com",
+  ),
   title: {
     default: `${site.name} | ${site.school}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  applicationName: site.name,
+  keywords: [
+    "Silver Ambassadors",
+    "Alpharetta High School",
+    "volunteer",
+    "senior citizens",
+    "Tech Helps",
+    "student organization",
+  ],
   openGraph: {
     title: `${site.name} | ${site.school}`,
     description: site.description,
@@ -44,8 +56,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${manrope.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+        >
+          Skip to main content
+        </a>
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

@@ -26,6 +26,15 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
   }, [open]);
 
   useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, onClose]);
+
+  useEffect(() => {
     onClose();
   }, [pathname, onClose]);
 

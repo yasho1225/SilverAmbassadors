@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { CallToAction } from "@/components/CallToAction";
 import { Reveal } from "@/components/motion/Reveal";
 import { Showcase } from "@/components/Showcase";
@@ -14,31 +15,43 @@ export default function AboutPage() {
   return (
     <>
       <section className="site-pad section-y border-b border-line">
-        <div className="site-container-wide">
+        <div className="site-container-wide grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-12">
           <Reveal>
-            <h1 className="display max-w-[12ch] text-[clamp(3rem,9vw,6.5rem)] text-ink">
+            <h1 className="display max-w-[12ch] text-[clamp(2.6rem,7vw,4.75rem)] text-ink">
               {site.name}
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-              A student organization at {site.school} dedicated to mutual joy,
-              respect, and community with senior citizens in Alpharetta.
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+              A student organization at {site.school} building mutual joy,
+              respect, and community with seniors in Alpharetta.
             </p>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <div className="relative aspect-[4/3] overflow-hidden bg-ink">
+              <Image
+                src="/images/members-patio.jpg"
+                alt="Silver Ambassadors members outdoors after a visit"
+                fill
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="object-cover object-[center_40%]"
+                priority
+              />
+            </div>
           </Reveal>
         </div>
       </section>
 
       <section className="site-pad section-y bg-surface">
-        <div className="site-container-wide grid gap-12 lg:grid-cols-2">
+        <div className="site-container-wide grid gap-8 lg:grid-cols-2 lg:gap-14">
           <Reveal>
-            <h2 className="display text-[clamp(2.2rem,4vw,3.5rem)] text-ink">
+            <h2 className="display text-[clamp(2rem,4vw,3.2rem)] text-ink">
               Why we gather
             </h2>
           </Reveal>
-          <Reveal delay={0.08}>
-            <p className="font-display text-[clamp(1.25rem,1rem+1vw,1.75rem)] leading-relaxed text-ink">
+          <Reveal delay={0.06}>
+            <p className="font-display text-[clamp(1.15rem,0.95rem+0.8vw,1.5rem)] leading-relaxed text-ink">
               {site.mission}
             </p>
-            <div className="mt-8 space-y-4 text-base leading-relaxed text-muted">
+            <div className="mt-6 space-y-3 text-base leading-relaxed text-muted">
               {site.aboutBody.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}

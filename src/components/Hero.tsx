@@ -19,14 +19,14 @@ export function Hero() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el.querySelectorAll("[data-hero]"),
-        { opacity: 0, y: 24 },
+        { opacity: 0, y: 18 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.85,
-          stagger: 0.08,
+          duration: 0.75,
+          stagger: 0.07,
           ease: "power3.out",
-          delay: 0.05,
+          delay: 0.04,
         },
       );
     }, el);
@@ -37,45 +37,57 @@ export function Hero() {
   return (
     <section
       ref={root}
-      className="site-pad relative flex min-h-[calc(100svh-var(--nav-h))] flex-col"
+      className="relative isolate min-h-[min(92svh,52rem)] overflow-hidden"
     >
-      <div className="site-container-wide flex flex-1 flex-col justify-between py-10 sm:py-14">
-        <div className="max-w-[18ch]">
+      <Image
+        src="/images/visit-lounge.jpg"
+        alt="A Silver Ambassador visiting with senior residents"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-[center_28%]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+
+      <div className="site-pad relative z-10 flex min-h-[min(92svh,52rem)] flex-col justify-end pb-10 pt-24 sm:pb-14">
+        <div className="site-container-wide max-w-3xl">
+          <div data-hero className="mb-5 flex items-center gap-3" style={{ opacity: 0 }}>
+            <Image
+              src={site.logo.src}
+              alt=""
+              width={56}
+              height={56}
+              className="h-12 w-12 object-contain drop-shadow-md sm:h-14 sm:w-14"
+              priority
+            />
+            <p className="font-display text-2xl tracking-[-0.03em] text-background sm:text-3xl">
+              {site.name}
+            </p>
+          </div>
+
           <h1
             data-hero
-            className="display text-[clamp(3.4rem,12vw,8.5rem)] text-ink"
+            className="display max-w-[11ch] text-[clamp(2.8rem,9vw,5.75rem)] text-background"
             style={{ opacity: 0 }}
           >
             Students and seniors,{" "}
             <span className="text-accent">connected.</span>
           </h1>
-        </div>
 
-        <div
-          data-hero
-          className="mt-16 grid gap-8 border-t border-line pt-8 sm:grid-cols-[1.4fr_auto] sm:items-end"
-          style={{ opacity: 0 }}
-        >
-          <div className="flex gap-4 sm:gap-5">
-            <Image
-              src={site.logo.src}
-              alt={site.logo.alt}
-              width={72}
-              height={72}
-              className="mt-1 h-14 w-14 shrink-0 object-contain sm:h-[4.5rem] sm:w-[4.5rem]"
-              priority
-            />
-            <div>
-              <p className="font-display text-xl text-ink sm:text-2xl">
-                {site.name}
-              </p>
-              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-                {site.tagline} Weekly Tech Helps and shared moments of service at{" "}
-                {site.school}.
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <p
+            data-hero
+            className="mt-5 max-w-lg text-base leading-relaxed text-background/80 sm:text-lg"
+            style={{ opacity: 0 }}
+          >
+            Weekly Tech Helps Sundays at 1:00 pm · {site.school}
+          </p>
+
+          <div
+            data-hero
+            className="mt-8 flex flex-wrap gap-3"
+            style={{ opacity: 0 }}
+          >
             <a
               href={volunteerForm.viewUrl}
               target="_blank"
@@ -84,7 +96,7 @@ export function Hero() {
             >
               Submit Hours
             </a>
-            <Link href="/events" className="btn btn-ghost">
+            <Link href="/events" className="btn border border-background/35 bg-background/10 text-background backdrop-blur-sm hover:bg-background/20">
               View events
             </Link>
           </div>

@@ -1,39 +1,40 @@
 import { Reveal } from "@/components/motion/Reveal";
 import { site } from "@/lib/content";
 
-export function MissionSection() {
-  const facts = [
-    { label: "Sundays", value: "Weekly" },
-    { label: "Tech Helps", value: "1:00 pm" },
-    { label: "Where", value: "Alpharetta" },
-  ];
+const facts = [
+  { label: "Rhythm", value: "Every Sunday" },
+  { label: "Tech Helps", value: "1:00 pm" },
+  { label: "Home", value: "Alpharetta" },
+] as const;
 
+export function MissionSection() {
   return (
-    <section className="site-pad section-y border-t border-line bg-surface" aria-labelledby="mission">
+    <section className="site-pad section-y" aria-labelledby="mission">
       <div className="site-container-wide">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.15fr] lg:items-end lg:gap-14">
           <Reveal>
-            <h2 id="mission" className="display text-[clamp(2.4rem,5vw,4.5rem)] text-ink">
+            <h2
+              id="mission"
+              className="display text-[clamp(2rem,4.2vw,3.4rem)] text-ink"
+            >
               Mutual joy across generations.
             </h2>
           </Reveal>
-          <Reveal delay={0.08}>
-            <p className="font-display text-[clamp(1.2rem,1rem+1vw,1.65rem)] leading-relaxed text-ink">
+          <Reveal delay={0.06}>
+            <p className="max-w-[48ch] text-base leading-relaxed text-muted sm:text-lg">
               {site.mission}
             </p>
-            <div className="mt-8 space-y-4 text-base leading-relaxed text-muted">
-              {site.aboutBody.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
           </Reveal>
         </div>
 
-        <Reveal delay={0.1} className="mt-16 grid gap-6 border-t border-line pt-10 sm:grid-cols-3">
+        <Reveal
+          delay={0.08}
+          className="mt-10 grid gap-5 border-t border-line pt-8 sm:grid-cols-3"
+        >
           {facts.map((fact) => (
             <div key={fact.label}>
               <p className="fact text-ink">{fact.value}</p>
-              <p className="mt-2 text-sm text-muted">{fact.label}</p>
+              <p className="mt-1.5 text-sm text-muted">{fact.label}</p>
             </div>
           ))}
         </Reveal>

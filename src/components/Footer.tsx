@@ -54,11 +54,38 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-line pt-6 text-xs text-muted sm:flex-row sm:justify-between">
-          <p>
-            © 2026 {site.name} · {site.school}
+        <div className="mt-14 flex flex-col gap-4 border-t border-line pt-6 text-xs text-muted sm:flex-row sm:items-end sm:justify-between">
+          <div className="space-y-2">
+            <p>
+              © 2026 {site.name} · {site.school}
+            </p>
+            <p>Student-led service in Alpharetta, Georgia</p>
+          </div>
+          <p className="max-w-sm sm:text-right">
+            Atmosphere photos via{" "}
+            <a
+              href="https://unsplash.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-line underline-offset-2 hover:decoration-accent"
+            >
+              Unsplash
+            </a>
+            {site.atmosphereCredits.map((credit, index) => (
+              <span key={credit.href}>
+                {index === 0 ? " · " : ", "}
+                <a
+                  href={credit.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-line underline-offset-2 hover:decoration-accent"
+                >
+                  {credit.label}
+                </a>
+              </span>
+            ))}
+            . Club visit photos appear only in the gallery.
           </p>
-          <p>Student-led service in Alpharetta, Georgia</p>
         </div>
       </div>
     </footer>

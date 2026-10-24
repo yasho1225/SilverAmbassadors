@@ -1,31 +1,28 @@
 # Design system — Silver Ambassadors
 
-## World
-Quiet night editorial. Structured type, clear hierarchy, restrained silver accent.
+## Idea
+On this page, **the Sunday connection between students and seniors** becomes **the missing word in a poster sentence** — a photograph sits where “and” would be.
 
-## Imagery rule
-Visit photographs render **only** on `/gallery` via `galleryPhotos` → `PhotoGallery`.
-Logo may appear in brand chrome (nav/footer). Never place visit photos on Home, About, Hero, or CTA.
-
-## Type
-- **Newsreader** — headings (`display`)
-- **Manrope** — body, nav, buttons
-- Body ~17px / 1.65; reading measure ~38rem
-- Section labels: 12px uppercase tracked
+## Direction
+Taste `sentence-as-layout` · soot ground · lime accent · Schibsted Grotesk · shutter motion.
 
 ## Colour
-| Token | Value |
-| --- | --- |
-| `--bg` | `#0e1013` |
-| `--surface` | `#161a20` |
-| `--ink` | `#eef1f5` |
-| `--muted` | `#9aa3af` |
-| `--accent` | `#a8b9c9` |
+| Token | Value | Use |
+| --- | --- | --- |
+| `--bg` | `#0f0f0f` | Page / open & close |
+| `--surface` | `#1a1a1a` | Panels |
+| `--field` | `#ffffff` | Mid-band (visits teaser, events) |
+| `--ink` | `#ffffff` | Text on soot |
+| `--field-ink` | `#0f0f0f` | Text on field |
+| `--muted` | `#8f8f8f` | Secondary |
+| `--accent` | `#dafa9c` | Actions / one display line |
 
-## Layout
-- Content width: `min(1080px)` wide / `720px` reading
-- Section padding: `clamp(3.5rem, 7vw, 5.5rem)`
-- Home: Hero → Mission → What we do → Events → CTA (no photos)
+## Type
+**Schibsted Grotesk** for display (800, tracking -0.05) and UI (400–600).
+
+## Imagery
+- Atmosphere (Unsplash): `/public/images/atmosphere/` — hero strip, mission float, verb stages, visits teaser
+- Club photos: `/gallery` only via `galleryPhotos`
 
 ## Motion
-Lenis + light GSAP (masked hero lines, list reveals, gallery fade). Respect reduced motion.
+Lenis + GSAP: masked hero lines, shutter on inline photo, sticky verb stages with scrubbed Ken Burns, print reveal, section reveals.

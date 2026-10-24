@@ -1,22 +1,15 @@
 import type { Metadata } from "next";
-import { Manrope, Newsreader } from "next/font/google";
+import { Schibsted_Grotesk } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { site } from "@/lib/content";
 import "./globals.css";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const grotesk = Schibsted_Grotesk({
+  variable: "--font-grotesk",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -59,10 +52,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${manrope.variable} ${newsreader.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${grotesk.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <SmoothScroll>
           <a

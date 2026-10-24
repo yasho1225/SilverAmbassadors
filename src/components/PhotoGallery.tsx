@@ -8,7 +8,7 @@ import { galleryPhotos } from "@/lib/content";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/** Exclusive home for visit photographs — mount only on `/gallery`. */
+/** Club visit photos — exclusive to `/gallery`. */
 export function PhotoGallery() {
   const root = useRef<HTMLElement>(null);
 
@@ -16,33 +16,32 @@ export function PhotoGallery() {
     const el = root.current;
     if (!el) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const frames = el.querySelectorAll<HTMLElement>("[data-frame]");
-    const imgs = el.querySelectorAll<HTMLElement>("[data-img]");
     if (reduce) return;
 
+    const frames = el.querySelectorAll<HTMLElement>("[data-frame]");
     const ctx = gsap.context(() => {
-      frames.forEach((frame, i) => {
-        const img = imgs[i];
+      frames.forEach((frame) => {
+        const img = frame.querySelector<HTMLElement>("[data-img]");
         gsap.fromTo(
           frame,
-          { opacity: 0, y: 20 },
+          { opacity: 0, y: 24 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.7,
+            duration: 0.75,
             ease: "power3.out",
-            scrollTrigger: { trigger: frame, start: "top 92%", once: true },
+            scrollTrigger: { trigger: frame, start: "top 90%", once: true },
           },
         );
         if (img) {
           gsap.fromTo(
             img,
-            { scale: 1.06 },
+            { scale: 1.08 },
             {
               scale: 1,
-              duration: 1.1,
+              duration: 1.2,
               ease: "power2.out",
-              scrollTrigger: { trigger: frame, start: "top 92%", once: true },
+              scrollTrigger: { trigger: frame, start: "top 90%", once: true },
             },
           );
         }
@@ -57,12 +56,12 @@ export function PhotoGallery() {
       <div className="site-pad site-container-wide mb-10 sm:mb-12">
         <h1
           id="gallery-heading"
-          className="display max-w-[14ch] text-[clamp(2.5rem,5.5vw,4rem)] text-ink"
+          className="display max-w-[12ch] text-[clamp(2.8rem,7vw,5rem)] text-ink"
         >
           From our visits
         </h1>
-        <p className="mt-5 max-w-[38rem] text-[1.05rem] leading-relaxed text-muted">
-          Photographs from Silver Ambassadors Sundays.
+        <p className="mt-5 max-w-lg text-base leading-relaxed text-muted">
+          Club photographs from Silver Ambassadors Sundays — only on this page.
         </p>
       </div>
 
@@ -72,7 +71,7 @@ export function PhotoGallery() {
             <figure
               key={photo.id}
               data-frame
-              className="relative aspect-[4/3] overflow-hidden bg-surface"
+              className="group relative aspect-[4/3] overflow-hidden bg-surface"
               style={{ opacity: 0 }}
             >
               <Image
@@ -81,14 +80,14 @@ export function PhotoGallery() {
                 alt={photo.alt}
                 fill
                 sizes="(max-width: 640px) 100vw, 50vw"
-                className="object-cover"
+                className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]"
                 style={{
                   objectPosition:
                     photo.id === "visit-lounge" ? "center 28%" : "center 40%",
                 }}
                 priority={index < 2}
               />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-4 pt-12 pb-4">
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-4 pt-14 pb-4">
                 <p className="text-sm text-white">{photo.caption}</p>
               </figcaption>
             </figure>

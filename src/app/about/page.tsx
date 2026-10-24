@@ -15,10 +15,10 @@ export default function AboutPage() {
       <section className="site-pad section-y border-b border-line">
         <div className="site-container-wide">
           <Reveal>
-            <h1 className="display max-w-[14ch] text-[clamp(2.5rem,5.5vw,4rem)] text-ink">
+            <h1 className="display max-w-[12ch] text-[clamp(2.8rem,8vw,5.5rem)] text-ink">
               {site.name}
             </h1>
-            <p className="mt-6 max-w-[38rem] text-[1.05rem] leading-relaxed text-muted">
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
               A student organization at {site.school} building mutual joy,
               respect, and community with seniors in Alpharetta.
             </p>
@@ -27,14 +27,12 @@ export default function AboutPage() {
       </section>
 
       <section className="site-pad section-y bg-surface">
-        <div className="site-container-wide grid gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="site-container-wide max-w-3xl">
           <Reveal>
-            <h2 className="display text-[clamp(1.85rem,3.5vw,2.75rem)] text-ink">
+            <h2 className="display text-[clamp(2rem,4vw,3rem)] text-ink">
               Why we gather
             </h2>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <p className="font-display text-[clamp(1.1rem,0.95rem+0.6vw,1.35rem)] leading-relaxed text-ink">
+            <p className="mt-6 text-[clamp(1.15rem,2vw,1.45rem)] font-medium leading-snug tracking-[-0.02em] text-ink">
               {site.mission}
             </p>
             <div className="mt-6 space-y-4 text-base leading-relaxed text-muted">
@@ -44,7 +42,7 @@ export default function AboutPage() {
             </div>
             <p className="mt-8">
               <Link href="/gallery" className="cta-underline text-accent">
-                View the photo gallery
+                See photographs from real visits
               </Link>
             </p>
           </Reveal>

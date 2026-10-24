@@ -14,7 +14,7 @@ export default function HomePage() {
       <WhatWeDo />
       <Showcase />
       <EventsPreview />
-      <PhotoGallery limit={8} showViewAll />
+      <PhotoGallery limit={4} showViewAll />
       <CallToAction />
     </>
   );

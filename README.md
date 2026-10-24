@@ -73,5 +73,5 @@ See [`docs/PRD.md`](docs/PRD.md) for the full Product Requirements Document.
 | `/about` | Mission and who the club serves |
 | `/events` | Google Calendar (or placeholder) |
 | `/volunteer-hours` | Official hours Google Form |
-| `/gallery` | Event photo placeholders / future photos |
+| `/gallery` | Club photographs from visits and gatherings |
 | `/contact` | Get involved + contact placeholders |

@@ -33,6 +33,10 @@ export const site = {
     location: "Alpharetta High School, Alpharetta, GA",
     note: "Contact details will be added once verified by club leadership.",
   },
+  logo: {
+    src: "/images/logo.png",
+    alt: "Silver Ambassadors medallion logo — handshake, Established 2026",
+  },
 } as const;
 
 export const navLinks = [
@@ -44,41 +48,33 @@ export const navLinks = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
-export const galleryPlaceholders = [
+export const galleryPhotos = [
   {
-    id: "1",
-    alt: "Placeholder for a Silver Ambassadors event photograph",
-    caption: "Event photo placeholder",
-    span: "wide" as const,
-  },
-  {
-    id: "2",
-    alt: "Placeholder for students volunteering with seniors",
-    caption: "Event photo placeholder",
+    id: "visit-lounge",
+    src: "/images/visit-lounge.jpg",
+    alt: "A Silver Ambassador visiting with two senior residents in a lounge",
+    caption: "Sunday visit",
     span: "tall" as const,
   },
   {
-    id: "3",
-    alt: "Placeholder for a Tech Help session photograph",
-    caption: "Event photo placeholder",
-    span: "square" as const,
-  },
-  {
-    id: "4",
-    alt: "Placeholder for a special community event photograph",
-    caption: "Event photo placeholder",
-    span: "square" as const,
-  },
-  {
-    id: "5",
-    alt: "Placeholder for a seasonal Silver Ambassadors gathering",
-    caption: "Event photo placeholder",
+    id: "group-lounge",
+    src: "/images/group-lounge.jpg",
+    alt: "Ambassadors gathered with a senior resident in the community lounge",
+    caption: "Shared company",
     span: "wide" as const,
   },
   {
-    id: "6",
-    alt: "Placeholder for members sharing time with seniors",
-    caption: "Event photo placeholder",
-    span: "square" as const,
+    id: "members-lobby",
+    src: "/images/members-lobby.jpg",
+    alt: "Silver Ambassadors members together in the building lobby",
+    caption: "The ambassadors",
+    span: "wide" as const,
   },
-];
+  {
+    id: "members-patio",
+    src: "/images/members-patio.jpg",
+    alt: "Silver Ambassadors members outdoors after a visit",
+    caption: "After the visit",
+    span: "wide" as const,
+  },
+] as const;

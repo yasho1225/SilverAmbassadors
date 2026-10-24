@@ -171,24 +171,6 @@ body {
   border-bottom: 1px solid var(--line);
 }
 
-.photo-slot {
-  background:
-    radial-gradient(circle at 28% 22%, rgba(158, 180, 200, 0.18), transparent 45%),
-    linear-gradient(155deg, #2a3038 0%, #1a1e24 55%, #12151a 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.photo-slot::after {
-  content: "Photo placeholder";
-  position: absolute;
-  inset: auto 1rem 1rem auto;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--ink) 45%, transparent);
-}
-
 .tile {
   background: var(--surface);
   border: 1px solid var(--line);

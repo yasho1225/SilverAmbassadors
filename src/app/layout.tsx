@@ -43,11 +43,17 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: site.name,
+    images: [{ url: site.logo.src, width: 1200, height: 1200, alt: site.logo.alt }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} | ${site.school}`,
     description: site.description,
+    images: [site.logo.src],
+  },
+  icons: {
+    icon: site.logo.src,
+    apple: site.logo.src,
   },
 };
 

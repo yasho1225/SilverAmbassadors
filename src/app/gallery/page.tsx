@@ -9,6 +9,6 @@ export const metadata: Metadata = {
 
 export default function GalleryPage() {
   return (
-    <PhotoGallery title="Event photographs and club rhythm" />
+    <PhotoGallery title="From our visits" />
   );
 }

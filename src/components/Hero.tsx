@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -55,14 +56,24 @@ export function Hero() {
           className="mt-16 grid gap-8 border-t border-line pt-8 sm:grid-cols-[1.4fr_auto] sm:items-end"
           style={{ opacity: 0 }}
         >
-          <div>
-            <p className="font-display text-xl text-ink sm:text-2xl">
-              {site.name}
-            </p>
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              {site.tagline} Weekly Tech Helps and shared moments of service at{" "}
-              {site.school}.
-            </p>
+          <div className="flex gap-4 sm:gap-5">
+            <Image
+              src={site.logo.src}
+              alt={site.logo.alt}
+              width={72}
+              height={72}
+              className="mt-1 h-14 w-14 shrink-0 object-contain sm:h-[4.5rem] sm:w-[4.5rem]"
+              priority
+            />
+            <div>
+              <p className="font-display text-xl text-ink sm:text-2xl">
+                {site.name}
+              </p>
+              <p className="mt-3 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+                {site.tagline} Weekly Tech Helps and shared moments of service at{" "}
+                {site.school}.
+              </p>
+            </div>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <a

@@ -1,4 +1,20 @@
+import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
+
+const panels = [
+  {
+    src: "/images/visit-lounge.jpg",
+    alt: "A student volunteer sitting with senior residents around a lounge table",
+    label: "Visits",
+    word: "Together",
+  },
+  {
+    src: "/images/group-lounge.jpg",
+    alt: "Ambassadors and a senior resident sharing a moment in the lounge",
+    label: "Company",
+    word: "Present",
+  },
+] as const;
 
 export function Showcase() {
   return (
@@ -19,24 +35,26 @@ export function Showcase() {
         </Reveal>
 
         <div className="mt-[10vh] grid gap-10 md:grid-cols-2">
-          <Reveal>
-            <div className="relative h-[38svh] overflow-hidden border border-line bg-surface md:h-[48svh]">
-              <p className="absolute top-4 left-4 text-sm text-muted">Students</p>
-              <p className="cut-word absolute top-1/2 left-0 -translate-y-1/2 text-ink">
-                Students
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <div className="relative h-[38svh] overflow-hidden border border-line bg-ink text-background md:h-[48svh]">
-              <p className="absolute top-4 left-4 text-sm text-background/55">
-                Seniors
-              </p>
-              <p className="cut-word absolute top-1/2 left-0 -translate-y-1/2 text-background">
-                Seniors
-              </p>
-            </div>
-          </Reveal>
+          {panels.map((panel, index) => (
+            <Reveal key={panel.src} delay={index * 0.08}>
+              <div className="group relative h-[38svh] overflow-hidden border border-line bg-surface md:h-[48svh]">
+                <Image
+                  src={panel.src}
+                  alt={panel.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                <p className="absolute top-4 left-4 text-sm text-background/80">
+                  {panel.label}
+                </p>
+                <p className="cut-word absolute bottom-4 left-0 text-background/90">
+                  {panel.word}
+                </p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

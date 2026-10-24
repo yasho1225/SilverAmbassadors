@@ -1,18 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
-
-const tiles = [
-  { word: "Sunday", caption: "Weekly" },
-  { word: "Tech", caption: "Help sessions" },
-  { word: "Joy", caption: "Shared" },
-  { word: "Hours", caption: "Volunteer" },
-  { word: "Games", caption: "Board night" },
-  { word: "Silver", caption: "Ambassadors" },
-  { word: "Carve", caption: "Pumpkins" },
-  { word: "Serve", caption: "Ice cream" },
-] as const;
+import { galleryPhotos } from "@/lib/content";
 
 type PhotoGalleryProps = {
   limit?: number;
@@ -23,9 +14,9 @@ type PhotoGalleryProps = {
 export function PhotoGallery({
   limit,
   showViewAll = false,
-  title = "The rhythm of the club",
+  title = "Moments from the club",
 }: PhotoGalleryProps) {
-  const items = limit ? tiles.slice(0, limit) : tiles;
+  const items = limit ? galleryPhotos.slice(0, limit) : galleryPhotos;
 
   return (
     <section className="site-pad section-y bg-surface" aria-labelledby="gallery">
@@ -34,7 +25,7 @@ export function PhotoGallery({
           <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <h2
               id="gallery"
-              className="display max-w-[14ch] text-[clamp(2.2rem,4.5vw,3.8rem)] text-ink"
+              className="display max-w-[16ch] text-[clamp(2.2rem,4.5vw,3.8rem)] text-ink"
             >
               {title}
             </h2>
@@ -46,33 +37,33 @@ export function PhotoGallery({
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-          {items.map((tile, index) => {
-            const inverse = index % 3 === 1;
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((photo, index) => {
+            const tall = photo.span === "tall";
             return (
-              <Reveal key={tile.word} delay={index * 0.03}>
-                <div
-                  className={`relative aspect-square overflow-hidden ${
-                    inverse ? "bg-ink text-background" : "tile text-ink"
+              <Reveal
+                key={photo.id}
+                delay={index * 0.04}
+                className={tall ? "sm:row-span-2" : undefined}
+              >
+                <figure
+                  className={`group relative overflow-hidden border border-line bg-ink ${
+                    tall
+                      ? "aspect-[3/4] sm:h-full sm:min-h-[28rem] sm:aspect-auto"
+                      : "aspect-[4/3]"
                   }`}
                 >
-                  {index % 4 === 2 ? (
-                    <div className="photo-slot absolute inset-0" />
-                  ) : (
-                    <p className="absolute inset-0 flex items-center justify-center font-display text-[clamp(2rem,7vw,4.5rem)] tracking-[-0.04em]">
-                      {tile.word}
-                    </p>
-                  )}
-                  <p
-                    className={`absolute inset-x-0 bottom-3 text-center text-[0.8rem] ${
-                      inverse || index % 4 === 2
-                        ? "text-background/70"
-                        : "text-muted"
-                    }`}
-                  >
-                    {index % 4 === 2 ? "Event photo placeholder" : tile.caption}
-                  </p>
-                </div>
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]"
+                  />
+                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-4 pt-12 pb-4">
+                    <p className="text-sm text-background/90">{photo.caption}</p>
+                  </figcaption>
+                </figure>
               </Reveal>
             );
           })}

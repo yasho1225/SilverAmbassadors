@@ -42,14 +42,15 @@ export function GalleryTeaser() {
   return (
     <section
       ref={root}
-      className="relative overflow-hidden bg-ink text-background"
+      className="relative overflow-hidden border-y border-line"
+      style={{ background: "var(--ink)", color: "var(--bg)" }}
       aria-labelledby="gallery-teaser"
     >
-      <div className="site-pad site-container-wide flex min-h-[52svh] flex-col justify-between gap-12 py-14 sm:py-16">
+      <div className="site-pad site-container-wide flex min-h-[48svh] flex-col justify-between gap-10 py-14 sm:py-16">
         <p
           data-teaser
-          className="text-sm tracking-[0.14em] text-background/45 uppercase"
-          style={{ opacity: 0 }}
+          className="text-sm tracking-[0.14em] uppercase"
+          style={{ opacity: 0, color: "color-mix(in srgb, var(--bg) 45%, transparent)" }}
         >
           Gallery
         </p>
@@ -57,7 +58,7 @@ export function GalleryTeaser() {
           <h2
             data-teaser
             id="gallery-teaser"
-            className="display text-[clamp(2.8rem,7vw,5.75rem)] text-background"
+            className="display text-[clamp(2.8rem,7vw,5.75rem)]"
             style={{ opacity: 0 }}
           >
             Four photographs.
@@ -65,8 +66,11 @@ export function GalleryTeaser() {
           </h2>
           <p
             data-teaser
-            className="mt-6 max-w-[40ch] text-base leading-relaxed text-background/65 sm:text-lg"
-            style={{ opacity: 0 }}
+            className="mt-6 max-w-[40ch] text-base leading-relaxed sm:text-lg"
+            style={{
+              opacity: 0,
+              color: "color-mix(in srgb, var(--bg) 62%, transparent)",
+            }}
           >
             Lounge Sundays and the walk out after — every club photo lives on
             the gallery page, shown once and large.
@@ -75,8 +79,12 @@ export function GalleryTeaser() {
         <Link
           data-teaser
           href="/gallery"
-          className="btn w-fit border-0 bg-background text-ink hover:bg-background/90"
-          style={{ opacity: 0 }}
+          className="btn w-fit"
+          style={{
+            opacity: 0,
+            background: "var(--bg)",
+            color: "var(--ink)",
+          }}
         >
           Open gallery
         </Link>

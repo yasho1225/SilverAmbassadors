@@ -35,27 +35,27 @@ export function PhotoGallery() {
     const ctx = gsap.context(() => {
       frames.forEach((frame, index) => {
         const img = images[index];
-        gsap.set(frame, { clipPath: "inset(12% 12% 12% 12%)" });
-        gsap.set(img, { scale: 1.14 });
+        gsap.set(frame, { clipPath: "inset(10% 10% 10% 10%)" });
+        gsap.set(img, { scale: 1.12 });
 
         gsap
           .timeline({
             scrollTrigger: {
               trigger: frame,
-              start: "top 90%",
+              start: "top 92%",
               once: true,
             },
           })
           .to(frame, {
             clipPath: "inset(0% 0% 0% 0%)",
-            duration: 1.1,
+            duration: 1.05,
             ease: "power3.inOut",
           })
           .to(
             img,
             {
               scale: 1,
-              duration: 1.4,
+              duration: 1.35,
               ease: "power2.out",
             },
             0,
@@ -80,23 +80,23 @@ export function PhotoGallery() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-1.5 sm:gap-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         {galleryPhotos.map((photo, index) => (
           <figure
             key={photo.id}
             data-frame
-            className={`relative overflow-hidden bg-ink ${
+            className={`relative overflow-hidden bg-[var(--surface)] ${
               photo.layout === "tall"
-                ? "aspect-[3/4] sm:aspect-[3/4] lg:col-span-1"
-                : "aspect-[4/3] sm:aspect-[4/3]"
-            } ${index === 0 ? "col-span-2 row-span-2 aspect-auto min-h-[22rem] sm:min-h-[28rem] lg:col-span-2 lg:row-span-2 lg:min-h-[36rem]" : ""}`}
+                ? "aspect-[3/4] sm:aspect-[4/5]"
+                : "aspect-[4/3] sm:aspect-[5/4]"
+            }`}
           >
             <Image
               data-img
               src={photo.src}
               alt={photo.alt}
               fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              sizes="(max-width: 640px) 100vw, 50vw"
               className="object-cover"
               style={{
                 objectPosition:
@@ -104,8 +104,8 @@ export function PhotoGallery() {
               }}
               priority={index < 2}
             />
-            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-3 pt-12 pb-3 sm:px-4 sm:pb-4">
-              <p className="text-xs text-background/90 sm:text-sm">{photo.caption}</p>
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-4 pt-16 pb-4">
+              <p className="text-sm font-medium text-white">{photo.caption}</p>
             </figcaption>
           </figure>
         ))}

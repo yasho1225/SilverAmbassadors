@@ -1,10 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { site } from "@/lib/content";
 import { volunteerForm } from "@/lib/config";
 
 export function Hero() {
@@ -39,64 +37,39 @@ export function Hero() {
 
   return (
     <section ref={root} className="site-pad relative overflow-hidden border-b border-line">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 hero-field"
-      />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 hero-field" />
 
-      <div className="site-container-wide relative flex min-h-[calc(100svh-var(--nav-h))] flex-col justify-between gap-12 py-10 sm:py-12">
-        <div className="flex items-start justify-between gap-6">
-          <div data-hero className="flex items-center gap-4">
-            <Image
-              src={site.logo.src}
-              alt=""
-              width={88}
-              height={88}
-              className="h-16 w-16 object-contain sm:h-20 sm:w-20"
-              priority
-            />
-            <div>
-              <p className="font-display text-2xl leading-none tracking-[-0.03em] text-ink sm:text-3xl">
-                {site.name}
-              </p>
-              <p className="mt-2 text-[0.72rem] tracking-[0.16em] text-muted uppercase">
-                {site.school}
-              </p>
-            </div>
-          </div>
-          <p
-            data-hero
-            className="hidden max-w-[18ch] text-right text-sm leading-relaxed text-muted md:block"
-          >
-            Sundays at 1:00 · Tech Helps & shared hours
-          </p>
-        </div>
+      <div className="site-container-wide relative flex min-h-[calc(100svh-var(--nav-h))] flex-col justify-between gap-10 py-10 sm:gap-12 sm:py-12">
+        <p
+          data-hero
+          className="max-w-[28ch] text-sm leading-relaxed text-muted sm:text-base"
+        >
+          Alpharetta High School · Sundays at 1:00 · Tech Helps & shared hours
+        </p>
 
-        <div>
-          <h1 className="display max-w-[11ch] text-[clamp(3.6rem,11vw,8.75rem)] text-ink">
-            <span className="line-mask">
-              <span data-line className="block">
-                Students
-              </span>
+        <h1 className="display max-w-[11ch] text-[clamp(3.6rem,11vw,8.75rem)] text-ink">
+          <span className="line-mask">
+            <span data-line className="block">
+              Students
             </span>
-            <span className="line-mask">
-              <span data-line className="block">
-                and seniors,
-              </span>
+          </span>
+          <span className="line-mask">
+            <span data-line className="block">
+              and seniors,
             </span>
-            <span className="line-mask">
-              <span data-line className="block text-accent">
-                connected.
-              </span>
+          </span>
+          <span className="line-mask">
+            <span data-line className="block text-accent">
+              connected.
             </span>
-          </h1>
-        </div>
+          </span>
+        </h1>
 
         <div
           data-hero
           className="grid gap-8 border-t border-line pt-8 sm:grid-cols-[1.2fr_auto] sm:items-end"
         >
-          <div className="grid grid-cols-3 gap-4 max-w-md">
+          <div className="grid max-w-md grid-cols-3 gap-4">
             <div>
               <p className="fact text-ink">Sun</p>
               <p className="mt-1 text-xs text-muted">Every week</p>

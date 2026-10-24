@@ -39,7 +39,7 @@ export function PhotoGallery({
   }, [activeId]);
 
   return (
-    <section className="section-pad bg-off-white" aria-labelledby="gallery-heading">
+    <section className="section-pad bg-stone/55" aria-labelledby="gallery-heading">
       <div className="site-container-wide">
         <FadeIn>
           <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">

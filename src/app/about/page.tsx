@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b border-border bg-off-white section-pad !pb-16 !pt-20">
+      <section className="border-b border-border section-pad !pb-16 !pt-20">
         <div className="site-container">
           <FadeIn>
             <p className="eyebrow mb-4">About</p>
@@ -28,20 +28,25 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-pad bg-white">
-        <div className="site-container grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
-          <FadeIn>
-            <SectionHeading eyebrow="Mission" title="Why we gather" />
-          </FadeIn>
-          <FadeIn delay={0.08}>
-            <p className="font-display text-2xl leading-relaxed text-ink sm:text-[1.75rem]">
-              {site.mission}
-            </p>
-          </FadeIn>
+      <section className="section-pad">
+        <div className="site-container">
+          <div className="panel overflow-hidden lg:grid lg:grid-cols-[0.9fr_1.1fr]">
+            <FadeIn className="border-b border-border bg-charcoal px-8 py-10 text-white sm:px-10 lg:border-r lg:border-b-0">
+              <p className="eyebrow mb-3 !text-white/55">Mission</p>
+              <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
+                Why we gather
+              </h2>
+            </FadeIn>
+            <FadeIn delay={0.08} className="bg-surface-elevated px-8 py-10 sm:px-10">
+              <p className="font-display text-2xl leading-relaxed text-ink sm:text-[1.75rem]">
+                {site.mission}
+              </p>
+            </FadeIn>
+          </div>
         </div>
       </section>
 
-      <section className="section-pad bg-off-white">
+      <section className="section-pad bg-stone/60">
         <div className="site-container">
           <FadeIn>
             <SectionHeading
@@ -51,9 +56,9 @@ export default function AboutPage() {
             />
           </FadeIn>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2">
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
             <FadeIn>
-              <article className="h-full border-t border-border pt-6">
+              <article className="panel h-full p-7">
                 <h3 className="text-xl font-semibold text-ink">Students</h3>
                 <p className="mt-3 text-base leading-relaxed text-muted">
                   Members earn valuable volunteer hours while improving
@@ -63,7 +68,7 @@ export default function AboutPage() {
               </article>
             </FadeIn>
             <FadeIn delay={0.06}>
-              <article className="h-full border-t border-border pt-6">
+              <article className="panel h-full p-7">
                 <h3 className="text-xl font-semibold text-ink">
                   Senior citizens
                 </h3>
@@ -77,13 +82,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-pad bg-white">
+      <section className="section-pad">
         <div className="site-container">
           <FadeIn>
-            <SectionHeading
-              eyebrow="Activities"
-              title="Our regular rhythm"
-            />
+            <SectionHeading eyebrow="Activities" title="Our regular rhythm" />
           </FadeIn>
           <div className="mt-10 space-y-6">
             {site.aboutBody.map((paragraph, index) => (
@@ -95,7 +97,7 @@ export default function AboutPage() {
             ))}
           </div>
           <FadeIn delay={0.1}>
-            <ul className="mt-10 max-w-2xl space-y-4 border-t border-border pt-8">
+            <ul className="panel mt-10 max-w-2xl space-y-5 p-7">
               {site.activities.map((activity) => (
                 <li key={activity.title}>
                   <p className="font-semibold text-ink">{activity.title}</p>

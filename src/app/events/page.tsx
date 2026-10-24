@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function EventsPage() {
   return (
     <>
-      <section className="border-b border-border bg-off-white section-pad !pb-14 !pt-20">
+      <section className="border-b border-border section-pad !pb-14 !pt-20">
         <div className="site-container">
           <FadeIn>
             <SectionHeading
@@ -24,20 +24,20 @@ export default function EventsPage() {
         </div>
       </section>
 
-      <section className="section-pad bg-white">
+      <section className="section-pad">
         <div className="site-container">
           <FadeIn>
             <CalendarEmbed />
           </FadeIn>
           <FadeIn delay={0.08}>
-            <div className="mt-10 max-w-2xl rounded-2xl border border-border bg-off-white p-6">
+            <div className="panel mt-10 max-w-2xl p-6">
               <h2 className="text-lg font-semibold text-ink">
                 Calendar setup note
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted">
                 If you are a club administrator: publish the Google Calendar, copy
                 the embed URL from Calendar settings → Integrate calendar, and set{" "}
-                <code className="rounded bg-white px-1.5 py-0.5 text-xs">
+                <code className="rounded bg-stone px-1.5 py-0.5 text-xs">
                   NEXT_PUBLIC_GOOGLE_CALENDAR_EMBED_URL
                 </code>{" "}
                 in the project environment. Public viewers do not need edit

@@ -28,8 +28,8 @@ export function Navbar() {
       <header
         className={`sticky top-0 z-50 border-b transition-[background,border-color,box-shadow] ${
           scrolled
-            ? "nav-blur border-border shadow-[0_1px_0_rgba(17,17,17,0.04)]"
-            : "border-transparent bg-white/80"
+            ? "nav-blur border-border shadow-[0_1px_0_rgba(17,17,17,0.06)]"
+            : "border-border/70 bg-background/75"
         }`}
       >
         <div className="site-container-wide flex h-[4.25rem] items-center justify-between gap-4">
@@ -44,8 +44,8 @@ export function Navbar() {
                   href={link.href}
                   className={`rounded-full px-3.5 py-2 text-sm transition-colors ${
                     active
-                      ? "bg-off-white font-semibold text-ink"
-                      : "text-charcoal hover:bg-off-white hover:text-ink"
+                      ? "bg-charcoal font-semibold text-white"
+                      : "text-charcoal hover:bg-surface-elevated hover:text-ink"
                   }`}
                 >
                   {link.label}
@@ -66,7 +66,7 @@ export function Navbar() {
             </a>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-ink transition-colors hover:bg-off-white lg:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-elevated text-ink transition-colors hover:border-charcoal/30 lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}

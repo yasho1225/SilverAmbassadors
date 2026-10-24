@@ -3,9 +3,14 @@ import Link from "next/link";
 type BrandMarkProps = {
   className?: string;
   compact?: boolean;
+  inverse?: boolean;
 };
 
-export function BrandMark({ className = "", compact = false }: BrandMarkProps) {
+export function BrandMark({
+  className = "",
+  compact = false,
+  inverse = false,
+}: BrandMarkProps) {
   return (
     <Link
       href="/"
@@ -14,16 +19,28 @@ export function BrandMark({ className = "", compact = false }: BrandMarkProps) {
     >
       <span
         aria-hidden="true"
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-light-gray bg-off-white text-[0.7rem] font-semibold tracking-[0.08em] text-ink transition-colors group-hover:border-charcoal"
+        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[0.7rem] font-semibold tracking-[0.08em] transition-transform group-hover:scale-[1.03] ${
+          inverse
+            ? "border border-white/25 bg-white/10 text-white"
+            : "border border-charcoal/20 bg-charcoal text-white"
+        }`}
       >
         SA
       </span>
       <span className="min-w-0">
-        <span className="block font-display text-lg leading-none tracking-tight text-ink sm:text-xl">
+        <span
+          className={`block font-display text-lg leading-none tracking-tight sm:text-xl ${
+            inverse ? "text-white" : "text-ink"
+          }`}
+        >
           Silver Ambassadors
         </span>
         {!compact ? (
-          <span className="mt-1 block text-[0.7rem] font-medium tracking-[0.12em] text-muted uppercase">
+          <span
+            className={`mt-1 block text-[0.7rem] font-medium tracking-[0.12em] uppercase ${
+              inverse ? "text-white/50" : "text-muted"
+            }`}
+          >
             Alpharetta High School
           </span>
         ) : null}

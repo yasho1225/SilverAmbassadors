@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function VolunteerHoursPage() {
   return (
     <>
-      <section className="border-b border-border bg-off-white section-pad !pb-10 !pt-20">
+      <section className="border-b border-border section-pad !pb-10 !pt-20">
         <div className="site-container">
           <p className="eyebrow mb-4">For members</p>
           <h1 className="font-display max-w-3xl text-4xl tracking-tight text-ink sm:text-5xl">

@@ -11,7 +11,7 @@ export function VolunteerHoursSection({
   showEmbed = true,
 }: VolunteerHoursSectionProps) {
   return (
-    <section className="section-pad bg-white" aria-labelledby="hours-heading">
+    <section className="section-pad" aria-labelledby="hours-heading">
       <div className="site-container">
         <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <FadeIn>
@@ -25,7 +25,7 @@ export function VolunteerHoursSection({
                 href={volunteerForm.viewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                className="btn-primary gap-2"
               >
                 Submit Volunteer Hours
                 <ExternalLink size={15} aria-hidden="true" />
@@ -34,7 +34,7 @@ export function VolunteerHoursSection({
                 href={volunteerForm.viewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-border px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-off-white"
+                className="btn-secondary"
               >
                 Open form in a new tab
               </a>
@@ -46,11 +46,11 @@ export function VolunteerHoursSection({
 
           {showEmbed ? (
             <FadeIn delay={0.08}>
-              <div className="overflow-hidden rounded-2xl border border-border bg-off-white">
+              <div className="panel overflow-hidden">
                 <iframe
                   title="Silver Ambassadors volunteer hour log form"
                   src={volunteerForm.embedUrl}
-                  className="h-[640px] w-full border-0 bg-white"
+                  className="h-[640px] w-full border-0 bg-surface-elevated"
                   loading="lazy"
                 >
                   Loading…

@@ -19,7 +19,7 @@ export function CalendarEmbed({
   if (!embedUrl) {
     return (
       <div
-        className={`rounded-2xl border border-dashed border-border bg-off-white px-6 py-16 text-center ${className}`}
+        className={`rounded-2xl border border-dashed border-border bg-surface-elevated px-6 py-16 text-center ${className}`}
       >
         <p className="eyebrow mb-3">Calendar placeholder</p>
         <h3 className="font-display text-2xl text-ink">
@@ -28,7 +28,7 @@ export function CalendarEmbed({
         <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted">
           The official Google Calendar embed is not configured yet. A club
           administrator can set{" "}
-          <code className="rounded bg-white px-1.5 py-0.5 text-xs text-charcoal">
+          <code className="rounded bg-stone px-1.5 py-0.5 text-xs text-charcoal">
             NEXT_PUBLIC_GOOGLE_CALENDAR_EMBED_URL
           </code>{" "}
           after making the calendar publicly viewable under Google Calendar →
@@ -40,7 +40,7 @@ export function CalendarEmbed({
 
   return (
     <div className={className}>
-      <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_1px_0_rgba(17,17,17,0.04)]">
+      <div className="overflow-hidden rounded-2xl border border-border bg-surface-elevated">
         <iframe
           title={title}
           src={embedUrl}

@@ -4,8 +4,13 @@ import { volunteerForm } from "@/lib/config";
 
 export function CallToAction() {
   return (
-    <section className="section-pad bg-ink text-white" aria-labelledby="cta-heading">
-      <div className="site-container">
+    <section
+      className="relative isolate overflow-hidden section-pad text-white"
+      aria-labelledby="cta-heading"
+    >
+      <div className="absolute inset-0 hero-grain" aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/35" aria-hidden="true" />
+      <div className="site-container relative">
         <FadeIn>
           <div className="max-w-2xl">
             <p className="mb-4 text-xs font-semibold tracking-[0.16em] text-white/55 uppercase">
@@ -33,7 +38,7 @@ export function CallToAction() {
               </a>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-white/25 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/14"
               >
                 Contact the club
               </Link>

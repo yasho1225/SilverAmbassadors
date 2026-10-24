@@ -16,7 +16,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="border-b border-border bg-off-white section-pad !pb-14 !pt-20">
+      <section className="border-b border-border section-pad !pb-14 !pt-20">
         <div className="site-container">
           <FadeIn>
             <SectionHeading
@@ -28,10 +28,10 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="section-pad bg-white">
-        <div className="site-container grid gap-10 lg:grid-cols-2">
+      <section className="section-pad">
+        <div className="site-container grid gap-6 lg:grid-cols-2">
           <FadeIn>
-            <div className="rounded-2xl border border-dashed border-border bg-off-white p-8">
+            <div className="panel h-full border-dashed p-8">
               <p className="eyebrow mb-4">Verified details pending</p>
               <dl className="space-y-5 text-sm">
                 <div>
@@ -58,11 +58,11 @@ export default function ContactPage() {
           </FadeIn>
 
           <FadeIn delay={0.08}>
-            <div className="space-y-6">
-              <h2 className="font-display text-3xl tracking-tight text-ink">
+            <div className="panel h-full bg-charcoal p-8 text-white">
+              <h2 className="font-display text-3xl tracking-tight text-white">
                 Ways to participate
               </h2>
-              <ul className="space-y-4 text-base leading-relaxed text-muted">
+              <ul className="mt-6 space-y-4 text-base leading-relaxed text-white/70">
                 <li>
                   Attend a weekly Sunday event—typically Tech Helps at 1:00 pm.
                 </li>
@@ -75,7 +75,7 @@ export default function ContactPage() {
                     href={volunteerForm.viewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-medium text-ink underline decoration-light-gray underline-offset-4 hover:decoration-ink"
+                    className="font-medium text-white underline decoration-white/30 underline-offset-4 hover:decoration-white"
                   >
                     Submit volunteer hours
                   </a>{" "}
@@ -85,7 +85,7 @@ export default function ContactPage() {
                   Review the{" "}
                   <Link
                     href="/events"
-                    className="font-medium text-ink underline decoration-light-gray underline-offset-4 hover:decoration-ink"
+                    className="font-medium text-white underline decoration-white/30 underline-offset-4 hover:decoration-white"
                   >
                     events calendar
                   </Link>{" "}

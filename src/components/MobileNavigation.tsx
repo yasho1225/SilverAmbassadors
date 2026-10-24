@@ -57,7 +57,7 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
           <motion.nav
             id="mobile-menu"
             aria-label="Mobile"
-            className="absolute inset-x-0 top-[4.25rem] mx-4 overflow-hidden rounded-2xl border border-border bg-white shadow-[0_20px_50px_rgba(17,17,17,0.12)]"
+            className="absolute inset-x-0 top-[4.25rem] mx-4 overflow-hidden rounded-2xl border border-border bg-surface-elevated shadow-[0_20px_50px_rgba(17,17,17,0.16)]"
             initial={reduceMotion ? false : { y: -12, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={reduceMotion ? undefined : { y: -8, opacity: 0 }}
@@ -72,8 +72,8 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                       href={link.href}
                       className={`block rounded-xl px-4 py-3 text-base transition-colors ${
                         active
-                          ? "bg-off-white font-semibold text-ink"
-                          : "text-charcoal hover:bg-off-white"
+                          ? "bg-charcoal font-semibold text-white"
+                          : "text-charcoal hover:bg-stone"
                       }`}
                     >
                       {link.label}

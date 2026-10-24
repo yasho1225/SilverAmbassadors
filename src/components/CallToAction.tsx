@@ -1,38 +1,85 @@
-import { Reveal } from "@/components/motion/Reveal";
+"use client";
+
+import Link from "next/link";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { volunteerForm } from "@/lib/config";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function CallToAction() {
+  const root = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        el.querySelectorAll("[data-cta]"),
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.08,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 78%", once: true },
+        },
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
-      className="site-pad relative flex min-h-[85svh] items-stretch bg-ink text-background"
+      ref={root}
+      className="site-pad section-y"
       aria-labelledby="cta"
     >
-      <div className="site-container-wide flex w-full flex-col justify-between py-16 sm:py-20">
-        <Reveal>
-          <h2
-            id="cta"
-            className="display max-w-[10ch] text-[clamp(3rem,10vw,7rem)] text-background"
+      <div className="site-container-wide overflow-hidden rounded-[calc(var(--radius)+4px)] bg-accent px-8 py-14 text-accent-ink sm:px-12 sm:py-16">
+        <h2
+          data-cta
+          id="cta"
+          className="display max-w-[12ch] text-[clamp(2.4rem,6vw,4.25rem)] text-accent-ink"
+          style={{ opacity: 0 }}
+        >
+          Ready this Sunday?
+        </h2>
+        <p
+          data-cta
+          className="mt-5 max-w-md text-base leading-relaxed text-accent-ink/70"
+          style={{ opacity: 0 }}
+        >
+          Show up, share an hour, then log it. Come back next week.
+        </p>
+        <div
+          data-cta
+          className="mt-8 flex flex-wrap items-center gap-3"
+          style={{ opacity: 0 }}
+        >
+          <a
+            href={volunteerForm.viewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn bg-accent-ink text-accent hover:opacity-90"
           >
-            Share an hour this Sunday.
-          </h2>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <div className="mt-16 flex flex-col gap-6 border-t border-background/15 pt-8 sm:flex-row sm:items-end sm:justify-between">
-            <p className="max-w-md text-lg leading-relaxed text-background/65">
-              Log the time you shared with seniors—or start with the next Tech
-              Help.
-            </p>
-            <a
-              href={volunteerForm.viewUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-accent"
-            >
-              Submit Hours
-            </a>
-          </div>
-        </Reveal>
+            Submit Hours
+          </a>
+          <Link
+            href="/events"
+            className="btn border border-accent-ink/25 bg-transparent text-accent-ink hover:bg-accent-ink/10"
+          >
+            See events
+          </Link>
+          <Link href="/gallery" className="cta-underline ml-1 text-sm text-accent-ink/80">
+            Browse visit photographs
+          </Link>
+        </div>
       </div>
     </section>
   );

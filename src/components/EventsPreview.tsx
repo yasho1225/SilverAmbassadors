@@ -4,25 +4,30 @@ import { Reveal } from "@/components/motion/Reveal";
 
 export function EventsPreview() {
   return (
-    <section className="site-pad section-y border-y border-line bg-surface" aria-labelledby="events">
+    <section className="site-pad section-y" aria-labelledby="events">
       <div className="site-container-wide">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <Reveal>
-            <h2 id="events" className="display max-w-[12ch] text-[clamp(2.4rem,5vw,4.2rem)] text-ink">
-              Join us this Sunday.
+            <p className="text-sm font-semibold tracking-[0.14em] text-silver uppercase">
+              Calendar
+            </p>
+            <h2
+              id="events"
+              className="display mt-3 max-w-[12ch] text-[clamp(2.2rem,5vw,3.5rem)] text-ink"
+            >
+              This Sunday.
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              Weekly Tech Helps are typically Sundays at 1:00 pm, with special
-              community events throughout the year.
+            <p className="mt-4 max-w-lg text-base leading-relaxed text-muted">
+              Tech Helps at 1:00 pm — plus seasonal gatherings through the year.
             </p>
           </Reveal>
-          <Reveal delay={0.08}>
-            <Link href="/events" className="btn btn-ghost">
+          <Reveal delay={0.05}>
+            <Link href="/events" className="btn btn-ghost !min-h-0 px-4 py-2 text-sm">
               Full calendar
             </Link>
           </Reveal>
         </div>
-        <Reveal delay={0.1} className="mt-12">
+        <Reveal delay={0.05}>
           <CalendarEmbed />
         </Reveal>
       </div>

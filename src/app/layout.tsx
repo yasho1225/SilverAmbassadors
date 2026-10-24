@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-import { Manrope, Newsreader } from "next/font/google";
+import { DM_Sans, Syne } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { site } from "@/lib/content";
 import "./globals.css";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const display = Syne({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["600", "700", "800"],
   display: "swap",
 });
 
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
+const body = DM_Sans({
+  variable: "--font-body",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -43,25 +43,28 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: site.name,
+    images: [{ url: site.logo.src, width: 1200, height: 1200, alt: site.logo.alt }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} | ${site.school}`,
     description: site.description,
+    images: [site.logo.src],
+  },
+  icons: {
+    icon: site.logo.src,
+    apple: site.logo.src,
   },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${manrope.variable} ${newsreader.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${display.variable} ${body.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <SmoothScroll>
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-accent-ink"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[100] focus:rounded-[var(--radius)] focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-accent-ink"
           >
             Skip to main content
           </a>

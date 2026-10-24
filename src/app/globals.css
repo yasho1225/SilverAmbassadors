@@ -1,24 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0f1114;
-  --surface: #181b21;
-  --surface-2: #1f242c;
-  --ink: #e9edf3;
-  --muted: #8b939f;
-  --accent: #9eb4c8;
-  --accent-ink: #0f1114;
-  --line: rgba(233, 237, 243, 0.12);
+  --bg: #eef0f3;
+  --surface: #ffffff;
+  --surface-2: #e2e5ea;
+  --ink: #16181d;
+  --muted: #5f6773;
+  --accent: #1e2430;
+  --accent-ink: #f4f5f7;
+  --silver: #8b939e;
+  --line: rgba(22, 24, 29, 0.12);
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
-  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
-  --step-body: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
-  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
-  --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
-  --step-display: clamp(2.75rem, 2rem + 6vw, 7.5rem);
-  --page-pad: clamp(1.25rem, 4vw, 3.5rem);
+  --page-pad: clamp(1.25rem, 4vw, 2.75rem);
   --nav-h: 4.25rem;
+  --radius: 0.5rem;
 }
 
 @theme inline {
@@ -31,8 +27,9 @@
   --color-accent-ink: var(--accent-ink);
   --color-ink: var(--ink);
   --color-line: var(--line);
-  --font-sans: var(--font-manrope);
-  --font-display: var(--font-newsreader);
+  --color-silver: var(--silver);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
 html {
@@ -59,15 +56,20 @@ html.lenis body {
 }
 
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(120% 80% at 100% -10%, rgba(139, 147, 158, 0.18), transparent 55%),
+    radial-gradient(90% 60% at -10% 20%, rgba(30, 36, 48, 0.05), transparent 50%),
+    var(--bg);
   color: var(--ink);
-  font-family: var(--font-manrope), sans-serif;
-  font-size: var(--step-body);
-  line-height: 1.6;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+  line-height: 1.55;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
   color: var(--ink);
 }
 
@@ -76,53 +78,37 @@ body {
   outline-offset: 3px;
 }
 
-.font-display {
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-optical-sizing: auto;
-}
-
 .site-pad {
   padding-inline: var(--page-pad);
 }
 
-.site-container {
+.site-container-wide {
   width: min(1120px, 100%);
   margin-inline: auto;
 }
 
-.site-container-wide {
-  width: min(1280px, 100%);
-  margin-inline: auto;
-}
-
 .section-y {
-  padding-block: clamp(5rem, 12vw, 9rem);
+  padding-block: clamp(4.5rem, 9vw, 7.5rem);
 }
 
 .display {
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-weight: 300;
-  letter-spacing: -0.04em;
-  line-height: 0.92;
-  font-optical-sizing: auto;
-}
-
-.lead {
-  font-size: var(--step-lead);
-  line-height: 1.45;
-  color: var(--muted);
+  font-family: var(--font-display), var(--font-body), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  text-wrap: balance;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 3.25rem;
-  padding: 0.85rem 1.4rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   transition:
     transform 140ms var(--ease-out),
     background 160ms var(--ease-out),
@@ -132,7 +118,7 @@ body {
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 .btn-accent {
@@ -141,81 +127,54 @@ body {
 }
 
 .btn-accent:hover {
-  opacity: 0.92;
+  background: color-mix(in srgb, var(--accent) 88%, white);
 }
 
 .btn-ghost {
-  border: 1px solid var(--line);
-  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
   color: var(--ink);
+  backdrop-filter: blur(8px);
 }
 
 .btn-ghost:hover {
-  border-color: color-mix(in srgb, var(--ink) 28%, transparent);
-  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  border-color: color-mix(in srgb, var(--ink) 35%, transparent);
+  background: var(--surface);
 }
 
-.btn-ink {
-  background: var(--ink);
-  color: var(--bg);
+.btn-on-dark {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  color: #fff;
 }
 
-.btn-ink:hover {
-  opacity: 0.92;
+.btn-on-dark:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .nav-shell {
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
 }
 
-.photo-slot {
+.cta-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  transition: text-decoration-color 180ms var(--ease-out);
+}
+
+.cta-underline:hover {
+  text-decoration-color: currentColor;
+}
+
+.hero-scrim {
   background:
-    radial-gradient(circle at 28% 22%, rgba(158, 180, 200, 0.18), transparent 45%),
-    linear-gradient(155deg, #2a3038 0%, #1a1e24 55%, #12151a 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.photo-slot::after {
-  content: "Photo placeholder";
-  position: absolute;
-  inset: auto 1rem 1rem auto;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--ink) 45%, transparent);
-}
-
-.tile {
-  background: var(--surface);
-  border: 1px solid var(--line);
-}
-
-.fact {
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-}
-
-.stair-line {
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-weight: 300;
-  font-size: clamp(2rem, 1.2rem + 3.8vw, 4.5rem);
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-
-.cut-word {
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-weight: 300;
-  font-size: clamp(5.5rem, 28vw, 18rem);
-  letter-spacing: -0.06em;
-  line-height: 0.8;
-  white-space: nowrap;
+    linear-gradient(105deg, rgba(22, 24, 29, 0.78) 0%, rgba(22, 24, 29, 0.45) 42%, rgba(22, 24, 29, 0.2) 70%, transparent 100%),
+    linear-gradient(to top, rgba(22, 24, 29, 0.55) 0%, transparent 45%);
 }
 
 @keyframes sa-menu-in {

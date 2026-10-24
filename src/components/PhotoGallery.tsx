@@ -1,81 +1,97 @@
 "use client";
 
-import Link from "next/link";
-import { Reveal } from "@/components/motion/Reveal";
+import Image from "next/image";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { galleryPhotos } from "@/lib/content";
 
-const tiles = [
-  { word: "Sunday", caption: "Weekly" },
-  { word: "Tech", caption: "Help sessions" },
-  { word: "Joy", caption: "Shared" },
-  { word: "Hours", caption: "Volunteer" },
-  { word: "Games", caption: "Board night" },
-  { word: "Silver", caption: "Ambassadors" },
-  { word: "Carve", caption: "Pumpkins" },
-  { word: "Serve", caption: "Ice cream" },
-] as const;
+gsap.registerPlugin(ScrollTrigger);
 
-type PhotoGalleryProps = {
-  limit?: number;
-  showViewAll?: boolean;
-  title?: string;
-};
+/** Club visit photos — exclusive to `/gallery`. */
+export function PhotoGallery() {
+  const root = useRef<HTMLElement>(null);
 
-export function PhotoGallery({
-  limit,
-  showViewAll = false,
-  title = "The rhythm of the club",
-}: PhotoGalleryProps) {
-  const items = limit ? tiles.slice(0, limit) : tiles;
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+
+    const frames = el.querySelectorAll<HTMLElement>("[data-frame]");
+    const ctx = gsap.context(() => {
+      frames.forEach((frame) => {
+        const img = frame.querySelector<HTMLElement>("[data-img]");
+        gsap.fromTo(
+          frame,
+          { opacity: 0, y: 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            ease: "power3.out",
+            scrollTrigger: { trigger: frame, start: "top 90%", once: true },
+          },
+        );
+        if (img) {
+          gsap.fromTo(
+            img,
+            { scale: 1.06 },
+            {
+              scale: 1,
+              duration: 1.15,
+              ease: "power2.out",
+              scrollTrigger: { trigger: frame, start: "top 90%", once: true },
+            },
+          );
+        }
+      });
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="site-pad section-y bg-surface" aria-labelledby="gallery">
-      <div className="site-container-wide">
-        <Reveal>
-          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <h2
-              id="gallery"
-              className="display max-w-[14ch] text-[clamp(2.2rem,4.5vw,3.8rem)] text-ink"
-            >
-              {title}
-            </h2>
-            {showViewAll ? (
-              <Link href="/gallery" className="btn btn-ghost">
-                Full gallery
-              </Link>
-            ) : null}
-          </div>
-        </Reveal>
+    <section ref={root} className="pb-16 sm:pb-20" aria-labelledby="gallery-heading">
+      <div className="site-pad site-container-wide mb-10 sm:mb-12">
+        <h1
+          id="gallery-heading"
+          className="display max-w-[12ch] text-[clamp(2.6rem,7vw,4.75rem)] text-ink"
+        >
+          From our visits
+        </h1>
+        <p className="mt-5 max-w-lg text-base leading-relaxed text-muted">
+          Photographs from Silver Ambassadors Sundays — only on this page.
+        </p>
+      </div>
 
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-          {items.map((tile, index) => {
-            const inverse = index % 3 === 1;
-            return (
-              <Reveal key={tile.word} delay={index * 0.03}>
-                <div
-                  className={`relative aspect-square overflow-hidden ${
-                    inverse ? "bg-ink text-background" : "tile text-ink"
-                  }`}
-                >
-                  {index % 4 === 2 ? (
-                    <div className="photo-slot absolute inset-0" />
-                  ) : (
-                    <p className="absolute inset-0 flex items-center justify-center font-display text-[clamp(2rem,7vw,4.5rem)] tracking-[-0.04em]">
-                      {tile.word}
-                    </p>
-                  )}
-                  <p
-                    className={`absolute inset-x-0 bottom-3 text-center text-[0.8rem] ${
-                      inverse || index % 4 === 2
-                        ? "text-background/70"
-                        : "text-muted"
-                    }`}
-                  >
-                    {index % 4 === 2 ? "Event photo placeholder" : tile.caption}
-                  </p>
-                </div>
-              </Reveal>
-            );
-          })}
+      <div className="site-pad site-container-wide">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {galleryPhotos.map((photo, index) => (
+            <figure
+              key={photo.id}
+              data-frame
+              className="group relative aspect-[4/3] overflow-hidden rounded-[var(--radius)] bg-surface-2"
+              style={{ opacity: 0 }}
+            >
+              <Image
+                data-img
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]"
+                style={{
+                  objectPosition:
+                    photo.id === "visit-lounge" ? "center 28%" : "center 40%",
+                }}
+                priority={index < 2}
+              />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-4 pt-14 pb-4">
+                <p className="text-sm text-white">{photo.caption}</p>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -13,21 +14,25 @@ export function Hero() {
     const el = root.current;
     if (!el) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    if (reduce) {
+      el.querySelectorAll<HTMLElement>("[data-hero]").forEach((node) => {
+        node.style.opacity = "1";
+        node.style.transform = "none";
+      });
+      return;
+    }
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el.querySelectorAll("[data-hero]"),
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.85,
-          stagger: 0.08,
-          ease: "power3.out",
-          delay: 0.05,
-        },
-      );
+      const img = el.querySelector<HTMLElement>("[data-hero-img]");
+      const parts = el.querySelectorAll<HTMLElement>("[data-hero]");
+
+      gsap.set(img, { scale: 1.08 });
+      gsap.set(parts, { opacity: 0, y: 22 });
+
+      gsap
+        .timeline({ defaults: { ease: "power3.out" } })
+        .to(img, { scale: 1, duration: 1.6, ease: "power2.out" }, 0)
+        .to(parts, { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 }, 0.2);
     }, el);
 
     return () => ctx.revert();
@@ -36,35 +41,48 @@ export function Hero() {
   return (
     <section
       ref={root}
-      className="site-pad relative flex min-h-[calc(100svh-var(--nav-h))] flex-col"
+      className="relative isolate min-h-[calc(100svh-var(--nav-h))] overflow-hidden"
+      aria-labelledby="hero-brand"
     >
-      <div className="site-container-wide flex flex-1 flex-col justify-between py-10 sm:py-14">
-        <div className="max-w-[18ch]">
-          <h1
+      <Image
+        data-hero-img
+        src={site.atmosphere.hero.src}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-[center_35%]"
+      />
+      <div className="hero-scrim absolute inset-0" aria-hidden="true" />
+
+      <div className="site-pad relative z-10 flex min-h-[calc(100svh-var(--nav-h))] flex-col justify-end pb-14 pt-24 sm:pb-20 sm:pt-28">
+        <div className="site-container-wide max-w-4xl text-white">
+          <p
             data-hero
-            className="display text-[clamp(3.4rem,12vw,8.5rem)] text-ink"
+            id="hero-brand"
+            className="display text-[clamp(3.2rem,10vw,7rem)] text-white"
             style={{ opacity: 0 }}
           >
-            Students and seniors,{" "}
-            <span className="text-accent">connected.</span>
+            Silver
+            <br />
+            Ambassadors
+          </p>
+          <h1
+            data-hero
+            className="mt-6 max-w-[20ch] text-[clamp(1.4rem,2.8vw,2.15rem)] font-medium leading-snug tracking-[-0.02em] text-white/95"
+            style={{ opacity: 0 }}
+          >
+            {site.tagline}
           </h1>
-        </div>
-
-        <div
-          data-hero
-          className="mt-16 grid gap-8 border-t border-line pt-8 sm:grid-cols-[1.4fr_auto] sm:items-end"
-          style={{ opacity: 0 }}
-        >
-          <div>
-            <p className="font-display text-xl text-ink sm:text-2xl">
-              {site.name}
-            </p>
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              {site.tagline} Weekly Tech Helps and shared moments of service at{" "}
-              {site.school}.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <p
+            data-hero
+            className="mt-5 max-w-[36ch] text-base leading-relaxed text-white/75 sm:text-lg"
+            style={{ opacity: 0 }}
+          >
+            Weekly Tech Helps and shared joy with seniors in Alpharetta —
+            mutual respect, real conversation, hours that add up.
+          </p>
+          <div data-hero className="mt-8 flex flex-wrap gap-3" style={{ opacity: 0 }}>
             <a
               href={volunteerForm.viewUrl}
               target="_blank"
@@ -73,10 +91,17 @@ export function Hero() {
             >
               Submit Hours
             </a>
-            <Link href="/events" className="btn btn-ghost">
-              View events
+            <Link href="/gallery" className="btn btn-on-dark">
+              See real visits
             </Link>
           </div>
+          <p
+            data-hero
+            className="mt-8 text-sm tracking-wide text-white/55"
+            style={{ opacity: 0 }}
+          >
+            {site.school} · Sundays · Alpharetta, GA
+          </p>
         </div>
       </div>
     </section>

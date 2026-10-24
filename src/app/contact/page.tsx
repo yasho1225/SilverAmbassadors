@@ -38,7 +38,10 @@ export default function ContactPage() {
       <section className="site-pad section-y">
         <div className="site-container-wide">
           <Reveal>
-            <h1 className="display max-w-[10ch] text-[clamp(3rem,9vw,6rem)] text-ink">
+            <p className="text-sm font-semibold tracking-[0.14em] text-silver uppercase">
+              Contact
+            </p>
+            <h1 className="display mt-4 max-w-[10ch] text-[clamp(2.8rem,8vw,5.5rem)] text-ink">
               Get involved.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted">
@@ -54,12 +57,12 @@ export default function ContactPage() {
         {rows.map((row, index) => {
           const content = (
             <div
-              className={`site-pad flex min-h-[7rem] items-end py-6 ${
+              className={`site-pad flex min-h-[6.5rem] items-end py-6 ${
                 index % 2 === 0 ? "bg-surface" : "bg-background"
               }`}
             >
               <p
-                className={`site-container-wide font-display text-[clamp(1.4rem,3.5vw,3rem)] tracking-[-0.03em] leading-none ${
+                className={`site-container-wide font-[family-name:var(--font-display)] text-[clamp(1.3rem,3.2vw,2.6rem)] font-semibold tracking-[-0.03em] leading-none ${
                   "muted" in row && row.muted ? "text-muted" : "text-ink"
                 }`}
               >
@@ -86,9 +89,9 @@ export default function ContactPage() {
             href={volunteerForm.viewUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="site-pad flex min-h-[7rem] items-center justify-between gap-4 bg-accent py-6 text-accent-ink transition-opacity hover:opacity-92"
+            className="site-pad flex min-h-[6.5rem] items-center justify-between gap-4 bg-accent py-6 text-accent-ink transition-opacity hover:opacity-92"
           >
-            <span className="site-container-wide flex w-full items-center justify-between gap-4 font-display text-[clamp(1.4rem,3.5vw,3rem)] tracking-[-0.03em] leading-none">
+            <span className="site-container-wide flex w-full items-center justify-between gap-4 font-[family-name:var(--font-display)] text-[clamp(1.3rem,3.2vw,2.6rem)] font-semibold tracking-[-0.03em] leading-none">
               Submit hours
               <span aria-hidden="true" className="text-[0.9em]">
                 →

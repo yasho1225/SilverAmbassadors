@@ -59,6 +59,11 @@ export function PhotoGallery({
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]"
+                    style={
+                      photo.id === "visit-lounge"
+                        ? { objectPosition: "center 22%" }
+                        : undefined
+                    }
                   />
                   <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-4 pt-12 pb-4">
                     <p className="text-sm text-background/90">{photo.caption}</p>

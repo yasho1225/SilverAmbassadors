@@ -7,12 +7,15 @@ const panels = [
     alt: "A student volunteer sitting with senior residents around a lounge table",
     label: "Visits",
     word: "Together",
+    // Portrait source in a landscape frame — keep faces in view
+    objectPosition: "center 28%",
   },
   {
     src: "/images/group-lounge.jpg",
     alt: "Ambassadors and a senior resident sharing a moment in the lounge",
     label: "Company",
     word: "Present",
+    objectPosition: "center 40%",
   },
 ] as const;
 
@@ -38,12 +41,13 @@ export function Showcase() {
           {panels.map((panel, index) => (
             <Reveal key={panel.src} delay={index * 0.08}>
               <div className="group relative h-[38svh] overflow-hidden border border-line bg-surface md:h-[48svh]">
-                <Image
+                  <Image
                   src={panel.src}
                   alt={panel.alt}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.04]"
+                  style={{ objectPosition: panel.objectPosition }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                 <p className="absolute top-4 left-4 text-sm text-background/80">

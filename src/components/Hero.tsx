@@ -40,12 +40,12 @@ export function Hero() {
       className="relative isolate min-h-[min(92svh,52rem)] overflow-hidden"
     >
       <Image
-        src="/images/visit-lounge.jpg"
-        alt="A Silver Ambassador visiting with senior residents"
+        src="/images/group-lounge.jpg"
+        alt="Ambassadors visiting with a senior resident in the lounge"
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[center_28%]"
+        className="object-cover object-[center_38%]"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />

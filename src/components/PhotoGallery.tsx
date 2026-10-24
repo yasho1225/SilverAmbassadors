@@ -61,7 +61,7 @@ export function PhotoGallery({
                     className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]"
                     style={
                       photo.id === "visit-lounge"
-                        ? { objectPosition: "center 22%" }
+                        ? { objectPosition: "center 35%" }
                         : undefined
                     }
                   />

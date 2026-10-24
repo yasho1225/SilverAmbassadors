@@ -7,15 +7,15 @@ const panels = [
     alt: "A student volunteer sitting with senior residents around a lounge table",
     label: "Visits",
     word: "Together",
-    // Portrait source in a landscape frame — keep faces in view
-    objectPosition: "center 28%",
+    // Portrait source in a landscape frame — faces sit mid/lower in the frame
+    objectPosition: "center 72%",
   },
   {
     src: "/images/group-lounge.jpg",
     alt: "Ambassadors and a senior resident sharing a moment in the lounge",
     label: "Company",
     word: "Present",
-    objectPosition: "center 40%",
+    objectPosition: "center 45%",
   },
 ] as const;
 

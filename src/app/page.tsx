@@ -3,6 +3,7 @@ import { EventsPreview } from "@/components/EventsPreview";
 import { Hero } from "@/components/Hero";
 import { MissionSection } from "@/components/MissionSection";
 import { PhotoGallery } from "@/components/PhotoGallery";
+import { Showcase } from "@/components/Showcase";
 import { WhatWeDo } from "@/components/WhatWeDo";
 
 export default function HomePage() {
@@ -11,8 +12,9 @@ export default function HomePage() {
       <Hero />
       <MissionSection />
       <WhatWeDo />
+      <Showcase />
       <EventsPreview />
-      <PhotoGallery limit={5} showViewAll />
+      <PhotoGallery limit={8} showViewAll />
       <CallToAction />
     </>
   );

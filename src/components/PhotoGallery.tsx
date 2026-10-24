@@ -1,144 +1,83 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { FadeIn } from "@/components/FadeIn";
-import { galleryPlaceholders } from "@/lib/content";
+import { Reveal } from "@/components/motion/Reveal";
+
+const tiles = [
+  { word: "Sunday", caption: "Weekly" },
+  { word: "Tech", caption: "Help sessions" },
+  { word: "Joy", caption: "Shared" },
+  { word: "Hours", caption: "Volunteer" },
+  { word: "Games", caption: "Board night" },
+  { word: "Silver", caption: "Ambassadors" },
+  { word: "Carve", caption: "Pumpkins" },
+  { word: "Serve", caption: "Ice cream" },
+] as const;
 
 type PhotoGalleryProps = {
-  eyebrow?: string;
-  title?: string;
-  description?: string;
   limit?: number;
   showViewAll?: boolean;
+  title?: string;
 };
 
 export function PhotoGallery({
-  eyebrow = "Photo highlights",
-  title = "Moments from our community",
-  description = "Authentic event photographs will replace these placeholders once club media is available.",
   limit,
   showViewAll = false,
+  title = "The rhythm of the club",
 }: PhotoGalleryProps) {
-  const items = limit
-    ? galleryPlaceholders.slice(0, limit)
-    : galleryPlaceholders;
-  const [activeId, setActiveId] = useState<string | null>(null);
-  const reduceMotion = useReducedMotion();
-  const active = items.find((item) => item.id === activeId) ?? null;
-
-  useEffect(() => {
-    if (!activeId) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setActiveId(null);
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [activeId]);
+  const items = limit ? tiles.slice(0, limit) : tiles;
 
   return (
-    <section className="section-pad bg-stone/55" aria-labelledby="gallery-heading">
+    <section className="site-pad section-y bg-surface" aria-labelledby="gallery">
       <div className="site-container-wide">
-        <FadeIn>
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <div className="max-w-2xl">
-              <p className="eyebrow mb-3">{eyebrow}</p>
-              <h2
-                id="gallery-heading"
-                className="font-display text-3xl tracking-tight text-ink sm:text-4xl md:text-[2.75rem]"
-              >
-                {title}
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-                {description}
-              </p>
-            </div>
+        <Reveal>
+          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <h2
+              id="gallery"
+              className="display max-w-[14ch] text-[clamp(2.2rem,4.5vw,3.8rem)] text-ink"
+            >
+              {title}
+            </h2>
             {showViewAll ? (
-              <Link
-                href="/gallery"
-                className="inline-flex shrink-0 text-sm font-semibold text-ink underline decoration-light-gray underline-offset-4 transition-colors hover:decoration-ink"
-              >
-                View full gallery
+              <Link href="/gallery" className="btn btn-ghost">
+                Full gallery
               </Link>
             ) : null}
           </div>
-        </FadeIn>
+        </Reveal>
 
-        <div className="mt-12 grid auto-rows-[180px] grid-cols-1 gap-3 sm:grid-cols-2 sm:auto-rows-[220px] lg:grid-cols-4 lg:auto-rows-[200px]">
-          {items.map((item, index) => {
-            const spanClass =
-              item.span === "wide"
-                ? "sm:col-span-2"
-                : item.span === "tall"
-                  ? "sm:row-span-2"
-                  : "";
-
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+          {items.map((tile, index) => {
+            const inverse = index % 3 === 1;
             return (
-              <FadeIn key={item.id} delay={index * 0.04} className={spanClass}>
-                <button
-                  type="button"
-                  onClick={() => setActiveId(item.id)}
-                  className="group relative h-full w-full overflow-hidden rounded-xl text-left focus-visible:outline-offset-4"
-                  aria-label={`View ${item.caption}`}
+              <Reveal key={tile.word} delay={index * 0.03}>
+                <div
+                  className={`relative aspect-square overflow-hidden ${
+                    inverse ? "bg-ink text-background" : "tile text-ink"
+                  }`}
                 >
-                  <div className="photo-placeholder absolute inset-0 transition-transform duration-500 group-hover:scale-[1.03]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-80" />
-                  <div className="absolute inset-x-0 bottom-0 p-4">
-                    <p className="text-sm font-medium text-white">
-                      {item.caption}
+                  {index % 4 === 2 ? (
+                    <div className="photo-slot absolute inset-0" />
+                  ) : (
+                    <p className="absolute inset-0 flex items-center justify-center font-display text-[clamp(2rem,7vw,4.5rem)] tracking-[-0.04em]">
+                      {tile.word}
                     </p>
-                    <p className="mt-1 text-xs text-white/70">
-                      Replace with club photograph
-                    </p>
-                  </div>
-                </button>
-              </FadeIn>
+                  )}
+                  <p
+                    className={`absolute inset-x-0 bottom-3 text-center text-[0.8rem] ${
+                      inverse || index % 4 === 2
+                        ? "text-background/70"
+                        : "text-muted"
+                    }`}
+                  >
+                    {index % 4 === 2 ? "Event photo placeholder" : tile.caption}
+                  </p>
+                </div>
+              </Reveal>
             );
           })}
         </div>
       </div>
-
-      <AnimatePresence>
-        {active ? (
-          <motion.div
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/70 p-4"
-            initial={reduceMotion ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            role="dialog"
-            aria-modal="true"
-            aria-label={active.alt}
-            onClick={() => setActiveId(null)}
-          >
-            <motion.div
-              className="relative w-full max-w-3xl overflow-hidden rounded-2xl bg-white"
-              initial={reduceMotion ? false : { scale: 0.96, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={reduceMotion ? undefined : { scale: 0.98, opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              onClick={(event) => event.stopPropagation()}
-            >
-              <div className="photo-placeholder aspect-[16/10] w-full" />
-              <div className="flex items-start justify-between gap-4 p-5">
-                <div>
-                  <p className="font-medium text-ink">{active.caption}</p>
-                  <p className="mt-1 text-sm text-muted">{active.alt}</p>
-                </div>
-                <button
-                  type="button"
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-ink hover:bg-off-white"
-                  aria-label="Close photograph"
-                  onClick={() => setActiveId(null)}
-                >
-                  <X size={16} />
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
     </section>
   );
 }

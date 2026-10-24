@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FadeIn } from "@/components/FadeIn";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Reveal } from "@/components/motion/Reveal";
 import { volunteerForm } from "@/lib/config";
 import { site } from "@/lib/content";
 
@@ -12,89 +11,91 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const { contactPlaceholders } = site;
+  const rows = [
+    { label: site.name, href: undefined },
+    {
+      label: site.contactPlaceholders.location,
+      href: undefined,
+    },
+    {
+      label: site.contactPlaceholders.email,
+      href: undefined,
+      muted: true,
+    },
+    {
+      label: site.contactPlaceholders.advisor,
+      href: undefined,
+      muted: true,
+    },
+    {
+      label: "Sundays · Tech Helps typically 1:00 pm",
+      href: "/events",
+    },
+  ] as const;
 
   return (
     <>
-      <section className="border-b border-border section-pad !pb-14 !pt-20">
-        <div className="site-container">
-          <FadeIn>
-            <SectionHeading
-              eyebrow="Contact"
-              title="Get involved"
-              description="Reach out through verified club channels once they are published, or start by joining a Sunday event and logging your hours."
-            />
-          </FadeIn>
+      <section className="site-pad section-y">
+        <div className="site-container-wide">
+          <Reveal>
+            <h1 className="display max-w-[10ch] text-[clamp(3rem,9vw,6rem)] text-ink">
+              Get involved.
+            </h1>
+            <p className="mt-6 max-w-xl text-lg text-muted">
+              Verified contact channels will replace placeholders once club
+              leadership publishes them. Until then, start with a Sunday event
+              and submit hours after you serve.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      <section className="section-pad">
-        <div className="site-container grid gap-6 lg:grid-cols-2">
-          <FadeIn>
-            <div className="panel h-full border-dashed p-8">
-              <p className="eyebrow mb-4">Verified details pending</p>
-              <dl className="space-y-5 text-sm">
-                <div>
-                  <dt className="font-semibold text-ink">Email</dt>
-                  <dd className="mt-1 text-muted">{contactPlaceholders.email}</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-ink">Staff advisor</dt>
-                  <dd className="mt-1 text-muted">
-                    {contactPlaceholders.advisor}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-ink">Location</dt>
-                  <dd className="mt-1 text-muted">
-                    {contactPlaceholders.location}
-                  </dd>
-                </div>
-              </dl>
-              <p className="mt-6 text-sm leading-relaxed text-muted">
-                {contactPlaceholders.note}
+      <section className="border-y border-line">
+        {rows.map((row, index) => {
+          const content = (
+            <div
+              className={`site-pad flex min-h-[7rem] items-end py-6 ${
+                index % 2 === 0 ? "bg-surface" : "bg-background"
+              }`}
+            >
+              <p
+                className={`site-container-wide font-display text-[clamp(1.4rem,3.5vw,3rem)] tracking-[-0.03em] leading-none ${
+                  "muted" in row && row.muted ? "text-muted" : "text-ink"
+                }`}
+              >
+                {row.label}
               </p>
             </div>
-          </FadeIn>
+          );
 
-          <FadeIn delay={0.08}>
-            <div className="panel h-full bg-charcoal p-8 text-white">
-              <h2 className="font-display text-3xl tracking-tight text-white">
-                Ways to participate
-              </h2>
-              <ul className="mt-6 space-y-4 text-base leading-relaxed text-white/70">
-                <li>
-                  Attend a weekly Sunday event—typically Tech Helps at 1:00 pm.
-                </li>
-                <li>
-                  Help facilitate special events such as pumpkin carving, serving
-                  ice cream, and board games.
-                </li>
-                <li>
-                  <a
-                    href={volunteerForm.viewUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-white underline decoration-white/30 underline-offset-4 hover:decoration-white"
-                  >
-                    Submit volunteer hours
-                  </a>{" "}
-                  after you serve.
-                </li>
-                <li>
-                  Review the{" "}
-                  <Link
-                    href="/events"
-                    className="font-medium text-white underline decoration-white/30 underline-offset-4 hover:decoration-white"
-                  >
-                    events calendar
-                  </Link>{" "}
-                  for upcoming opportunities.
-                </li>
-              </ul>
-            </div>
-          </FadeIn>
-        </div>
+          return (
+            <Reveal key={row.label} delay={index * 0.04}>
+              {row.href ? (
+                <Link href={row.href} className="block transition-opacity hover:opacity-85">
+                  {content}
+                </Link>
+              ) : (
+                content
+              )}
+            </Reveal>
+          );
+        })}
+
+        <Reveal delay={0.2}>
+          <a
+            href={volunteerForm.viewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="site-pad flex min-h-[7rem] items-center justify-between gap-4 bg-accent py-6 text-accent-ink transition-opacity hover:opacity-92"
+          >
+            <span className="site-container-wide flex w-full items-center justify-between gap-4 font-display text-[clamp(1.4rem,3.5vw,3rem)] tracking-[-0.03em] leading-none">
+              Submit hours
+              <span aria-hidden="true" className="text-[0.9em]">
+                →
+              </span>
+            </span>
+          </a>
+        </Reveal>
       </section>
     </>
   );

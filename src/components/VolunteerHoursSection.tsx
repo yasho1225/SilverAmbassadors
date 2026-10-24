@@ -1,6 +1,5 @@
 import { ExternalLink } from "lucide-react";
-import { FadeIn } from "@/components/FadeIn";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Reveal } from "@/components/motion/Reveal";
 import { volunteerForm } from "@/lib/config";
 
 type VolunteerHoursSectionProps = {
@@ -11,21 +10,26 @@ export function VolunteerHoursSection({
   showEmbed = true,
 }: VolunteerHoursSectionProps) {
   return (
-    <section className="section-pad" aria-labelledby="hours-heading">
-      <div className="site-container">
-        <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          <FadeIn>
-            <SectionHeading
-              eyebrow="Volunteer hours"
-              title="Log the time you shared"
-              description="Members can submit completed volunteering hours through the official Silver Ambassadors Google Form. Submission is confirmed only after the form itself records your response."
-            />
+    <section className="site-pad section-y" aria-labelledby="hours-heading">
+      <div className="site-container-wide">
+        <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <Reveal>
+            <h2
+              id="hours-heading"
+              className="display text-[clamp(2.2rem,4.5vw,3.8rem)] text-ink"
+            >
+              Log the time you shared.
+            </h2>
+            <p className="mt-5 max-w-md text-base leading-relaxed text-muted">
+              Members submit completed volunteering hours through the official
+              Google Form. Confirmation comes only from the form itself.
+            </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
                 href={volunteerForm.viewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary gap-2"
+                className="btn btn-accent gap-2"
               >
                 Submit Volunteer Hours
                 <ExternalLink size={15} aria-hidden="true" />
@@ -34,32 +38,26 @@ export function VolunteerHoursSection({
                 href={volunteerForm.viewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary"
+                className="btn btn-ghost"
               >
-                Open form in a new tab
+                Open in a new tab
               </a>
             </div>
-            <p className="mt-5 text-sm text-muted">
-              Tip: keep event name and date ready before you begin.
-            </p>
-          </FadeIn>
+          </Reveal>
 
           {showEmbed ? (
-            <FadeIn delay={0.08}>
-              <div className="panel overflow-hidden">
+            <Reveal delay={0.08}>
+              <div className="overflow-hidden border border-line bg-surface">
                 <iframe
                   title="Silver Ambassadors volunteer hour log form"
                   src={volunteerForm.embedUrl}
-                  className="h-[640px] w-full border-0 bg-surface-elevated"
+                  className="h-[640px] w-full border-0 bg-background"
                   loading="lazy"
                 >
                   Loading…
                 </iframe>
               </div>
-              <p id="hours-heading" className="sr-only">
-                Volunteer hours form
-              </p>
-            </FadeIn>
+            </Reveal>
           ) : null}
         </div>
       </div>

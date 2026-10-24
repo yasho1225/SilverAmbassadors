@@ -19,20 +19,18 @@ export function CalendarEmbed({
   if (!embedUrl) {
     return (
       <div
-        className={`rounded-2xl border border-dashed border-border bg-surface-elevated px-6 py-16 text-center ${className}`}
+        className={`border border-dashed border-line bg-background px-6 py-16 text-center ${className}`}
       >
-        <p className="eyebrow mb-3">Calendar placeholder</p>
-        <h3 className="font-display text-2xl text-ink">
+        <h3 className="font-display text-2xl text-ink sm:text-3xl">
           Upcoming events will appear here
         </h3>
-        <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted">
-          The official Google Calendar embed is not configured yet. A club
-          administrator can set{" "}
-          <code className="rounded bg-stone px-1.5 py-0.5 text-xs text-charcoal">
+        <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-muted">
+          Set{" "}
+          <code className="rounded bg-surface-2 px-1.5 py-0.5 text-xs text-ink">
             NEXT_PUBLIC_GOOGLE_CALENDAR_EMBED_URL
           </code>{" "}
-          after making the calendar publicly viewable under Google Calendar →
-          Settings → Access permissions → Make available to public.
+          after publishing the club calendar publicly in Google Calendar
+          settings.
         </p>
       </div>
     );
@@ -40,7 +38,7 @@ export function CalendarEmbed({
 
   return (
     <div className={className}>
-      <div className="overflow-hidden rounded-2xl border border-border bg-surface-elevated">
+      <div className="overflow-hidden border border-line bg-background">
         <iframe
           title={title}
           src={embedUrl}
@@ -54,7 +52,7 @@ export function CalendarEmbed({
             href={externalUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-medium text-charcoal underline decoration-light-gray underline-offset-4 transition-colors hover:decoration-ink"
+            className="inline-flex items-center gap-2 text-sm font-medium text-ink underline decoration-line underline-offset-4 hover:decoration-accent"
           >
             Open in Google Calendar
             <ExternalLink size={14} aria-hidden="true" />

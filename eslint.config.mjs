@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Installed agent skills (third-party)
+    ".agents/**",
+    ".cursor/skills/**",
+    ".cursor/agents/**",
+    ".taste-skill/**",
   ]),
 ]);
 

@@ -1,81 +1,83 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import { site } from "@/lib/content";
+import { volunteerForm } from "@/lib/config";
 
 export function Hero() {
-  const reduceMotion = useReducedMotion();
+  const root = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        el.querySelectorAll("[data-hero]"),
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          stagger: 0.08,
+          ease: "power3.out",
+          delay: 0.05,
+        },
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="relative isolate min-h-[calc(100svh-4.25rem)] overflow-hidden">
-      <div className="absolute inset-0 hero-grain" aria-hidden="true" />
-      <div
-        className="absolute inset-0 opacity-[0.16]"
-        aria-hidden="true"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/50 to-transparent" />
-
-      <div className="site-container-wide relative flex min-h-[calc(100svh-4.25rem)] flex-col justify-end pb-16 pt-24 sm:pb-20 md:justify-center md:pb-28">
-        <div className="max-w-3xl text-white">
-          <motion.div
-            className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/8 px-3.5 py-1.5 text-[0.7rem] font-semibold tracking-[0.16em] text-white/75 uppercase backdrop-blur-sm"
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+    <section
+      ref={root}
+      className="site-pad relative flex min-h-[calc(100svh-var(--nav-h))] flex-col"
+    >
+      <div className="site-container-wide flex flex-1 flex-col justify-between py-10 sm:py-14">
+        <div className="max-w-[18ch]">
+          <h1
+            data-hero
+            className="display text-[clamp(3.4rem,12vw,8.5rem)] text-ink"
+            style={{ opacity: 0 }}
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-white/80" aria-hidden="true" />
-            {site.school}
-          </motion.div>
-
-          <motion.h1
-            className="font-display text-[clamp(2.9rem,8.4vw,5.75rem)] leading-[0.94] tracking-tight"
-            initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {site.name}
-          </motion.h1>
-
-          <motion.p
-            className="mt-6 max-w-xl text-lg leading-relaxed text-white/84 sm:text-xl"
-            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {site.tagline} Weekly service that brings students and senior
-            citizens together through shared time, talents, and joy.
-          </motion.p>
-
-          <motion.div
-            className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
-            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Link
-              href="/about"
-              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink transition-[transform,opacity] hover:opacity-95 active:scale-[0.98]"
-            >
-              Explore Our Mission
-            </Link>
-            <Link
-              href="/events"
-              className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/8 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/14"
-            >
-              View Upcoming Events
-            </Link>
-          </motion.div>
+            Students and seniors,{" "}
+            <span className="text-accent">connected.</span>
+          </h1>
         </div>
 
-        <p className="absolute right-0 bottom-6 left-0 site-container-wide text-[0.7rem] tracking-wide text-white/40">
-          Hero photograph placeholder — replace with an authentic club event image
-        </p>
+        <div
+          data-hero
+          className="mt-16 grid gap-8 border-t border-line pt-8 sm:grid-cols-[1.4fr_auto] sm:items-end"
+          style={{ opacity: 0 }}
+        >
+          <div>
+            <p className="font-display text-xl text-ink sm:text-2xl">
+              {site.name}
+            </p>
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+              {site.tagline} Weekly Tech Helps and shared moments of service at{" "}
+              {site.school}.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a
+              href={volunteerForm.viewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-accent"
+            >
+              Submit Hours
+            </a>
+            <Link href="/events" className="btn btn-ghost">
+              View events
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

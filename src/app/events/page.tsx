@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { CalendarEmbed } from "@/components/CalendarEmbed";
-import { FadeIn } from "@/components/FadeIn";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "Events",
@@ -12,39 +11,40 @@ export const metadata: Metadata = {
 export default function EventsPage() {
   return (
     <>
-      <section className="border-b border-border section-pad !pb-14 !pt-20">
-        <div className="site-container">
-          <FadeIn>
-            <SectionHeading
-              eyebrow="Events"
-              title="When we meet"
-              description="Weekly events are typically held every Sunday—most often Tech Helps at 1:00 pm—with additional special events throughout the year."
-            />
-          </FadeIn>
+      <section className="site-pad section-y border-b border-line">
+        <div className="site-container-wide">
+          <Reveal>
+            <h1 className="display max-w-[10ch] text-[clamp(3rem,9vw,6rem)] text-ink">
+              When we meet.
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+              Weekly events are typically held every Sunday—most often Tech
+              Helps at 1:00 pm—with additional special events throughout the
+              year.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      <section className="section-pad">
-        <div className="site-container">
-          <FadeIn>
+      <section className="site-pad section-y">
+        <div className="site-container-wide">
+          <Reveal>
             <CalendarEmbed />
-          </FadeIn>
-          <FadeIn delay={0.08}>
-            <div className="panel mt-10 max-w-2xl p-6">
-              <h2 className="text-lg font-semibold text-ink">
+          </Reveal>
+          <Reveal delay={0.08}>
+            <div className="mt-10 max-w-2xl border border-line bg-surface p-6">
+              <h2 className="font-display text-xl text-ink">
                 Calendar setup note
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted">
-                If you are a club administrator: publish the Google Calendar, copy
-                the embed URL from Calendar settings → Integrate calendar, and set{" "}
-                <code className="rounded bg-stone px-1.5 py-0.5 text-xs">
+                Publish the Google Calendar, copy the embed URL, and set{" "}
+                <code className="rounded bg-surface-2 px-1.5 py-0.5 text-xs text-ink">
                   NEXT_PUBLIC_GOOGLE_CALENDAR_EMBED_URL
-                </code>{" "}
-                in the project environment. Public viewers do not need edit
-                access—only the ability to see the calendar without signing in.
+                </code>
+                . Public viewers only need view access—not edit access.
               </p>
             </div>
-          </FadeIn>
+          </Reveal>
         </div>
       </section>
     </>

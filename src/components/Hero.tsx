@@ -55,19 +55,21 @@ export function Hero() {
       />
       <div className="hero-scrim absolute inset-0" aria-hidden="true" />
 
-      <div className="site-pad relative z-10 flex min-h-[calc(100svh-var(--nav-h))] flex-col justify-end pb-12 pt-24 sm:pb-16 sm:pt-28">
-        <div className="site-container-wide max-w-3xl text-white">
+      <div className="site-pad relative z-10 flex min-h-[calc(100svh-var(--nav-h))] flex-col justify-end pb-14 pt-24 sm:pb-20 sm:pt-28">
+        <div className="site-container-wide max-w-4xl text-white">
           <p
             data-hero
             id="hero-brand"
-            className="display text-[clamp(2.6rem,8vw,5.75rem)] text-white"
+            className="display text-[clamp(3.2rem,10vw,7rem)] text-white"
             style={{ opacity: 0 }}
           >
-            {site.name}
+            Silver
+            <br />
+            Ambassadors
           </p>
           <h1
             data-hero
-            className="mt-4 max-w-[18ch] text-[clamp(1.35rem,2.6vw,2rem)] font-medium leading-snug tracking-[-0.02em] text-white/95"
+            className="mt-6 max-w-[20ch] text-[clamp(1.4rem,2.8vw,2.15rem)] font-medium leading-snug tracking-[-0.02em] text-white/95"
             style={{ opacity: 0 }}
           >
             {site.tagline}

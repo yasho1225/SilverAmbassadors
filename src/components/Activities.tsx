@@ -55,20 +55,30 @@ export function Activities() {
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {site.activities.map((activity) => (
+        <div className="mt-12 grid gap-8 md:grid-cols-12 md:gap-6">
+          {site.activities.map((activity, index) => (
             <article
               key={activity.verb}
               data-activity
-              className="group flex flex-col"
+              className={`group flex flex-col ${
+                index === 0 ? "md:col-span-6" : "md:col-span-3"
+              }`}
               style={{ opacity: 0 }}
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius)] bg-surface-2">
+              <div
+                className={`relative overflow-hidden rounded-[var(--radius)] bg-surface-2 ${
+                  index === 0 ? "aspect-[5/4] md:aspect-[4/3]" : "aspect-[4/3]"
+                }`}
+              >
                 <Image
                   src={activity.image}
                   alt={activity.imageAlt}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes={
+                    index === 0
+                      ? "(max-width: 768px) 100vw, 50vw"
+                      : "(max-width: 768px) 100vw, 25vw"
+                  }
                   className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.04]"
                 />
               </div>

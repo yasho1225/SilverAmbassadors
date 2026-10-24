@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Impeccable native engine binary (reinstall with: npx impeccable install)
+.cursor/skills/impeccable/scripts/bin/

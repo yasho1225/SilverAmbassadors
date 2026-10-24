@@ -15,7 +15,7 @@ export default function AboutPage() {
       <section className="site-pad section-y border-b border-line">
         <div className="site-container-wide">
           <Reveal>
-            <h1 className="display max-w-[12ch] text-[clamp(2.8rem,7vw,5.25rem)] text-ink">
+            <h1 className="display max-w-[12ch] text-[clamp(2.8rem,7vw,5rem)] text-ink">
               {site.name}
             </h1>
             <p className="mt-6 max-w-[44ch] text-base leading-relaxed text-muted sm:text-lg">
@@ -43,7 +43,7 @@ export default function AboutPage() {
               ))}
             </div>
             <p className="mt-8">
-              <Link href="/gallery" className="cta-underline text-accent">
+              <Link href="/#gallery" className="cta-underline text-accent">
                 See photographs from our visits
               </Link>
             </p>

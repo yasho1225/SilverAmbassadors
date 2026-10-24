@@ -52,36 +52,33 @@ export const navLinks = [
 ] as const;
 
 /**
- * Club photographs — rendered ONLY on `/gallery`.
- * Do not import these into Hero, About, Showcase, or home sections.
+ * Each photograph appears exactly once on the site (home).
+ * Hero owns `hero`; HomeGallery owns the rest. /gallery redirects to /#gallery.
  */
-export const galleryPhotos = [
-  {
-    id: "visit-lounge",
-    src: "/images/visit-lounge.jpg",
-    alt: "A Silver Ambassador visiting with two senior residents in a lounge",
-    caption: "Sunday visit",
-    layout: "tall" as const,
-  },
-  {
+export const photos = {
+  hero: {
     id: "group-lounge",
     src: "/images/group-lounge.jpg",
     alt: "Ambassadors gathered with a senior resident in the community lounge",
-    caption: "Shared company",
-    layout: "wide" as const,
   },
-  {
-    id: "members-lobby",
-    src: "/images/members-lobby.jpg",
-    alt: "Silver Ambassadors members together in the building lobby",
-    caption: "The ambassadors",
-    layout: "wide" as const,
-  },
-  {
-    id: "members-patio",
-    src: "/images/members-patio.jpg",
-    alt: "Silver Ambassadors members outdoors after a visit",
-    caption: "After the visit",
-    layout: "wide" as const,
-  },
-] as const;
+  gallery: [
+    {
+      id: "visit-lounge",
+      src: "/images/visit-lounge.jpg",
+      alt: "A Silver Ambassador visiting with two senior residents in a lounge",
+      caption: "Sunday visit",
+    },
+    {
+      id: "members-lobby",
+      src: "/images/members-lobby.jpg",
+      alt: "Silver Ambassadors members together in the building lobby",
+      caption: "The ambassadors",
+    },
+    {
+      id: "members-patio",
+      src: "/images/members-patio.jpg",
+      alt: "Silver Ambassadors members outdoors after a visit",
+      caption: "After the visit",
+    },
+  ],
+} as const;

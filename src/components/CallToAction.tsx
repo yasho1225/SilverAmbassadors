@@ -19,18 +19,14 @@ export function CallToAction() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el.querySelectorAll("[data-cta]"),
-        { opacity: 0, y: 22 },
+        { opacity: 0, y: 18 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.7,
-          stagger: 0.08,
+          duration: 0.65,
+          stagger: 0.06,
           ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 82%",
-            once: true,
-          },
+          scrollTrigger: { trigger: el, start: "top 85%", once: true },
         },
       );
     }, el);
@@ -41,29 +37,18 @@ export function CallToAction() {
   return (
     <section
       ref={root}
-      className="site-pad section-y border-t border-line bg-surface"
+      className="site-pad border-t border-line bg-surface py-12 sm:py-14"
       aria-labelledby="cta"
     >
-      <div className="site-container-wide flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-        <div className="max-w-2xl">
-          <h2
-            data-cta
-            id="cta"
-            className="display text-[clamp(2rem,4.2vw,3.4rem)] text-ink"
-            style={{ opacity: 0 }}
-          >
-            Log the hour you{" "}
-            <a
-              href={volunteerForm.viewUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-underline text-accent"
-            >
-              shared this Sunday
-            </a>
-            .
-          </h2>
-        </div>
+      <div className="site-container-wide flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <h2
+          data-cta
+          id="cta"
+          className="display max-w-[18ch] text-[clamp(1.75rem,3.5vw,2.75rem)] text-ink"
+          style={{ opacity: 0 }}
+        >
+          Log the hour you shared.
+        </h2>
         <a
           data-cta
           href={volunteerForm.viewUrl}

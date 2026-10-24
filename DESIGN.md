@@ -1,32 +1,34 @@
 # Design system — Silver Ambassadors
 
 ## World
-Night editorial field with silver ink. Photographs lead: large, dense, few words over them. Type carries claims; pictures carry proof.
+Printed-annual editorial on a night field. Silver ink, steel accent. Photographs are treated as specimens — large, few, and shown in **one place only** (`/gallery`).
+
+## Idea
+On this page, **Sunday visits between students and seniors** become a **print annual**: a strict column axis for reading, a masked headline on load, and a single gallery sheet for every photograph.
 
 ## Type
-- **Newsreader** for display and long reading (light at poster scale)
-- **Manrope** for nav, buttons, captions
+- **Newsreader** — display + long reading
+- **Manrope** — nav, buttons, captions
 
 ## Colour
 | Token | Value | Use |
 | --- | --- | --- |
 | `--bg` | `#0f1114` | Page ground |
-| `--surface` | `#181b21` | Panels |
+| `--surface` | `#181b21` | Panels / alternating sections |
 | `--ink` | `#e9edf3` | Primary text |
 | `--muted` | `#8b939f` | Secondary text |
-| `--accent` | `#9eb4c8` | Steel/silver accent |
+| `--accent` | `#9eb4c8` | Steel accent (actions, last stair line) |
 | `--accent-ink` | `#0f1114` | Text on accent |
 
-## Layout
-- Section padding: `clamp(2.75rem, 5.5vw, 4.5rem)` — tight groups, not empty voids
-- Home: photo hero → mission once → photo grid → Sunday activities → events → compact hours CTA
-- Say each claim once; About holds the longer mission body
+## Imagery rule
+`galleryPhotos` in `src/lib/content.ts` mounts **only** via `PhotoGallery` on `/gallery`. Logo may appear in brand chrome. Never reuse visit photos on Home, About, Hero, or CTA.
 
 ## Motion
-- Lenis smooth scroll
-- GSAP ScrollTrigger for occasional section entrances
-- UI feedback ≤160ms, `cubic-bezier(0.23, 1, 0.32, 1)`
-- Respect `prefers-reduced-motion`
+- Lenis + GSAP ScrollTrigger (wired in `SmoothScroll`)
+- Signature: masked headline lines on hero load (~900ms, stagger 110ms)
+- Gallery: shutter clip-path open + image scale settle
+- Stairs / teaser / CTA: purposeful once-scroll entrances
+- UI press ≤160ms; respect `prefers-reduced-motion`
 
 ## Anti-patterns
-No eyebrow kickers, no 01/02/03 costume numbering, no icon-card grids, no purple gradients, no glassmorphism decoration, no giant empty CTA panels.
+No eyebrow kickers as costume, no 01/02/03, no icon-card grids, no purple gradients, no glass decoration, no duplicate photographs, no giant empty CTA panels.

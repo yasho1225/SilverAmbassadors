@@ -96,7 +96,42 @@ body {
 }
 
 .section-y {
-  padding-block: clamp(2.75rem, 5.5vw, 4.5rem);
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.editorial-axis {
+  display: grid;
+  gap: 1rem 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .editorial-axis {
+    grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
+    align-items: start;
+  }
+}
+
+.editorial-note {
+  letter-spacing: 0.04em;
+}
+
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.cta-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.28em;
+  text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
+  transition: text-decoration-color 180ms var(--ease-out);
+}
+
+.cta-underline:hover {
+  text-decoration-color: currentColor;
 }
 
 .display {

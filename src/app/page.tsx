@@ -1,8 +1,8 @@
 import { CallToAction } from "@/components/CallToAction";
 import { EventsPreview } from "@/components/EventsPreview";
+import { GalleryTeaser } from "@/components/GalleryTeaser";
 import { Hero } from "@/components/Hero";
 import { MissionSection } from "@/components/MissionSection";
-import { PhotoGallery } from "@/components/PhotoGallery";
 import { WhatWeDo } from "@/components/WhatWeDo";
 
 export default function HomePage() {
@@ -10,8 +10,8 @@ export default function HomePage() {
     <>
       <Hero />
       <MissionSection />
-      <PhotoGallery limit={4} showViewAll />
       <WhatWeDo />
+      <GalleryTeaser />
       <EventsPreview />
       <CallToAction />
     </>

@@ -12,19 +12,16 @@ export const site = {
   ],
   activities: [
     {
-      opener: "First you show up.",
       title: "Sunday Tech Helps",
       detail:
         "Weekly sessions at 1:00 pm helping seniors with phones, apps, and everyday digital tasks.",
     },
     {
-      opener: "Then you share time.",
       title: "Special events",
       detail:
         "Pumpkin carving, ice cream socials, and board games that bring both generations into one room.",
     },
     {
-      opener: "Hours add up.",
       title: "Flexible volunteering",
       detail:
         "Short, frequent visits so students earn hours without a large one-time commitment.",
@@ -51,34 +48,30 @@ export const navLinks = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
-/**
- * Each photograph appears exactly once on the site (home).
- * Hero owns `hero`; HomeGallery owns the rest. /gallery redirects to /#gallery.
- */
-export const photos = {
-  hero: {
+/** Visit photographs — render ONLY on `/gallery`. Never import into Home, About, or Hero. */
+export const galleryPhotos = [
+  {
+    id: "visit-lounge",
+    src: "/images/visit-lounge.jpg",
+    alt: "A Silver Ambassador visiting with two senior residents in a lounge",
+    caption: "Sunday visit",
+  },
+  {
     id: "group-lounge",
     src: "/images/group-lounge.jpg",
     alt: "Ambassadors gathered with a senior resident in the community lounge",
+    caption: "Shared company",
   },
-  gallery: [
-    {
-      id: "visit-lounge",
-      src: "/images/visit-lounge.jpg",
-      alt: "A Silver Ambassador visiting with two senior residents in a lounge",
-      caption: "Sunday visit",
-    },
-    {
-      id: "members-lobby",
-      src: "/images/members-lobby.jpg",
-      alt: "Silver Ambassadors members together in the building lobby",
-      caption: "The ambassadors",
-    },
-    {
-      id: "members-patio",
-      src: "/images/members-patio.jpg",
-      alt: "Silver Ambassadors members outdoors after a visit",
-      caption: "After the visit",
-    },
-  ],
-} as const;
+  {
+    id: "members-lobby",
+    src: "/images/members-lobby.jpg",
+    alt: "Silver Ambassadors members together in the building lobby",
+    caption: "The ambassadors",
+  },
+  {
+    id: "members-patio",
+    src: "/images/members-patio.jpg",
+    alt: "Silver Ambassadors members outdoors after a visit",
+    caption: "After the visit",
+  },
+] as const;

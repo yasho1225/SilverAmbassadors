@@ -1,32 +1,31 @@
 # Design system — Silver Ambassadors
 
 ## World
-Night editorial field. Photographs lead the home page — large, few, each used once.
+Quiet night editorial. Structured type, clear hierarchy, restrained silver accent.
 
-## Imagery
-| Slot | Photo | Where |
-| --- | --- | --- |
-| Hero | `group-lounge.jpg` | Home hero only |
-| Mosaic | `visit-lounge`, `members-lobby`, `members-patio` | Home `#gallery` only |
-| Logo | `logo.png` | Brand chrome |
-
-`/gallery` redirects to `/#gallery`. About has no visit photos.
+## Imagery rule
+Visit photographs render **only** on `/gallery` via `galleryPhotos` → `PhotoGallery`.
+Logo may appear in brand chrome (nav/footer). Never place visit photos on Home, About, Hero, or CTA.
 
 ## Type
-- **Newsreader** — display
-- **Manrope** — UI
+- **Newsreader** — headings (`display`)
+- **Manrope** — body, nav, buttons
+- Body ~17px / 1.65; reading measure ~38rem
+- Section labels: 12px uppercase tracked
 
 ## Colour
 | Token | Value |
 | --- | --- |
-| `--bg` | `#0f1114` |
-| `--surface` | `#181b21` |
-| `--ink` | `#e9edf3` |
-| `--muted` | `#8b939f` |
-| `--accent` | `#9eb4c8` |
+| `--bg` | `#0e1013` |
+| `--surface` | `#161a20` |
+| `--ink` | `#eef1f5` |
+| `--muted` | `#9aa3af` |
+| `--accent` | `#a8b9c9` |
+
+## Layout
+- Content width: `min(1080px)` wide / `720px` reading
+- Section padding: `clamp(3.5rem, 7vw, 5.5rem)`
+- Home: Hero → Mission → What we do → Events → CTA (no photos)
 
 ## Motion
-Lenis + GSAP: hero image settle + masked lines; gallery shutter opens; section reveals once. Respect `prefers-reduced-motion`.
-
-## Anti-patterns
-No duplicate photographs, no empty type-only hero, no giant CTA voids, no icon-card grids, no purple SaaS look.
+Lenis + light GSAP (masked hero lines, list reveals, gallery fade). Respect reduced motion.

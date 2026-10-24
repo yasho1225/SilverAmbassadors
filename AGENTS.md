@@ -17,4 +17,4 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Volunteer hours use the official Google Form only — never add a custom hours backend
 - Do not invent contacts, stats, partnerships, or photo captions; keep placeholders labeled until real assets arrive
 - Imagery split: Unsplash atmosphere under `public/images/atmosphere/` may appear on home; club visit photos in `galleryPhotos` render only on `/gallery`
-- Design lock: soot `#0f0f0f` + lime `#dafa9c`, Schibsted Grotesk, Taste `sentence-as-layout` — see `DESIGN.md`
+- Design lock: silver/charcoal light world (see `PRODUCT.md` + `DESIGN.md`) — Syne + DM Sans; no soot/lime dark mode, no purple SaaS, no cream–terracotta

@@ -14,7 +14,10 @@ export default function EventsPage() {
       <section className="site-pad section-y border-b border-line">
         <div className="site-container-wide">
           <Reveal>
-            <h1 className="display max-w-[10ch] text-[clamp(3rem,9vw,6rem)] text-ink">
+            <p className="text-sm font-semibold tracking-[0.14em] text-silver uppercase">
+              Events
+            </p>
+            <h1 className="display mt-4 max-w-[10ch] text-[clamp(2.8rem,8vw,5.5rem)] text-ink">
               When we meet.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
@@ -32,8 +35,8 @@ export default function EventsPage() {
             <CalendarEmbed />
           </Reveal>
           <Reveal delay={0.08}>
-            <div className="mt-10 max-w-2xl border border-line bg-surface p-6">
-              <h2 className="font-display text-xl text-ink">
+            <div className="mt-10 max-w-2xl rounded-[var(--radius)] border border-line bg-surface p-6">
+              <h2 className="font-[family-name:var(--font-display)] text-xl font-semibold text-ink">
                 Calendar setup note
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted">

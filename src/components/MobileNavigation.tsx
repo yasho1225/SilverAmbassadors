@@ -34,16 +34,16 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
     <div className="fixed inset-0 z-40 lg:hidden">
       <button
         type="button"
-        className="absolute inset-0 bg-black/55"
+        className="absolute inset-0 bg-ink/40"
         aria-label="Close menu"
         onClick={onClose}
       />
       <nav
         id="mobile-menu"
         aria-label="Mobile"
-        className="menu-panel absolute inset-x-0 top-[var(--nav-h)] mx-4 overflow-hidden rounded-2xl border border-line bg-surface"
+        className="menu-panel absolute inset-x-0 top-[var(--nav-h)] mx-4 overflow-hidden rounded-[calc(var(--radius)+4px)] border border-line bg-surface shadow-sm"
       >
-        <ul className="flex flex-col p-3">
+        <ul className="flex flex-col p-2">
           {navLinks.map((link) => {
             const active = pathname === link.href;
             return (
@@ -51,9 +51,9 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
                 <Link
                   href={link.href}
                   onClick={onClose}
-                  className={`block rounded-xl px-4 py-3 text-base transition-colors ${
+                  className={`block rounded-[var(--radius)] px-4 py-3 text-base transition-colors ${
                     active
-                      ? "bg-ink font-semibold text-background"
+                      ? "bg-accent font-semibold text-accent-ink"
                       : "text-ink hover:bg-surface-2"
                   }`}
                 >

@@ -5,7 +5,7 @@ import { navLinks, site } from "@/lib/content";
 
 export function Footer() {
   return (
-    <footer className="site-pad border-t border-line bg-background">
+    <footer className="site-pad border-t border-line bg-surface">
       <div className="site-container-wide section-y !py-16">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
@@ -16,13 +16,13 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="mb-4 text-sm text-muted">Explore</p>
+            <p className="mb-4 text-sm font-medium text-muted">Explore</p>
             <ul className="space-y-2.5">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-ink transition-colors hover:text-accent"
+                    className="text-sm text-ink transition-colors hover:text-silver"
                   >
                     {link.label}
                   </Link>
@@ -32,20 +32,20 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="mb-4 text-sm text-muted">Members</p>
+            <p className="mb-4 text-sm font-medium text-muted">Members</p>
             <ul className="space-y-2.5 text-sm text-ink">
               <li>
                 <a
                   href={volunteerForm.viewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline decoration-line underline-offset-4 hover:decoration-accent"
+                  className="underline decoration-line underline-offset-4 hover:decoration-ink"
                 >
                   Submit volunteer hours
                 </a>
               </li>
               <li>
-                <Link href="/events" className="hover:text-accent">
+                <Link href="/events" className="hover:text-silver">
                   View upcoming events
                 </Link>
               </li>
@@ -67,7 +67,7 @@ export function Footer() {
               href="https://unsplash.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline decoration-line underline-offset-2 hover:decoration-accent"
+              className="underline decoration-line underline-offset-2 hover:decoration-ink"
             >
               Unsplash
             </a>
@@ -78,7 +78,7 @@ export function Footer() {
                   href={credit.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline decoration-line underline-offset-2 hover:decoration-accent"
+                  className="underline decoration-line underline-offset-2 hover:decoration-ink"
                 >
                   {credit.label}
                 </a>

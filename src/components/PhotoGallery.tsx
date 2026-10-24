@@ -36,10 +36,10 @@ export function PhotoGallery() {
         if (img) {
           gsap.fromTo(
             img,
-            { scale: 1.08 },
+            { scale: 1.06 },
             {
               scale: 1,
-              duration: 1.2,
+              duration: 1.15,
               ease: "power2.out",
               scrollTrigger: { trigger: frame, start: "top 90%", once: true },
             },
@@ -56,22 +56,22 @@ export function PhotoGallery() {
       <div className="site-pad site-container-wide mb-10 sm:mb-12">
         <h1
           id="gallery-heading"
-          className="display max-w-[12ch] text-[clamp(2.8rem,7vw,5rem)] text-ink"
+          className="display max-w-[12ch] text-[clamp(2.6rem,7vw,4.75rem)] text-ink"
         >
           From our visits
         </h1>
         <p className="mt-5 max-w-lg text-base leading-relaxed text-muted">
-          Club photographs from Silver Ambassadors Sundays — only on this page.
+          Photographs from Silver Ambassadors Sundays — only on this page.
         </p>
       </div>
 
       <div className="site-pad site-container-wide">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {galleryPhotos.map((photo, index) => (
             <figure
               key={photo.id}
               data-frame
-              className="group relative aspect-[4/3] overflow-hidden bg-surface"
+              className="group relative aspect-[4/3] overflow-hidden rounded-[var(--radius)] bg-surface-2"
               style={{ opacity: 0 }}
             >
               <Image
@@ -87,7 +87,7 @@ export function PhotoGallery() {
                 }}
                 priority={index < 2}
               />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-4 pt-14 pb-4">
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-4 pt-14 pb-4">
                 <p className="text-sm text-white">{photo.caption}</p>
               </figcaption>
             </figure>

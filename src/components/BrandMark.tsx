@@ -23,7 +23,7 @@ export function BrandMark({ className = "", compact = false }: BrandMarkProps) {
         priority
       />
       <span className="min-w-0">
-        <span className="block text-[0.95rem] font-semibold leading-none tracking-[-0.03em] text-ink sm:text-base">
+        <span className="block font-[family-name:var(--font-display)] text-[0.95rem] font-semibold leading-none tracking-[-0.03em] text-ink sm:text-base">
           Silver Ambassadors
         </span>
         {!compact ? (

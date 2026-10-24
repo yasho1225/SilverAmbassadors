@@ -20,7 +20,7 @@ export function MissionSection() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el.querySelectorAll("[data-mission]"),
-        { opacity: 0, y: 22 },
+        { opacity: 0, y: 24 },
         {
           opacity: 1,
           y: 0,
@@ -38,60 +38,63 @@ export function MissionSection() {
   return (
     <section
       ref={root}
-      className="site-pad section-y border-t border-line"
+      className="site-pad section-y"
       aria-labelledby="mission"
     >
-      <div className="site-container-wide">
-        <div className="grid gap-10 lg:grid-cols-[7rem_minmax(0,1fr)] lg:gap-12">
-          <aside
+      <div className="site-container-wide grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+        <div>
+          <p
             data-mission
-            className="flex gap-6 text-sm text-muted lg:flex-col lg:gap-5"
+            className="text-sm font-semibold tracking-[0.14em] text-silver uppercase"
             style={{ opacity: 0 }}
           >
-            <p>
-              <span className="block text-ink">Alpharetta</span>
-              Georgia
-            </p>
-            <p>
-              <span className="block text-ink">Sundays</span>
-              1:00 pm Tech Helps
-            </p>
-            <p>
-              <span className="block text-ink">Est. 2026</span>
-              AHS club
-            </p>
-          </aside>
-
-          <div>
-            <h2 id="mission" className="sr-only">
-              Mission
-            </h2>
-            <p
-              data-mission
-              className="text-[clamp(1.35rem,2.4vw,2rem)] font-medium leading-[1.25] tracking-[-0.03em] text-ink"
-              style={{ opacity: 0 }}
-            >
-              <span className="relative float-left mr-4 mb-1 h-[3.6em] w-[3.6em] overflow-hidden rounded-sm bg-surface-2">
-                <Image
-                  src={site.atmosphere.missionPortrait.src}
-                  alt={site.atmosphere.missionPortrait.alt}
-                  fill
-                  sizes="120px"
-                  className="object-cover"
-                />
-              </span>
-              {site.mission}
-            </p>
-            <div
-              data-mission
-              className="mt-8 clear-both space-y-4 text-base leading-relaxed text-muted sm:text-[1.05rem]"
-              style={{ opacity: 0 }}
-            >
-              {site.aboutBody.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
+            Our mission
+          </p>
+          <h2
+            data-mission
+            id="mission"
+            className="display mt-4 max-w-[14ch] text-[clamp(2.2rem,5vw,3.75rem)] text-ink"
+            style={{ opacity: 0 }}
+          >
+            Mutual joy. Real respect. Shared Sundays.
+          </h2>
+          <p
+            data-mission
+            className="mt-6 text-base leading-relaxed text-muted sm:text-lg"
+            style={{ opacity: 0 }}
+          >
+            {site.mission}
+          </p>
+          <div
+            data-mission
+            className="mt-8 grid gap-4 sm:grid-cols-3"
+            style={{ opacity: 0 }}
+          >
+            {[
+              ["Alpharetta", "Georgia"],
+              ["Sundays", "1:00 pm Tech Helps"],
+              ["Est. 2026", "AHS club"],
+            ].map(([title, detail]) => (
+              <div key={title} className="border-t border-line pt-4">
+                <p className="font-semibold text-ink">{title}</p>
+                <p className="mt-1 text-sm text-muted">{detail}</p>
+              </div>
+            ))}
           </div>
+        </div>
+
+        <div
+          data-mission
+          className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius)] bg-surface-2"
+          style={{ opacity: 0 }}
+        >
+          <Image
+            src={site.atmosphere.mission.src}
+            alt={site.atmosphere.mission.alt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 45vw"
+            className="object-cover"
+          />
         </div>
       </div>
     </section>

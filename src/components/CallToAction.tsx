@@ -27,7 +27,7 @@ export function CallToAction() {
           duration: 0.7,
           stagger: 0.08,
           ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 75%", once: true },
+          scrollTrigger: { trigger: el, start: "top 78%", once: true },
         },
       );
     }, el);
@@ -38,54 +38,49 @@ export function CallToAction() {
   return (
     <section
       ref={root}
-      className="relative flex min-h-[100svh] flex-col justify-between site-pad py-10 sm:py-12"
+      className="site-pad section-y"
       aria-labelledby="cta"
     >
-      <h2 id="cta" className="sr-only">
-        Ready this Sunday?
-      </h2>
-
-      <p
-        data-cta
-        className="display mx-auto max-w-[10ch] text-center text-[clamp(2.8rem,11vw,7.5rem)] text-ink"
-        style={{ opacity: 0 }}
-        aria-hidden="true"
-      >
-        Ready this
-      </p>
-
-      <div
-        data-cta
-        className="mx-auto flex w-full max-w-lg flex-col items-center gap-4"
-        style={{ opacity: 0 }}
-      >
-        <div className="flex w-full flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-5">
+      <div className="site-container-wide overflow-hidden rounded-[calc(var(--radius)+4px)] bg-accent px-8 py-14 text-accent-ink sm:px-12 sm:py-16">
+        <h2
+          data-cta
+          id="cta"
+          className="display max-w-[12ch] text-[clamp(2.4rem,6vw,4.25rem)] text-accent-ink"
+          style={{ opacity: 0 }}
+        >
+          Ready this Sunday?
+        </h2>
+        <p
+          data-cta
+          className="mt-5 max-w-md text-base leading-relaxed text-accent-ink/70"
+          style={{ opacity: 0 }}
+        >
+          Show up, share an hour, then log it. Come back next week.
+        </p>
+        <div
+          data-cta
+          className="mt-8 flex flex-wrap items-center gap-3"
+          style={{ opacity: 0 }}
+        >
           <a
             href={volunteerForm.viewUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-accent min-w-[11rem]"
+            className="btn bg-accent-ink text-accent hover:opacity-90"
           >
             Submit Hours
           </a>
-          <span className="text-center text-sm text-muted">or</span>
-          <Link href="/events" className="btn btn-ghost min-w-[11rem]">
+          <Link
+            href="/events"
+            className="btn border border-accent-ink/25 bg-transparent text-accent-ink hover:bg-accent-ink/10"
+          >
             See events
           </Link>
+          <Link href="/gallery" className="cta-underline ml-1 text-sm text-accent-ink/80">
+            Browse visit photographs
+          </Link>
         </div>
-        <p className="text-center text-sm text-muted">
-          Show up Sunday · log the hours after · come back next week
-        </p>
       </div>
-
-      <p
-        data-cta
-        className="display mx-auto max-w-[8ch] text-center text-[clamp(2.8rem,11vw,7.5rem)] text-accent"
-        style={{ opacity: 0 }}
-        aria-hidden="true"
-      >
-        Sunday?
-      </p>
     </section>
   );
 }

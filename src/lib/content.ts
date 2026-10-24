@@ -17,7 +17,7 @@ export const site = {
       detail:
         "Show up at 1:00 pm. Help with phones, apps, and the everyday digital tasks that unlock independence.",
       image: "/images/atmosphere/help.jpg",
-      imageAlt: "People collaborating around a table during a workshop",
+      imageAlt: "Students collaborating around a table with laptops",
     },
     {
       verb: "Share",
@@ -25,7 +25,7 @@ export const site = {
       detail:
         "Share seasons together — pumpkin carving, ice cream socials, board games, and celebration.",
       image: "/images/atmosphere/laugh.jpg",
-      imageAlt: "Friends laughing together outdoors",
+      imageAlt: "A group of friends laughing together outdoors",
     },
     {
       verb: "Serve",
@@ -33,7 +33,7 @@ export const site = {
       detail:
         "Serve in short weekly visits so hours add up without a single large commitment.",
       image: "/images/atmosphere/share.jpg",
-      imageAlt: "A group of friends together in a warm gathering",
+      imageAlt: "People gathered together on a grassy field",
     },
   ],
   contactPlaceholders: {
@@ -47,16 +47,15 @@ export const site = {
     alt: "Silver Ambassadors medallion logo — handshake, Established 2026",
   },
   atmosphere: {
-    heroStrip: {
+    hero: {
       src: "/images/atmosphere/hands.jpg",
       alt: "Many hands stacked together in a circle of community",
     },
-    missionPortrait: {
-      src: "/images/atmosphere/help.jpg",
-      alt: "Volunteers working side by side",
+    mission: {
+      src: "/images/atmosphere/laugh.jpg",
+      alt: "Friends laughing together outdoors",
     },
   },
-  /** Unsplash atmosphere — club visit photos are listed only in `galleryPhotos`. */
   atmosphereCredits: [
     {
       label: "Hands",
@@ -64,11 +63,11 @@ export const site = {
     },
     {
       label: "Help",
-      href: "https://unsplash.com/photos/person-holding-baby-s-hand-5f04d1e3f289",
+      href: "https://unsplash.com/photos/people-sitting-beside-table-and-laptop-66273c2fd55f",
     },
     {
       label: "Gather",
-      href: "https://unsplash.com/photos/person-writing-on-white-paper-c3d57bc86b40",
+      href: "https://unsplash.com/photos/five-person-sitting-on-surface-39953e39b3ac",
     },
     {
       label: "Share",

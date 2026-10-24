@@ -19,7 +19,7 @@ export function CallToAction() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el.querySelectorAll("[data-cta]"),
-        { opacity: 0, y: 20 },
+        { opacity: 0, y: 22 },
         {
           opacity: 1,
           y: 0,
@@ -41,18 +41,15 @@ export function CallToAction() {
   return (
     <section
       ref={root}
-      className="site-pad section-y bg-surface"
+      className="site-pad section-y border-t border-line bg-surface"
       aria-labelledby="cta"
     >
-      <div className="site-container-wide editorial-axis">
-        <p data-cta className="editorial-note text-sm text-muted" style={{ opacity: 0 }}>
-          Members
-        </p>
-        <div>
+      <div className="site-container-wide flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div className="max-w-2xl">
           <h2
             data-cta
             id="cta"
-            className="display max-w-[16ch] text-[clamp(2rem,4vw,3.25rem)] text-ink"
+            className="display text-[clamp(2rem,4.2vw,3.4rem)] text-ink"
             style={{ opacity: 0 }}
           >
             Log the hour you{" "}
@@ -66,14 +63,17 @@ export function CallToAction() {
             </a>
             .
           </h2>
-          <p
-            data-cta
-            className="mt-5 max-w-[40ch] text-base leading-relaxed text-muted"
-            style={{ opacity: 0 }}
-          >
-            Use the club Google Form after Tech Helps or any special event.
-          </p>
         </div>
+        <a
+          data-cta
+          href={volunteerForm.viewUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-accent shrink-0"
+          style={{ opacity: 0 }}
+        >
+          Submit Hours
+        </a>
       </div>
     </section>
   );

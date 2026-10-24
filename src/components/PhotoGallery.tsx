@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Exclusive home for club photographs.
- * Mount only on `/gallery` so images are never duplicated elsewhere.
+ * Mount only on `/gallery` — never import photos into Home/About/Hero.
  */
 export function PhotoGallery() {
   const root = useRef<HTMLElement>(null);
@@ -35,42 +35,40 @@ export function PhotoGallery() {
     const ctx = gsap.context(() => {
       frames.forEach((frame, index) => {
         const img = images[index];
-        gsap.set(frame, { clipPath: "inset(100% 0 0 0)" });
-        gsap.set(img, { scale: 1.12 });
+        gsap.set(frame, { clipPath: "inset(12% 12% 12% 12%)" });
+        gsap.set(img, { scale: 1.14 });
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: frame,
-            start: "top 88%",
-            once: true,
-          },
-        });
-
-        tl.to(frame, {
-          clipPath: "inset(0% 0 0 0)",
-          duration: 1.05,
-          ease: "power3.inOut",
-        }).to(
-          img,
-          {
-            scale: 1,
-            duration: 1.35,
-            ease: "power2.out",
-          },
-          0,
-        );
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: frame,
+              start: "top 90%",
+              once: true,
+            },
+          })
+          .to(frame, {
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 1.1,
+            ease: "power3.inOut",
+          })
+          .to(
+            img,
+            {
+              scale: 1,
+              duration: 1.4,
+              ease: "power2.out",
+            },
+            0,
+          );
       });
     }, el);
 
     return () => ctx.revert();
   }, []);
 
-  const tall = galleryPhotos.find((p) => p.layout === "tall");
-  const wides = galleryPhotos.filter((p) => p.layout === "wide");
-
   return (
     <section ref={root} className="pb-16 sm:pb-20" aria-labelledby="gallery-heading">
-      <div className="site-pad site-container-wide mb-10 sm:mb-12">
+      <div className="site-pad site-container-wide mb-8 sm:mb-10">
         <h1
           id="gallery-heading"
           className="display max-w-[12ch] text-[clamp(2.8rem,7vw,5.5rem)] text-ink"
@@ -78,56 +76,39 @@ export function PhotoGallery() {
           From our visits
         </h1>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-          Four photographs from Silver Ambassadors Sundays — shown here once,
-          large, and nowhere else on the site.
+          The only page that shows Silver Ambassadors photographs.
         </p>
       </div>
 
-      <div className="site-pad site-container-wide">
-        <div className="grid gap-2 md:grid-cols-12 md:grid-rows-2 md:gap-2">
-          {tall ? (
-            <figure
-              data-frame
-              className="relative aspect-[3/4] overflow-hidden bg-ink md:col-span-5 md:row-span-2 md:aspect-auto md:min-h-[36rem]"
-            >
-              <Image
-                data-img
-                src={tall.src}
-                alt={tall.alt}
-                fill
-                sizes="(max-width: 768px) 100vw, 42vw"
-                className="object-cover object-[center_30%]"
-                priority
-              />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-4 pt-16 pb-4">
-                <p className="text-sm text-background/90">{tall.caption}</p>
-              </figcaption>
-            </figure>
-          ) : null}
-
-          {wides.map((photo, index) => (
-            <figure
-              key={photo.id}
-              data-frame
-              className={`relative aspect-[4/3] overflow-hidden bg-ink md:col-span-7 md:aspect-auto md:min-h-[17.5rem] ${
-                index === wides.length - 1 ? "md:col-span-7" : ""
-              }`}
-            >
-              <Image
-                data-img
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                sizes="(max-width: 768px) 100vw, 58vw"
-                className="object-cover object-[center_40%]"
-                priority={index === 0}
-              />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-4 pt-14 pb-4">
-                <p className="text-sm text-background/90">{photo.caption}</p>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+      <div className="grid grid-cols-2 gap-1.5 sm:gap-2 lg:grid-cols-4">
+        {galleryPhotos.map((photo, index) => (
+          <figure
+            key={photo.id}
+            data-frame
+            className={`relative overflow-hidden bg-ink ${
+              photo.layout === "tall"
+                ? "aspect-[3/4] sm:aspect-[3/4] lg:col-span-1"
+                : "aspect-[4/3] sm:aspect-[4/3]"
+            } ${index === 0 ? "col-span-2 row-span-2 aspect-auto min-h-[22rem] sm:min-h-[28rem] lg:col-span-2 lg:row-span-2 lg:min-h-[36rem]" : ""}`}
+          >
+            <Image
+              data-img
+              src={photo.src}
+              alt={photo.alt}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className="object-cover"
+              style={{
+                objectPosition:
+                  photo.id === "visit-lounge" ? "center 28%" : "center 40%",
+              }}
+              priority={index < 2}
+            />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-3 pt-12 pb-3 sm:px-4 sm:pb-4">
+              <p className="text-xs text-background/90 sm:text-sm">{photo.caption}</p>
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </section>
   );

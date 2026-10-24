@@ -13,15 +13,12 @@ export default function AboutPage() {
   return (
     <>
       <section className="site-pad section-y border-b border-line">
-        <div className="site-container-wide editorial-axis">
+        <div className="site-container-wide">
           <Reveal>
-            <p className="editorial-note text-sm text-muted">About</p>
-          </Reveal>
-          <Reveal>
-            <h1 className="display max-w-[12ch] text-[clamp(2.8rem,7vw,5rem)] text-ink">
+            <h1 className="display max-w-[12ch] text-[clamp(2.8rem,7vw,5.25rem)] text-ink">
               {site.name}
             </h1>
-            <p className="mt-6 max-w-[42ch] text-base leading-relaxed text-muted sm:text-lg">
+            <p className="mt-6 max-w-[44ch] text-base leading-relaxed text-muted sm:text-lg">
               A student organization at {site.school} building mutual joy,
               respect, and community with seniors in Alpharetta.
             </p>
@@ -30,18 +27,17 @@ export default function AboutPage() {
       </section>
 
       <section className="site-pad section-y bg-surface">
-        <div className="site-container-wide editorial-axis">
+        <div className="site-container-wide grid gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <p className="editorial-note text-sm text-muted">Why</p>
-          </Reveal>
-          <Reveal delay={0.06}>
             <h2 className="display text-[clamp(2rem,4vw,3.2rem)] text-ink">
               Why we gather
             </h2>
-            <p className="mt-6 max-w-[48ch] font-display text-[clamp(1.15rem,0.95rem+0.7vw,1.45rem)] leading-relaxed text-ink">
+          </Reveal>
+          <Reveal delay={0.06}>
+            <p className="font-display text-[clamp(1.15rem,0.95rem+0.7vw,1.5rem)] leading-relaxed text-ink">
               {site.mission}
             </p>
-            <div className="mt-6 max-w-[48ch] space-y-3 text-base leading-relaxed text-muted">
+            <div className="mt-6 space-y-3 text-base leading-relaxed text-muted">
               {site.aboutBody.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}

@@ -18,24 +18,22 @@ export function WhatWeDo() {
 
     const rows = el.querySelectorAll<HTMLElement>("[data-step]");
     const ctx = gsap.context(() => {
-      rows.forEach((row, index) => {
-        gsap.fromTo(
-          row,
-          { opacity: 0, x: index === 0 ? 0 : 24, y: 20 },
-          {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: row,
-              start: "top 86%",
-              once: true,
-            },
+      gsap.fromTo(
+        rows,
+        { opacity: 0, y: 28 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.75,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 75%",
+            once: true,
           },
-        );
-      });
+        },
+      );
     }, el);
 
     return () => ctx.revert();
@@ -51,25 +49,23 @@ export function WhatWeDo() {
         <h2 id="what-we-do" className="sr-only">
           What Sundays look like
         </h2>
-        <ol className="space-y-12 md:space-y-16">
+        <ol className="space-y-10 md:space-y-12">
           {site.activities.map((activity, index) => (
             <li
               key={activity.title}
               data-step
-              className="max-w-4xl"
-              style={{
-                marginLeft: `min(${index * 5}vw, 7rem)`,
-                opacity: 0,
-              }}
+              className="grid gap-3 md:grid-cols-12 md:items-end md:gap-8"
+              style={{ opacity: 0 }}
             >
               <p
-                className={`stair-line ${
+                className={`stair-line md:col-span-8 ${
                   index === site.activities.length - 1 ? "text-accent" : "text-ink"
                 }`}
+                style={{ paddingLeft: `min(${index * 3.5}vw, 5.5rem)` }}
               >
                 {activity.opener}
               </p>
-              <p className="mt-3 max-w-[36ch] text-[0.95rem] leading-relaxed text-muted">
+              <p className="max-w-[34ch] text-[0.95rem] leading-relaxed text-muted md:col-span-4 md:justify-self-end md:pb-1">
                 <span className="font-medium text-ink">{activity.title}. </span>
                 {activity.detail}
               </p>

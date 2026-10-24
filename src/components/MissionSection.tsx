@@ -4,25 +4,20 @@ import { site } from "@/lib/content";
 export function MissionSection() {
   return (
     <section className="site-pad section-y" aria-labelledby="mission">
-      <div className="site-container-wide editorial-axis">
+      <div className="site-container-wide">
         <Reveal>
-          <p className="editorial-note text-sm text-muted">Mission</p>
-        </Reveal>
-        <div>
-          <Reveal>
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
             <h2
               id="mission"
-              className="display max-w-[14ch] text-[clamp(2.2rem,4.5vw,3.6rem)] text-ink"
+              className="display text-[clamp(2.4rem,5vw,4rem)] text-ink"
             >
               Mutual joy across generations.
             </h2>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p className="mt-6 max-w-[42ch] text-base leading-relaxed text-muted sm:text-lg">
+            <p className="max-w-[46ch] self-end text-base leading-relaxed text-muted sm:text-lg">
               {site.mission}
             </p>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

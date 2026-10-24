@@ -20,12 +20,12 @@ export function WhatWeDo() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         rows,
-        { opacity: 0, y: 16 },
+        { opacity: 0, y: 14 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          stagger: 0.08,
+          duration: 0.55,
+          stagger: 0.07,
           ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 80%", once: true },
         },
@@ -41,26 +41,26 @@ export function WhatWeDo() {
       className="site-pad section-y border-y border-line bg-surface"
       aria-labelledby="what-we-do"
     >
-      <div className="site-container-wide">
+      <div className="site-container-wide max-w-3xl">
         <h2
           id="what-we-do"
-          className="display max-w-[18ch] text-[clamp(1.85rem,3.5vw,2.75rem)] text-ink"
+          className="display text-[clamp(1.85rem,3.2vw,2.5rem)] text-ink"
         >
           How Sundays are structured
         </h2>
 
-        <ul className="mt-12 divide-y divide-line border-y border-line">
+        <ul className="mt-10 space-y-0 divide-y divide-line border-y border-line">
           {site.activities.map((activity) => (
             <li
               key={activity.title}
               data-step
-              className="grid gap-3 py-8 md:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)] md:gap-10"
+              className="py-7"
               style={{ opacity: 0 }}
             >
-              <h3 className="font-display text-xl tracking-[-0.02em] text-ink sm:text-2xl">
+              <h3 className="font-display text-xl tracking-[-0.02em] text-ink sm:text-[1.35rem]">
                 {activity.title}
               </h3>
-              <p className="max-w-[40ch] text-[0.98rem] leading-relaxed text-muted md:pt-1">
+              <p className="mt-2 max-w-[40rem] text-[0.98rem] leading-relaxed text-muted">
                 {activity.detail}
               </p>
             </li>

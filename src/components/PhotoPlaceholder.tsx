@@ -4,22 +4,27 @@ export function PhotoPlaceholder({
   asset,
   variant = "connection",
   className = "",
+  sizes = "(max-width: 767px) calc(100vw - 40px), (max-width: 1439px) 45vw, 620px",
 }: {
   asset: PhotoKey;
   variant?: "connection" | "orbit" | "arch";
   className?: string;
+  sizes?: string;
 }) {
   const photo = photographs[asset];
   return (
-    <div className={`photo-composition art-${variant} ${className}`}>
+    <div
+      className={`photo-composition art-${variant} ${photo.src ? "has-photo" : ""} ${className}`}
+    >
       {photo.src ? (
         <Image
           src={photo.src}
           alt={photo.alt}
           fill
-          priority={asset === "hero"}
-          sizes="(max-width: 767px) 100vw, 55vw"
+          preload={asset === "hero"}
+          sizes={sizes}
           className="object-cover"
+          style={{ objectPosition: photo.position }}
         />
       ) : (
         <>

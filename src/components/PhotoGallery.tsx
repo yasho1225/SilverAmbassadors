@@ -5,12 +5,11 @@ import { photographs, type PhotoKey } from "@/lib/photographs";
 
 const frames: {
   asset: PhotoKey;
-  title: string;
   variant: "connection" | "orbit" | "arch";
 }[] = [
-  { asset: "tech", title: "A helping hand.", variant: "arch" },
-  { asset: "gatherings", title: "A shared story.", variant: "orbit" },
-  { asset: "moments", title: "Time together.", variant: "connection" },
+  { asset: "connection", variant: "arch" },
+  { asset: "community", variant: "orbit" },
+  { asset: "students", variant: "connection" },
 ];
 
 export function PhotoGallery({
@@ -20,7 +19,9 @@ export function PhotoGallery({
   standalone?: boolean;
   showViewAll?: boolean;
 }) {
-  const photos = frames.filter((frame) => photographs[frame.asset].src);
+  const photos = frames
+    .filter((frame) => photographs[frame.asset].src)
+    .slice(0, standalone ? frames.length : 2);
   const Heading = standalone ? "h1" : "h2";
   return (
     <section
@@ -44,14 +45,21 @@ export function PhotoGallery({
               </div>
               <p>Our story, through our lens.</p>
             </div>
-            <div className="gallery-frames">
+            <div
+              className={`gallery-frames ${standalone ? "" : "gallery-frames-preview"}`}
+            >
               {photos.map((frame) => (
                 <figure key={frame.asset}>
                   <PhotoPlaceholder
                     asset={frame.asset}
                     variant={frame.variant}
+                    sizes={
+                      standalone
+                        ? "(max-width: 767px) calc(100vw - 40px), (max-width: 1439px) 30vw, 450px"
+                        : "(max-width: 767px) calc(100vw - 40px), (max-width: 1439px) 45vw, 628px"
+                    }
                   />
-                  <figcaption>{photographs[frame.asset].alt}</figcaption>
+                  <figcaption>{photographs[frame.asset].caption}</figcaption>
                 </figure>
               ))}
             </div>
@@ -95,7 +103,7 @@ export function PhotoGallery({
               )}
             </div>
             <div className="gallery-preview-art">
-              <PhotoPlaceholder asset="moments" variant="arch" />
+              <PhotoPlaceholder asset="connection" variant="arch" />
             </div>
           </div>
         )}

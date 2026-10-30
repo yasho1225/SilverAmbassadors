@@ -60,25 +60,25 @@ Being shared on a calendar is not the same as making it publicly embeddable. For
 
 Do not commit private credentials or non-public calendar tokens.
 
-## Placeholders
+## Photography and remaining placeholders
 
 Until club assets are provided, the site uses clearly labeled placeholders for:
 
-- Hero and gallery photographs
 - Logo mark (text monogram)
 - Contact email / advisor
 - Google Calendar embed
 
-Photo slots use lightweight CSS sculptures, explicitly labeled as placeholders.
-To replace them, add approved photographs to `public/photos/` and update
-`src/lib/photographs.ts` with each image path and meaningful alternative text.
-The fixed containers preserve layout and scroll measurements.
+Three club-provided originals are stored in `public/photos/`. The shared visit
+portrait leads the homepage, with two photos in the homepage gallery and all
+three selected photos on the Gallery page. Sources, descriptive alternative text,
+short captions, and crop focal points live in `src/lib/photographs.ts`.
+The original files are preserved; Next.js supplies appropriately sized images.
+Empty photo slots still have a labeled artwork fallback.
 The text monogram is temporary until the official logo is supplied.
 
 The homepage retains the animated generation panels and the senior line drawing.
 About uses a concise mission and activity overview instead of repeating the same
-scroll story. Gallery shows one illustrated empty state until approved event
-photographs are available, then displays only configured photos. Contact explains
+scroll story. Gallery displays the selected club photographs. Contact explains
 the first-visit steps and identifies unavailable contact information in one note.
 
 ### Motion
@@ -126,5 +126,5 @@ See [`docs/PRD.md`](docs/PRD.md) for the full Product Requirements Document.
 | `/about`           | Mission and who the club serves                             |
 | `/events`          | Google Calendar (or placeholder)                            |
 | `/volunteer-hours` | Official hours Google Form                                  |
-| `/gallery`         | Event photo placeholders / future photos                    |
+| `/gallery`         | Selected club photographs                                   |
 | `/contact`         | Get involved + contact placeholders                         |

@@ -4,7 +4,7 @@ import { PhotoGallery } from "@/components/PhotoGallery";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "A visual journal of Silver Ambassadors. Event photographs and community highlights are coming soon.",
+    "Photographs of Silver Ambassadors students and seniors sharing time and building connections in Alpharetta.",
 };
 
 export default function GalleryPage() {

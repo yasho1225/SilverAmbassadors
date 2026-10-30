@@ -4,9 +4,10 @@
 
 An editorial study of connection. Mist blue and light silver
 establish a clear rhythm. Newsreader's italic voice adds warmth to restrained
-Manrope navigation. Abstract interlocking forms stand in for future photography,
-with explicit placeholder labels. Large, few photographs will replace these
-without changing the frame proportions or motion.
+Manrope navigation. A small selection of real club photographs brings the
+student–senior connection into focus. Natural image colors are preserved, with
+face-aware cover crops. Abstract interlocking forms remain available as a labeled
+fallback for empty photo slots.
 
 ## Type
 
@@ -41,8 +42,8 @@ fill and a fine silver edge, without a background box or color blending.
 
 The homepage owns the animated story. About provides a concise mission and
 activity overview without replaying it. Supporting pages share a consistent
-introduction, heading scale, and spacing. Gallery uses one clearly illustrated
-empty state until approved photographs are supplied. The footer groups all
+introduction, heading scale, and spacing. Two photographs close the homepage;
+the Gallery page shows the three selected originals. The footer groups all
 pages and the two social destinations without a duplicate members column.
 
 ## Anti-patterns

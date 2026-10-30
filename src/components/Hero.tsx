@@ -48,8 +48,8 @@ export function Hero() {
             </h1>
             <p className="hero-description">
               A student-led volunteering community in Alpharetta. We bring high
-              school students and seniors together through tech help, games,
-              and shared activities.
+              school students and seniors together through tech help, games, and
+              shared activities.
             </p>
             <Link href="#volunteering" className="text-link">
               Explore volunteering <ArrowUpRight size={19} aria-hidden="true" />
@@ -60,7 +60,11 @@ export function Hero() {
               <PhotoPlaceholder asset="hero" variant="connection" />
             </div>
             <div className="art-caption">
-              <span>A space for shared moments</span>
+              <span>
+                {photographs.hero.src
+                  ? photographs.hero.caption
+                  : "A space for shared moments"}
+              </span>
               <span>
                 {photographs.hero.src
                   ? "Silver Ambassadors"

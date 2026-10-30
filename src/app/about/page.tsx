@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { CallToAction } from "@/components/CallToAction";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { PageIntro } from "@/components/PageIntro";
 import { Reveal } from "@/components/motion/Reveal";
-import { Showcase } from "@/components/Showcase";
-import { WhatWeDo } from "@/components/WhatWeDo";
 import { site } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -13,19 +13,21 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="site-pad section-y border-b border-line">
-        <div className="site-container-wide">
-          <Reveal>
-            <h1 className="display max-w-[12ch] text-[clamp(3rem,9vw,6.5rem)] text-ink">
-              {site.name}
-            </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-              A student organization at {site.school} dedicated to mutual joy,
-              respect, and community with senior citizens in Alpharetta.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageIntro
+        label="About the club"
+        title={
+          <>
+            Different generations.
+            <br />
+            <em>Shared purpose.</em>
+          </>
+        }
+      >
+        <p>
+          A student-led organization at {site.school}, connecting students and
+          senior citizens in Alpharetta through service.
+        </p>
+      </PageIntro>
 
       <section className="site-pad section-y bg-surface">
         <div className="site-container-wide grid gap-12 lg:grid-cols-2">
@@ -35,21 +37,39 @@ export default function AboutPage() {
             </h2>
           </Reveal>
           <Reveal delay={0.08}>
-            <p className="font-display text-[clamp(1.25rem,1rem+1vw,1.75rem)] leading-relaxed text-ink">
+            <p className="font-display text-[clamp(1.25rem,1rem+1vw,1.6rem)] leading-relaxed text-ink">
               {site.mission}
             </p>
-            <div className="mt-8 space-y-4 text-base leading-relaxed text-muted">
-              {site.aboutBody.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
           </Reveal>
         </div>
       </section>
 
-      <Showcase />
-      <WhatWeDo />
-      <CallToAction />
+      <section
+        className="site-pad section-y"
+        aria-labelledby="about-activities"
+      >
+        <div className="site-container-wide detail-layout">
+          <div>
+            <p className="section-label">Time shared, well spent</p>
+            <h2 id="about-activities" className="detail-heading">
+              A place for your
+              <br />
+              <em>time and talents.</em>
+            </h2>
+            <Link href="/events" className="text-link">
+              Explore volunteering <ArrowUpRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+          <dl className="detail-list">
+            {site.activities.map((activity) => (
+              <div key={activity.title}>
+                <dt>{activity.title}</dt>
+                <dd>{activity.detail}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
     </>
   );
 }

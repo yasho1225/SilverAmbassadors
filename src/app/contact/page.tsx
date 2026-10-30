@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Reveal } from "@/components/motion/Reveal";
-import { volunteerForm } from "@/lib/config";
+import { ArrowUpRight } from "lucide-react";
+import { PageIntro } from "@/components/PageIntro";
 import { site } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -11,91 +11,78 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const rows = [
-    { label: site.name, href: undefined },
-    {
-      label: site.contactPlaceholders.location,
-      href: undefined,
-    },
-    {
-      label: site.contactPlaceholders.email,
-      href: undefined,
-      muted: true,
-    },
-    {
-      label: site.contactPlaceholders.advisor,
-      href: undefined,
-      muted: true,
-    },
-    {
-      label: "Sundays · Tech Helps typically 1:00 pm",
-      href: "/events",
-    },
-  ] as const;
-
   return (
     <>
-      <section className="site-pad section-y">
-        <div className="site-container-wide">
-          <Reveal>
-            <h1 className="display max-w-[10ch] text-[clamp(3rem,9vw,6rem)] text-ink">
-              Get involved.
-            </h1>
-            <p className="mt-6 max-w-xl text-lg text-muted">
-              Verified contact channels will replace placeholders once club
-              leadership publishes them. Until then, start with a Sunday event
-              and submit hours after you serve.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="border-y border-line">
-        {rows.map((row, index) => {
-          const content = (
-            <div
-              className={`site-pad flex min-h-[7rem] items-end py-6 ${
-                index % 2 === 0 ? "bg-surface" : "bg-background"
-              }`}
-            >
-              <p
-                className={`site-container-wide font-display text-[clamp(1.4rem,3.5vw,3rem)] tracking-[-0.03em] leading-none ${
-                  "muted" in row && row.muted ? "text-muted" : "text-ink"
-                }`}
-              >
-                {row.label}
+      <PageIntro
+        label="Get involved"
+        title={
+          <>
+            Make a little room
+            <br />
+            <em>for connection.</em>
+          </>
+        }
+      >
+        <p>
+          A little time can make a meaningful difference. Start with a Sunday,
+          and see where it takes you.
+        </p>
+      </PageIntro>
+      <section className="site-pad section-y" aria-labelledby="first-visit">
+        <div className="site-container-wide detail-layout">
+          <div>
+            <p className="section-label">Your first visit</p>
+            <h2 id="first-visit" className="detail-heading">
+              Good company.
+              <br />
+              <em>A simple start.</em>
+            </h2>
+            <Link href="/events" className="text-link">
+              Find a volunteering opportunity{" "}
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </Link>
+            <div className="contact-note">
+              <p className="section-label">Our school community</p>
+              <p>
+                {site.school}
+                <br />
+                Alpharetta, Georgia
+              </p>
+              <p className="text-sm text-muted">
+                Club email and advisor details will appear here once confirmed.
               </p>
             </div>
-          );
-
-          return (
-            <Reveal key={row.label} delay={index * 0.04}>
-              {row.href ? (
-                <Link href={row.href} className="block transition-opacity hover:opacity-85">
-                  {content}
+          </div>
+          <dl className="detail-list">
+            <div>
+              <dt>Find a time that fits.</dt>
+              <dd>
+                Tech Helps are typically Sundays at 1:00 pm. Seasonal and social
+                gatherings offer other ways to take part.
+              </dd>
+            </div>
+            <div>
+              <dt>Check before you go.</dt>
+              <dd>
+                Ask club leadership to confirm the time, location, and any
+                joining details before your first visit.
+              </dd>
+            </div>
+            <div>
+              <dt>Make your time count.</dt>
+              <dd>
+                After volunteering, record your completed hours through the
+                official form.
+              </dd>
+              <dd>
+                <Link href="/volunteer-hours" className="text-link">
+                  Log volunteer hours{" "}
+                  <ArrowUpRight size={16} aria-hidden="true" />
                 </Link>
-              ) : (
-                content
-              )}
-            </Reveal>
-          );
-        })}
-
-        <Reveal delay={0.2}>
-          <a
-            href={volunteerForm.viewUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="site-pad flex min-h-[7rem] items-center justify-between gap-4 bg-accent py-6 text-accent-ink transition-opacity hover:opacity-92"
-          >
-            <span className="site-container-wide flex w-full items-center justify-between gap-4 font-display text-[clamp(1.4rem,3.5vw,3rem)] tracking-[-0.03em] leading-none">
-              Submit hours
-              <span aria-hidden="true" className="text-[0.9em]">
-                →
-              </span>
-            </span>
-          </a>
-        </Reveal>
+              </dd>
+            </div>
+          </dl>
+        </div>
       </section>
     </>
   );

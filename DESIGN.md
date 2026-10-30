@@ -1,27 +1,52 @@
 # Design system — Silver Ambassadors
 
 ## World
-Type-led editorial night field. Silver ink on near-black ground. One muted steel accent. Photographs (when present) arrive large and few; until then, honest placeholders and typographic set pieces carry the page.
+
+An editorial study of connection. Mist blue and light silver
+establish a clear rhythm. Newsreader's italic voice adds warmth to restrained
+Manrope navigation. Abstract interlocking forms stand in for future photography,
+with explicit placeholder labels. Large, few photographs will replace these
+without changing the frame proportions or motion.
 
 ## Type
-- **Newsreader** for display and body (optical sizing, light at poster scale)
-- **Manrope** for compact UI chrome (nav, buttons, captions)
+
+- **Newsreader** for display headings, emphasis, and the long-form mission statement
+- **Manrope** for body copy, navigation, buttons, and captions
 
 ## Colour
-| Token | Value | Use |
-| --- | --- | --- |
-| `--bg` | `#0f1114` | Page ground |
-| `--surface` | `#181b21` | Panels |
-| `--ink` | `#e9edf3` | Primary text |
-| `--muted` | `#8b939f` | Secondary text |
-| `--accent` | `#9eb4c8` | Steel/silver accent (buttons, emphasis) |
-| `--accent-ink` | `#0f1114` | Text on accent |
+
+| Color          | Value     | Role                                              |
+| -------------- | --------- | ------------------------------------------------- |
+| Silver blue    | `#cbd6df` | Main page background                              |
+| Brushed silver | `#b8c3cc` | Mission, calendar, and supporting surfaces        |
+| Cool graphite  | `#25323d` | Accessible text, buttons, and illustration detail |
+
+Mist blue and silver share cool undertones. Graphite supplies contrast for
+type and controls. Surface variations are subtle mixes of the light colors,
+while illustration shadows give silver its material character. Large page
+surfaces stay light. The overlapping “together.” word uses a single graphite
+fill and a fine silver edge, without a background box or color blending.
 
 ## Motion
+
 - Lenis for smooth scroll
-- GSAP ScrollTrigger for section entrances (opacity + y, ease-out, ~0.6–0.9s marketing)
+- GSAP ScrollTrigger for hero parallax, converging generation panels, and the volunteering story
+- Native sticky illustration stage on desktop; inline chapter illustrations on mobile
+- Each scene reserves a separate caption area; captions fade in sequence and never sit on the artwork
+- Motion for restrained section entrances; content visible before hydration
 - UI feedback ≤160ms, `cubic-bezier(0.23, 1, 0.32, 1)`
 - Respect `prefers-reduced-motion`
 
+## Page hierarchy
+
+The homepage owns the animated story. About provides a concise mission and
+activity overview without replaying it. Supporting pages share a consistent
+introduction, heading scale, and spacing. Gallery uses one clearly illustrated
+empty state until approved photographs are supplied. The footer groups all
+pages and the two social destinations without a duplicate members column.
+
 ## Anti-patterns
-No eyebrow kickers, no 01/02/03 costume numbering, no icon-card grids, no purple gradients, no glassmorphism decoration.
+
+No decorative section numbers, icon-card grids, neon, or glassmorphism.
+Small section labels support orientation. Sculptural shading is limited to
+placeholder artwork. No fabricated event photographs, statistics, or dates.

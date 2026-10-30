@@ -1,64 +1,62 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { BrandMark } from "@/components/BrandMark";
-import { volunteerForm } from "@/lib/config";
+import { getSocialLinks } from "@/lib/config";
 import { navLinks, site } from "@/lib/content";
 
 export function Footer() {
+  const socialLinks = getSocialLinks();
   return (
-    <footer className="site-pad border-t border-line bg-background">
-      <div className="site-container-wide section-y !py-16">
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
-          <div>
+    <footer className="site-pad site-footer border-t border-line bg-background">
+      <div className="site-container-wide">
+        <div className="footer-grid">
+          <div className="footer-brand">
             <BrandMark />
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-muted">
-              {site.description}
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
+              Students and seniors, connected through service in Alpharetta.
             </p>
           </div>
-
-          <div>
-            <p className="mb-4 text-sm text-muted">Explore</p>
-            <ul className="space-y-2.5">
+          <nav aria-label="Footer pages">
+            <p className="section-label mb-4 text-muted">Explore</p>
+            <ul className="footer-links">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-ink transition-colors hover:text-accent"
-                  >
-                    {link.label}
-                  </Link>
+                  <Link href={link.href}>{link.label}</Link>
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div>
-            <p className="mb-4 text-sm text-muted">Members</p>
-            <ul className="space-y-2.5 text-sm text-ink">
-              <li>
-                <a
-                  href={volunteerForm.viewUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline decoration-line underline-offset-4 hover:decoration-accent"
-                >
-                  Submit volunteer hours
-                </a>
-              </li>
-              <li>
-                <Link href="/events" className="hover:text-accent">
-                  View upcoming events
-                </Link>
-              </li>
-              <li className="text-muted">{site.contactPlaceholders.note}</li>
+          </nav>
+          <nav aria-label="Social links">
+            <p className="section-label mb-4 text-muted">Stay connected</p>
+            <ul className="footer-links">
+              {socialLinks.map((social) => (
+                <li key={social.label}>
+                  {social.href ? (
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2"
+                    >
+                      {social.label}
+                      <ArrowUpRight size={14} aria-hidden="true" />
+                    </a>
+                  ) : (
+                    <span className="social-pending">
+                      <span>{social.label}</span>
+                      <small>Link coming soon</small>
+                    </span>
+                  )}
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
         </div>
-
-        <div className="mt-14 flex flex-col gap-2 border-t border-line pt-6 text-xs text-muted sm:flex-row sm:justify-between">
+        <div className="footer-bottom">
           <p>
             © 2026 {site.name} · {site.school}
           </p>
-          <p>Student-led service in Alpharetta, Georgia</p>
+          <p>Different generations. Common ground.</p>
         </div>
       </div>
     </footer>

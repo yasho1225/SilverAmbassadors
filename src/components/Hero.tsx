@@ -1,82 +1,82 @@
 "use client";
-
 import Link from "next/link";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { site } from "@/lib/content";
-import { volunteerForm } from "@/lib/config";
-
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import { photographs } from "@/lib/photographs";
+gsap.registerPlugin(ScrollTrigger);
 export function Hero() {
   const root = useRef<HTMLElement>(null);
-
   useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el.querySelectorAll("[data-hero]"),
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.85,
-          stagger: 0.08,
-          ease: "power3.out",
-          delay: 0.05,
-        },
-      );
-    }, el);
-
-    return () => ctx.revert();
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
+        gsap.to(".hero-art-inner", {
+          yPercent: 9,
+          scale: 1.07,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.6,
+            invalidateOnRefresh: true,
+          },
+        });
+      }, root);
+      return () => ctx.revert();
+    });
+    return () => mm.revert();
   }, []);
-
   return (
-    <section
-      ref={root}
-      className="site-pad relative flex min-h-[calc(100svh-var(--nav-h))] flex-col"
-    >
-      <div className="site-container-wide flex flex-1 flex-col justify-between py-10 sm:py-14">
-        <div className="max-w-[18ch]">
-          <h1
-            data-hero
-            className="display text-[clamp(3.4rem,12vw,8.5rem)] text-ink"
-            style={{ opacity: 0 }}
-          >
-            Students and seniors,{" "}
-            <span className="text-accent">connected.</span>
-          </h1>
+    <section ref={root} className="hero site-pad" aria-labelledby="hero-title">
+      <div className="site-container-wide">
+        <div className="hero-topline">
+          <span>Student volunteers. Senior connections.</span>
+          <span>Alpharetta, Georgia</span>
         </div>
-
-        <div
-          data-hero
-          className="mt-16 grid gap-8 border-t border-line pt-8 sm:grid-cols-[1.4fr_auto] sm:items-end"
-          style={{ opacity: 0 }}
-        >
-          <div>
-            <p className="font-display text-xl text-ink sm:text-2xl">
-              {site.name}
+        <div className="hero-grid">
+          <div className="hero-copy">
+            <h1 id="hero-title" className="hero-title">
+              Students
+              <br />
+              helping
+              <br />
+              <em>seniors.</em>
+            </h1>
+            <p className="hero-description">
+              A student-led volunteering community in Alpharetta. We bring high
+              school students and seniors together through tech help, games,
+              and shared activities.
             </p>
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              {site.tagline} Weekly Tech Helps and shared moments of service at{" "}
-              {site.school}.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a
-              href={volunteerForm.viewUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-accent"
-            >
-              Submit Hours
-            </a>
-            <Link href="/events" className="btn btn-ghost">
-              View events
+            <Link href="#volunteering" className="text-link">
+              Explore volunteering <ArrowUpRight size={19} aria-hidden="true" />
             </Link>
           </div>
+          <div className="hero-art">
+            <div className="hero-art-inner">
+              <PhotoPlaceholder asset="hero" variant="connection" />
+            </div>
+            <div className="art-caption">
+              <span>A space for shared moments</span>
+              <span>
+                {photographs.hero.src
+                  ? "Silver Ambassadors"
+                  : "Photography coming soon"}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="hero-bottom">
+          <a href="#mission" className="scroll-link">
+            <ArrowDown size={15} aria-hidden="true" /> A small introduction
+          </a>
+          <p>Different generations. Common ground.</p>
+          <span className="hero-seal" aria-hidden="true">
+            SA / AHS
+          </span>
         </div>
       </div>
     </section>

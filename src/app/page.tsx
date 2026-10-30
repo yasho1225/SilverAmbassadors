@@ -1,4 +1,3 @@
-import { CallToAction } from "@/components/CallToAction";
 import { EventsPreview } from "@/components/EventsPreview";
 import { Hero } from "@/components/Hero";
 import { MissionSection } from "@/components/MissionSection";
@@ -11,11 +10,10 @@ export default function HomePage() {
     <>
       <Hero />
       <MissionSection />
-      <WhatWeDo />
       <Showcase />
+      <WhatWeDo />
       <EventsPreview />
-      <PhotoGallery limit={8} showViewAll />
-      <CallToAction />
+      <PhotoGallery showViewAll />
     </>
   );
 }

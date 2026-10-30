@@ -7,7 +7,7 @@ import { useCallback, useState } from "react";
 import { BrandMark } from "@/components/BrandMark";
 import { MobileNavigation } from "@/components/MobileNavigation";
 import { volunteerForm } from "@/lib/config";
-import { navLinks } from "@/lib/content";
+import { primaryNavLinks } from "@/lib/content";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -20,16 +20,20 @@ export function Navbar() {
         <div className="site-pad site-container-wide flex h-[var(--nav-h)] items-center justify-between gap-4">
           <BrandMark compact />
 
-          <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
-            {navLinks.map((link) => {
+          <nav
+            aria-label="Primary"
+            className="hidden items-center gap-1 lg:flex"
+          >
+            {primaryNavLinks.map((link) => {
               const active = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
+                  aria-current={active ? "page" : undefined}
                   className={`rounded-full px-3.5 py-2 text-sm transition-colors duration-150 ${
                     active
-                      ? "bg-ink font-semibold text-background"
+                      ? "font-semibold text-ink underline underline-offset-8 decoration-line"
                       : "text-muted hover:bg-surface-2 hover:text-ink"
                   }`}
                 >
@@ -51,9 +55,10 @@ export function Navbar() {
             </a>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink transition-transform duration-150 active:scale-[0.97] lg:hidden"
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line text-ink transition-transform duration-150 active:scale-[0.97]"
               aria-expanded={open}
               aria-controls="mobile-menu"
+              aria-haspopup="dialog"
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((v) => !v)}
             >

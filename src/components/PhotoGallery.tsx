@@ -1,82 +1,109 @@
-"use client";
-
 import Link from "next/link";
-import { Reveal } from "@/components/motion/Reveal";
+import { ArrowUpRight } from "lucide-react";
+import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import { photographs, type PhotoKey } from "@/lib/photographs";
 
-const tiles = [
-  { word: "Sunday", caption: "Weekly" },
-  { word: "Tech", caption: "Help sessions" },
-  { word: "Joy", caption: "Shared" },
-  { word: "Hours", caption: "Volunteer" },
-  { word: "Games", caption: "Board night" },
-  { word: "Silver", caption: "Ambassadors" },
-  { word: "Carve", caption: "Pumpkins" },
-  { word: "Serve", caption: "Ice cream" },
-] as const;
-
-type PhotoGalleryProps = {
-  limit?: number;
-  showViewAll?: boolean;
-  title?: string;
-};
+const frames: {
+  asset: PhotoKey;
+  title: string;
+  variant: "connection" | "orbit" | "arch";
+}[] = [
+  { asset: "tech", title: "A helping hand.", variant: "arch" },
+  { asset: "gatherings", title: "A shared story.", variant: "orbit" },
+  { asset: "moments", title: "Time together.", variant: "connection" },
+];
 
 export function PhotoGallery({
-  limit,
+  standalone = false,
   showViewAll = false,
-  title = "The rhythm of the club",
-}: PhotoGalleryProps) {
-  const items = limit ? tiles.slice(0, limit) : tiles;
-
+}: {
+  standalone?: boolean;
+  showViewAll?: boolean;
+}) {
+  const photos = frames.filter((frame) => photographs[frame.asset].src);
+  const Heading = standalone ? "h1" : "h2";
   return (
-    <section className="site-pad section-y bg-surface" aria-labelledby="gallery">
+    <section
+      className="site-pad section-y gallery-section"
+      aria-labelledby="gallery-title"
+    >
       <div className="site-container-wide">
-        <Reveal>
-          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <h2
-              id="gallery"
-              className="display max-w-[14ch] text-[clamp(2.2rem,4.5vw,3.8rem)] text-ink"
-            >
-              {title}
-            </h2>
-            {showViewAll ? (
-              <Link href="/gallery" className="btn btn-ghost">
-                Full gallery
-              </Link>
-            ) : null}
-          </div>
-        </Reveal>
-
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-          {items.map((tile, index) => {
-            const inverse = index % 3 === 1;
-            return (
-              <Reveal key={tile.word} delay={index * 0.03}>
-                <div
-                  className={`relative aspect-square overflow-hidden ${
-                    inverse ? "bg-ink text-background" : "tile text-ink"
-                  }`}
+        {photos.length ? (
+          <>
+            <div className="gallery-heading">
+              <div>
+                <p className="section-label">Life at Silver Ambassadors</p>
+                <Heading
+                  id="gallery-title"
+                  className={standalone ? "page-title" : "editorial-heading"}
                 >
-                  {index % 4 === 2 ? (
-                    <div className="photo-slot absolute inset-0" />
-                  ) : (
-                    <p className="absolute inset-0 flex items-center justify-center font-display text-[clamp(2rem,7vw,4.5rem)] tracking-[-0.04em]">
-                      {tile.word}
-                    </p>
-                  )}
-                  <p
-                    className={`absolute inset-x-0 bottom-3 text-center text-[0.8rem] ${
-                      inverse || index % 4 === 2
-                        ? "text-background/70"
-                        : "text-muted"
-                    }`}
-                  >
-                    {index % 4 === 2 ? "Event photo placeholder" : tile.caption}
-                  </p>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
+                  {standalone
+                    ? "Our shared moments."
+                    : "The moments in between."}
+                </Heading>
+              </div>
+              <p>Our story, through our lens.</p>
+            </div>
+            <div className="gallery-frames">
+              {photos.map((frame) => (
+                <figure key={frame.asset}>
+                  <PhotoPlaceholder
+                    asset={frame.asset}
+                    variant={frame.variant}
+                  />
+                  <figcaption>{photographs[frame.asset].alt}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="gallery-preview">
+            <div className="gallery-preview-copy">
+              <p className="section-label">Life at Silver Ambassadors</p>
+              <Heading
+                id="gallery-title"
+                className={standalone ? "page-title" : "editorial-heading"}
+              >
+                {standalone ? (
+                  <>
+                    Our shared
+                    <br />
+                    <em>moments.</em>
+                  </>
+                ) : (
+                  <>
+                    The moments
+                    <br />
+                    <em>in between.</em>
+                  </>
+                )}
+              </Heading>
+              <p className="gallery-empty-note">
+                A place for the stories we share. Real photographs from our Tech
+                Helps and community gatherings are coming soon.
+              </p>
+              {showViewAll ? (
+                <Link href="/gallery" className="text-link">
+                  Visit the gallery{" "}
+                  <ArrowUpRight size={18} aria-hidden="true" />
+                </Link>
+              ) : (
+                <Link href="/events" className="text-link">
+                  Explore our gatherings{" "}
+                  <ArrowUpRight size={18} aria-hidden="true" />
+                </Link>
+              )}
+            </div>
+            <div className="gallery-preview-art">
+              <PhotoPlaceholder asset="moments" variant="arch" />
+            </div>
+          </div>
+        )}
+        {photos.length > 0 && showViewAll && (
+          <Link href="/gallery" className="text-link">
+            Visit the gallery <ArrowUpRight size={18} aria-hidden="true" />
+          </Link>
+        )}
       </div>
     </section>
   );

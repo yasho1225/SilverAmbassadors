@@ -10,16 +10,15 @@ export function BrandMark({ className = "", compact = false }: BrandMarkProps) {
     <Link
       href="/"
       className={`group inline-flex items-center gap-3 ${className}`}
-      aria-label="Silver Ambassadors home"
     >
       <span
         aria-hidden="true"
-        className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-[0.65rem] font-semibold tracking-[0.1em] text-accent-ink transition-transform duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] group-active:scale-[0.97]"
+        className="flex h-9 w-9 items-center justify-center border border-line text-[0.65rem] font-semibold tracking-[0.04em] text-ink transition-transform duration-150 group-active:scale-[0.97]"
       >
         SA
       </span>
       <span className="min-w-0">
-        <span className="block font-display text-lg leading-none tracking-[-0.03em] text-ink sm:text-xl">
+        <span className="block font-display text-base leading-none tracking-[-0.03em] text-ink sm:text-xl">
           Silver Ambassadors
         </span>
         {!compact ? (

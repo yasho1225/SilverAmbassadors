@@ -1,65 +1,27 @@
 "use client";
-
-import { useEffect, useRef, type ReactNode } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
-type RevealProps = {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-  y?: number;
-  as?: keyof HTMLElementTagNameMap;
-};
-
+import { motion, useReducedMotion } from "motion/react";
+import type { ReactNode } from "react";
 export function Reveal({
   children,
   className = "",
   delay = 0,
-  y = 28,
-  as = "div",
-}: RevealProps) {
-  const ref = useRef<HTMLElement | null>(null);
-  const Tag = as as "div";
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      el.style.opacity = "1";
-      el.style.transform = "none";
-      return;
-    }
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        { opacity: 0, y },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.75,
-          delay,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 88%",
-            once: true,
-          },
-        },
-      );
-    }, el);
-
-    return () => ctx.revert();
-  }, [delay, y]);
-
+  y = 18,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  y?: number;
+}) {
+  const reduce = useReducedMotion();
   return (
-    <Tag ref={ref as React.RefObject<HTMLDivElement>} className={className} style={{ opacity: 0 }}>
+    <motion.div
+      className={className}
+      initial={false}
+      whileInView={reduce ? undefined : { y: [y, 0] }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
       {children}
-    </Tag>
+    </motion.div>
   );
 }

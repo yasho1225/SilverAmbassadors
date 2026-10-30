@@ -1,43 +1,77 @@
-import { Reveal } from "@/components/motion/Reveal";
-
+"use client";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 export function Showcase() {
+  const root = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top 85%",
+            end: "center 45%",
+            scrub: 0.7,
+            invalidateOnRefresh: true,
+          },
+        });
+        timeline
+          .from(
+            ".generation-student",
+            { xPercent: -14, rotate: -5, ease: "none" },
+            0,
+          )
+          .from(
+            ".generation-senior",
+            { xPercent: 14, rotate: 5, ease: "none" },
+            0,
+          )
+          .from(".connection-word", { y: -12, ease: "none" }, 0);
+      }, root);
+      return () => ctx.revert();
+    });
+    return () => mm.revert();
+  }, []);
   return (
-    <section className="site-pad section-y overflow-hidden" aria-labelledby="who">
+    <section
+      ref={root}
+      className="connection-section site-pad"
+      aria-labelledby="connection-title"
+    >
       <div className="site-container-wide">
-        <Reveal>
-          <div className="grid gap-6 md:grid-cols-2 md:gap-10">
-            <div>
-              <h2 id="who" className="font-display text-2xl text-ink sm:text-3xl">
-                Who we bring together
-              </h2>
-            </div>
-            <p className="max-w-[42ch] text-base leading-relaxed text-muted">
-              Students earn volunteer hours and practice communication. Seniors
-              receive company, tech help, and shared celebration.
-            </p>
-          </div>
-        </Reveal>
-
-        <div className="mt-[10vh] grid gap-10 md:grid-cols-2">
-          <Reveal>
-            <div className="relative h-[38svh] overflow-hidden border border-line bg-surface md:h-[48svh]">
-              <p className="absolute top-4 left-4 text-sm text-muted">Students</p>
-              <p className="cut-word absolute top-1/2 left-0 -translate-y-1/2 text-ink">
-                Students
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <div className="relative h-[38svh] overflow-hidden border border-line bg-ink text-background md:h-[48svh]">
-              <p className="absolute top-4 left-4 text-sm text-background/55">
-                Seniors
-              </p>
-              <p className="cut-word absolute top-1/2 left-0 -translate-y-1/2 text-background">
-                Seniors
-              </p>
-            </div>
-          </Reveal>
+        <div className="connection-intro">
+          <h2 id="connection-title">
+            Two generations.
+            <br />
+            <em>A world to share.</em>
+          </h2>
+          <p>
+            Different experiences.
+            <br />
+            The same need to connect.
+          </p>
         </div>
+        <div className="generation-composition">
+          <div className="generation-panel generation-student">
+            <span>Something to give</span>
+            <p>Students</p>
+            <small>Time. Talent. A fresh perspective.</small>
+          </div>
+          <div className="generation-panel generation-senior">
+            <span>Something to share</span>
+            <p>Seniors</p>
+            <small>Stories. Experience. A new friendship.</small>
+          </div>
+          <span className="connection-word" aria-hidden="true">
+            together.
+          </span>
+        </div>
+        <p className="connection-footnote">
+          The best part is what we learn from each other.
+        </p>
       </div>
     </section>
   );

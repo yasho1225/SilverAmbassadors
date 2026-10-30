@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { site } from "@/lib/content";
+import { getSiteOrigin } from "@/lib/config";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -20,10 +21,10 @@ const newsreader = Newsreader({
   display: "swap",
 });
 
+const siteOrigin = getSiteOrigin();
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://silverambassadors.example.com",
-  ),
+  metadataBase: siteOrigin ? new URL(siteOrigin) : undefined,
   title: {
     default: `${site.name} | ${site.school}`,
     template: `%s | ${site.name}`,
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
     siteName: site.name,
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: `${site.name} | ${site.school}`,
     description: site.description,
   },
@@ -66,7 +67,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             Skip to main content
           </a>
           <Navbar />
-          <main id="main-content" className="flex-1">
+          <main id="main-content" tabIndex={-1} className="flex-1">
             {children}
           </main>
           <Footer />

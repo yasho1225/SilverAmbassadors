@@ -4,11 +4,9 @@ import { PhotoGallery } from "@/components/PhotoGallery";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Photographs and highlights from Silver Ambassadors events and community gatherings.",
+    "A visual journal of Silver Ambassadors. Event photographs and community highlights are coming soon.",
 };
 
 export default function GalleryPage() {
-  return (
-    <PhotoGallery title="Event photographs and club rhythm" />
-  );
+  return <PhotoGallery standalone />;
 }

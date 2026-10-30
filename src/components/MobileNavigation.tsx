@@ -1,79 +1,91 @@
 "use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { X, ArrowUpRight } from "lucide-react";
 import { navLinks } from "@/lib/content";
 import { volunteerForm } from "@/lib/config";
-
-type MobileNavigationProps = {
+export function MobileNavigation({
+  open,
+  onClose,
+}: {
   open: boolean;
   onClose: () => void;
-};
-
-export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
+}) {
   const pathname = usePathname();
-
+  const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     if (!open) return;
+    const el = dialog.current;
+    el?.showModal();
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
     return () => {
+      el?.close();
       document.body.style.overflow = previous;
-      window.removeEventListener("keydown", onKeyDown);
     };
   }, [open, onClose]);
-
-  if (!open) return null;
-
   return (
-    <div className="fixed inset-0 z-40 lg:hidden">
-      <button
-        type="button"
-        className="absolute inset-0 bg-black/55"
-        aria-label="Close menu"
-        onClick={onClose}
-      />
-      <nav
-        id="mobile-menu"
-        aria-label="Mobile"
-        className="menu-panel absolute inset-x-0 top-[var(--nav-h)] mx-4 overflow-hidden rounded-2xl border border-line bg-surface"
-      >
-        <ul className="flex flex-col p-3">
-          {navLinks.map((link) => {
-            const active = pathname === link.href;
-            return (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={onClose}
-                  className={`block rounded-xl px-4 py-3 text-base transition-colors ${
-                    active
-                      ? "bg-ink font-semibold text-background"
-                      : "text-ink hover:bg-surface-2"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            );
-          })}
+    <dialog
+      ref={dialog}
+      id="mobile-menu"
+      aria-label="Navigation menu"
+      data-lenis-prevent
+      onCancel={onClose}
+      onKeyDown={(event) => {
+        if (event.key !== "Tab") return;
+        const controls = event.currentTarget.querySelectorAll<HTMLElement>(
+          "a[href], button:not([disabled])",
+        );
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }}
+      onClick={(e) => {
+        if (e.target === dialog.current) onClose();
+      }}
+      className="mobile-dialog"
+    >
+      <div className="mobile-dialog-top">
+        <span>Silver Ambassadors</span>
+        <button type="button" onClick={onClose} aria-label="Close menu">
+          <X size={22} aria-hidden="true" />
+        </button>
+      </div>
+      <nav aria-label="All pages">
+        <ul>
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                onClick={onClose}
+                aria-current={pathname === link.href ? "page" : undefined}
+              >
+                {link.label}
+                <ArrowUpRight size={20} aria-hidden="true" />
+              </Link>
+            </li>
+          ))}
         </ul>
-        <div className="border-t border-line p-4">
-          <a
-            href={volunteerForm.viewUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-accent w-full"
-          >
-            Submit Hours
-          </a>
-        </div>
       </nav>
-    </div>
+      <a
+        href={volunteerForm.viewUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn btn-accent w-full mt-8"
+        onClick={onClose}
+      >
+        Submit Hours ↗
+      </a>
+      <p className="mt-8 text-xs text-muted">
+        Student-led service in Alpharetta, Georgia.
+      </p>
+    </dialog>
   );
 }

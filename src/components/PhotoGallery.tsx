@@ -10,6 +10,7 @@ const frames: {
   { asset: "connection", variant: "arch" },
   { asset: "community", variant: "orbit" },
   { asset: "students", variant: "connection" },
+  { asset: "gathering", variant: "orbit" },
 ];
 
 export function PhotoGallery({
@@ -19,9 +20,10 @@ export function PhotoGallery({
   standalone?: boolean;
   showViewAll?: boolean;
 }) {
-  const photos = frames
-    .filter((frame) => photographs[frame.asset].src)
-    .slice(0, standalone ? frames.length : 2);
+  const photos = frames.filter(
+    (frame) => photographs[frame.asset].src &&
+      (standalone || frame.asset === "students" || frame.asset === "gathering"),
+  );
   const Heading = standalone ? "h1" : "h2";
   return (
     <section

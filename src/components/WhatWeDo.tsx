@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Clock3, Smartphone, Users } from "lucide-react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { volunteerStories } from "@/lib/content";
 
 gsap.registerPlugin(ScrollTrigger);
+const activityIcons = { tech: Smartphone, games: Users, time: Clock3 };
 
 function ActivityIllustration({ scene }: { scene: "tech" | "games" | "time" }) {
   return (
@@ -42,6 +43,9 @@ function ActivityIllustration({ scene }: { scene: "tech" | "games" | "time" }) {
       )}
       {scene === "time" && (
         <div className="time-dial">
+          {Array.from({ length: 12 }, (_, index) => (
+            <i key={index} className="dial-tick" style={{ rotate: `${index * 30}deg` }} />
+          ))}
           <span className="dial-twelve">12</span>
           <span className="dial-three">3</span>
           <span className="dial-six">6</span>
@@ -58,68 +62,64 @@ function ActivityIllustration({ scene }: { scene: "tech" | "games" | "time" }) {
 export function WhatWeDo() {
   const root = useRef<HTMLElement>(null);
   useEffect(() => {
+    const animateArtwork = (
+      artwork: HTMLElement,
+      trigger: HTMLElement,
+      start: string,
+      end: string,
+    ) => {
+      const timeline = gsap.timeline({
+        defaults: { duration: 1, ease: "none" },
+        scrollTrigger: { trigger, start, end, scrub: 0.6, invalidateOnRefresh: true },
+      });
+      const device = artwork.querySelector(".tech-device");
+      const board = artwork.querySelector(".game-board");
+      if (device) {
+        timeline
+          .fromTo(device, { rotate: -9, y: 14 }, { rotate: 1, y: -8 }, 0)
+          .fromTo(artwork.querySelector(".device-type"), { scale: 0.85 }, { scale: 1 }, 0)
+          .fromTo(artwork.querySelectorAll(".device-rule"), { scaleX: 0.65 }, { scaleX: 1 }, 0);
+      } else if (board) {
+        timeline
+          .fromTo(board, { rotate: -11, scale: 0.94 }, { rotate: -2, scale: 1 }, 0)
+          .fromTo(artwork.querySelector(".piece-one"), { xPercent: 0, yPercent: 0 }, { xPercent: 130, yPercent: 130 }, 0);
+      } else {
+        timeline
+          .fromTo(artwork.querySelector(".hand-minute"), { rotate: -110 }, { rotate: 45 }, 0)
+          .fromTo(artwork.querySelector(".hand-hour"), { rotate: 55 }, { rotate: 68 }, 0);
+      }
+    };
     const mm = gsap.matchMedia();
     mm.add(
       "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
       () => {
         const ctx = gsap.context(() => {
+          const stage = root.current?.querySelector<HTMLElement>(".activity-stage");
           const scenes = gsap.utils.toArray<HTMLElement>(".activity-scene");
-          const timeline = gsap.timeline({
-            scrollTrigger: {
-              trigger: ".activity-story-grid",
-              start: "top top+=120",
-              end: () => {
-                const stage =
-                  root.current?.querySelector<HTMLElement>(".activity-stage");
-                return (
-                  "bottom top+=" + (120 + (stage?.offsetHeight ?? 530) / 2)
-                );
+          const chapters = gsap.utils.toArray<HTMLElement>(".activity-chapter");
+          if (!stage) return;
+          const stageCenter = () => parseFloat(getComputedStyle(stage).top) + stage.offsetHeight / 2;
+
+          scenes.forEach((scene, index) => {
+            const artwork = scene.querySelector<HTMLElement>(".activity-illustration");
+            if (artwork) animateArtwork(artwork, chapters[index], "top 70%", "bottom 35%");
+            if (!index) return;
+
+            // Both drawings crossfade continuously. Captions take turns so the
+            // frame never goes blank and the words never overlap.
+            gsap.timeline({
+              defaults: { ease: "none" },
+              scrollTrigger: {
+                trigger: chapters[index].querySelector("h3"),
+                start: () => `top top+=${stageCenter() + 80}`,
+                end: () => `top top+=${stageCenter() - 80}`,
+                scrub: 0.5,
+                invalidateOnRefresh: true,
               },
-              scrub: 0.6,
-              invalidateOnRefresh: true,
-            },
+            })
+              .fromTo(scenes[index - 1], { "--scene-alpha": 1 }, { "--scene-alpha": 0, duration: 1, immediateRender: false }, 0)
+              .fromTo(scene, { "--scene-alpha": 0 }, { "--scene-alpha": 1, duration: 1 }, 0);
           });
-          timeline
-            .fromTo(
-              ".activity-stage .tech-device",
-              { rotate: -6, y: 8 },
-              { rotate: -2, y: -4, duration: 0.8, ease: "none" },
-              0,
-            )
-            .to(
-              scenes[0],
-              { autoAlpha: 0, duration: 0.18, ease: "none" },
-              0.4,
-            )
-            .fromTo(
-              scenes[1],
-              { autoAlpha: 0 },
-              { autoAlpha: 1, duration: 0.22, ease: "none" },
-              0.58,
-            )
-            .fromTo(
-              ".activity-stage .game-board",
-              { rotate: -10, scale: 0.94 },
-              { rotate: -3, scale: 1, duration: 1.1, ease: "none" },
-              0.4,
-            )
-            .to(
-              scenes[1],
-              { autoAlpha: 0, duration: 0.18, ease: "none" },
-              1.5,
-            )
-            .fromTo(
-              scenes[2],
-              { autoAlpha: 0 },
-              { autoAlpha: 1, duration: 0.22, ease: "none" },
-              1.68,
-            )
-            .fromTo(
-              ".activity-stage .hand-minute",
-              { rotate: -110 },
-              { rotate: 25, duration: 1.1, ease: "none" },
-              1.5,
-            );
         }, root);
         return () => ctx.revert();
       },
@@ -131,20 +131,8 @@ export function WhatWeDo() {
           gsap.utils
             .toArray<HTMLElement>(".activity-mobile-art")
             .forEach((art) => {
-              gsap.fromTo(
-                art.querySelector(".activity-illustration"),
-                { y: 20 },
-                {
-                  y: -12,
-                  ease: "none",
-                  scrollTrigger: {
-                    trigger: art,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: 0.5,
-                  },
-                },
-              );
+              const artwork = art.querySelector<HTMLElement>(".activity-illustration");
+              if (artwork) animateArtwork(artwork, art, "top 85%", "bottom 35%");
             });
         }, root);
         return () => ctx.revert();
@@ -171,32 +159,47 @@ export function WhatWeDo() {
             </h2>
           </div>
           <p>
-            Three ways a little of your time
-            <br className="hidden sm:block" /> can bring us closer together.
+            Tech help, shared activities,
+            <br className="hidden sm:block" /> and time well spent.
           </p>
         </div>
         <div className="activity-story-grid">
           <div className="activity-stage" aria-hidden="true">
-            <div className="stage-topline">
-              <span>Small gestures. Real connection.</span>
-              <span>Silver Ambassadors</span>
-            </div>
-            {volunteerStories.map((story) => (
+            {volunteerStories.map((story, index) => {
+              const Icon = activityIcons[story.scene];
+              return (
               <div
                 key={story.scene}
                 className={`activity-scene scene-${story.scene}`}
               >
+                <div className="stage-topline">
+                  <span>{story.note}</span>
+                  <Icon size={18} />
+                </div>
                 <div className="scene-artwork">
                   <ActivityIllustration scene={story.scene} />
                 </div>
-                <p className="scene-caption">{story.visualLabel}</p>
+                <p className="scene-caption">
+                  <span>{story.visualLabel}</span>
+                  <span className="scene-dots">
+                    {volunteerStories.map((item, dot) => (
+                      <i key={item.scene} className={index === dot ? "is-current" : ""} />
+                    ))}
+                  </span>
+                </p>
               </div>
-            ))}
+              );
+            })}
           </div>
           <div className="activity-chapters">
-            {volunteerStories.map((story) => (
+            {volunteerStories.map((story) => {
+              const Icon = activityIcons[story.scene];
+              return (
               <article className="activity-chapter" key={story.scene}>
-                <p className="section-label">{story.note}</p>
+                <div className="chapter-kicker">
+                  <span className="chapter-icon"><Icon size={18} aria-hidden="true" /></span>
+                  <p className="section-label">{story.note}</p>
+                </div>
                 <div className="activity-mobile-art">
                   <ActivityIllustration scene={story.scene} />
                 </div>
@@ -205,6 +208,11 @@ export function WhatWeDo() {
                 {story.scene !== "time" && (
                   <p className="chapter-detail">{story.detail}</p>
                 )}
+                {story.scene === "tech" && (
+                  <Link href="/events" className="text-link">
+                    See upcoming visits <ArrowUpRight size={18} aria-hidden="true" />
+                  </Link>
+                )}
                 {story.scene === "time" && (
                   <Link href="/volunteer-hours" className="text-link">
                     Log your volunteer hours{" "}
@@ -212,7 +220,8 @@ export function WhatWeDo() {
                   </Link>
                 )}
               </article>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

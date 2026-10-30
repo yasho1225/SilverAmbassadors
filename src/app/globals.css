@@ -461,42 +461,39 @@ em {
 }
 .generation-panel {
   position: relative;
-  min-height: 340px;
+  min-height: 300px;
   padding: 25px 30px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
-.generation-panel > span {
+.generation-title {
   position: relative;
   z-index: 1;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-.generation-panel > p {
-  position: relative;
-  z-index: 1;
-  margin-top: 22px;
+  margin-top: 8px;
   font-family: var(--font-newsreader), Georgia, serif;
-  font-size: clamp(2.8rem, 4.8vw, 4.3rem);
+  font-size: clamp(2.4rem, 3.8vw, 3.6rem);
   letter-spacing: -0.07em;
   line-height: 1;
   font-weight: 300;
 }
-.generation-panel small {
+.generation-description {
   position: relative;
   z-index: 1;
-  max-width: 210px;
-  margin-top: auto;
-  font-size: 11px;
-  padding-bottom: 32px;
+  max-width: 52%;
+  margin-top: 18px;
+  font-family: var(--font-manrope), Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.8;
+  text-wrap: pretty;
 }
 .generation-art {
   position: absolute;
   right: 0;
-  bottom: 42px;
-  width: min(82%, 400px);
+  bottom: 28px;
+  width: min(76%, 280px);
   height: auto;
   overflow: hidden;
 }
@@ -504,12 +501,8 @@ em {
   left: 0;
   right: auto;
 }
-.generation-senior > span,
-.generation-senior > p {
-  align-self: flex-end;
-  text-align: right;
-}
-.generation-senior small {
+.generation-senior .generation-title,
+.generation-senior .generation-description {
   align-self: flex-end;
   text-align: right;
 }
@@ -528,7 +521,7 @@ em {
 .connection-word {
   grid-column: 1 / -1;
   display: block;
-  margin-top: 22px;
+  margin-top: 34px;
   text-align: center;
   font-family: var(--font-newsreader), Georgia, serif;
   font-size: clamp(2.6rem, 4.5vw, 4.2rem);
@@ -536,12 +529,6 @@ em {
   color: var(--charcoal);
   line-height: 1.1;
   letter-spacing: -0.045em;
-}
-.connection-footnote {
-  margin-top: 10px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--muted);
 }
 .section-heading {
   display: grid;
@@ -600,7 +587,7 @@ em {
 }
 .gallery-frames {
   display: grid;
-  grid-template-columns: 1.15fr 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
   align-items: start;
 }
@@ -610,18 +597,18 @@ em {
 .gallery-frames figure:nth-child(2) {
   padding-top: 36px;
 }
-.gallery-frames:not(.gallery-frames-preview) figure:nth-child(3) {
-  padding-top: 76px;
+.gallery-frames:not(.gallery-frames-preview) figure:nth-child(4) {
+  padding-top: 36px;
 }
 .gallery-frames .photo-composition {
   height: auto;
   aspect-ratio: 4 / 3;
 }
 .gallery-frames figure:first-child .photo-composition {
-  aspect-ratio: 0.94;
+  aspect-ratio: 1.15;
 }
 .gallery-frames-preview figure:first-child .photo-composition {
-  aspect-ratio: 1.15;
+  aspect-ratio: 4 / 3;
 }
 .gallery-frames figcaption {
   margin-top: 14px;
@@ -863,28 +850,23 @@ em {
     padding-bottom: 0;
   }
   .generation-panel {
-    min-height: 300px;
+    min-height: 260px;
     padding: 20px 14px;
+    padding-bottom: clamp(108px, calc(31.875vw + 20px), 167px);
   }
-  .generation-panel > span {
-    font-size: 7px;
-  }
-  .generation-panel > p {
-    margin-top: 18px;
-    font-size: 10vw;
+  .generation-title {
+    margin-top: 0;
+    font-size: clamp(1.9rem, 8.5vw, 3.4rem);
   }
   .generation-art {
-    width: 100%;
-    bottom: 84px;
+    width: min(85%, 180px);
+    bottom: 16px;
   }
-  .generation-panel small {
-    font-size: 9px;
-    max-width: 95px;
+  .generation-description {
+    margin-top: 14px;
+    max-width: 100%;
+    font-size: 12px;
     line-height: 1.7;
-  }
-  .connection-footnote {
-    font-size: 11px;
-    margin-top: 10px;
   }
   .activity-row {
     grid-template-columns: 1fr;
@@ -910,10 +892,10 @@ em {
     grid-column: 1 / -1;
   }
   .gallery-frames figure:first-child .photo-composition {
-    aspect-ratio: 1.15;
+    aspect-ratio: 4 / 3;
   }
   .gallery-frames figure:nth-child(2),
-  .gallery-frames:not(.gallery-frames-preview) figure:nth-child(3) {
+  .gallery-frames:not(.gallery-frames-preview) figure:nth-child(4) {
     padding-top: 0;
   }
   .gallery-frames figcaption {
@@ -1357,7 +1339,7 @@ em {
 .activity-story-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 9%;
+  gap: 7%;
   align-items: start;
 }
 .activity-stage {
@@ -1365,9 +1347,14 @@ em {
   top: 120px;
   height: min(530px, calc(100svh - 155px));
   min-height: 380px;
-  background: var(--art-ground);
-  color: var(--charcoal);
+  background: var(--charcoal);
+  color: var(--mist);
+  border: 1px solid var(--line);
   overflow: hidden;
+}
+.activity-stage,
+.activity-mobile-art {
+  background-image: radial-gradient(ellipse at 35% 30%, color-mix(in srgb, var(--silver) 16%, transparent), transparent 75%);
 }
 .stage-topline {
   position: absolute;
@@ -1381,32 +1368,54 @@ em {
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--charcoal);
+  color: var(--mist);
 }
 .activity-scene {
+  --scene-alpha: 0;
   position: absolute;
   inset: 0;
+  opacity: var(--scene-alpha);
+  pointer-events: none;
 }
-.activity-scene {
-  opacity: 0;
-  visibility: hidden;
+.activity-scene .scene-caption,
+.activity-scene .stage-topline {
+  opacity: clamp(0, calc((var(--scene-alpha) - 0.5) * 2), 1);
 }
 .activity-scene.scene-tech {
-  opacity: 1;
-  visibility: visible;
+  --scene-alpha: 1;
 }
 .scene-caption {
   position: absolute;
   bottom: 24px;
   inset-inline: 28px;
   padding-top: 16px;
-  border-top: 1px solid color-mix(in srgb, var(--charcoal) 20%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--silver) 28%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   font-family: var(--font-newsreader), Georgia, serif;
   font-size: clamp(1.65rem, 2.4vw, 2.1rem);
   font-weight: 300;
   line-height: 1.15;
   letter-spacing: -0.025em;
   text-wrap: balance;
+}
+.scene-dots {
+  display: flex;
+  gap: 7px;
+  flex-shrink: 0;
+}
+.scene-dots i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--silver) 30%, transparent);
+}
+.scene-dots .is-current {
+  width: 18px;
+  border-radius: 4px;
+  background: var(--silver);
 }
 .scene-artwork {
   position: absolute;
@@ -1433,11 +1442,11 @@ em {
   left: 19%;
   border-width: 3px;
   border-radius: 16px;
-  box-shadow: 10px 12px 0 color-mix(in srgb, var(--charcoal) 14%, transparent);
+  box-shadow: 8px 12px 0 #121c2470, 0 24px 40px #10192350, inset 0 0 0 2px #e2ebf255;
 }
 .scene-artwork .device-screen {
-  inset: 24px 12px;
-  padding: 8px 4px;
+  inset: 28px 14px;
+  padding: 12px 10px;
 }
 .scene-artwork .device-type {
   font-size: clamp(42px, 4.5vw, 60px);
@@ -1447,13 +1456,13 @@ em {
   width: 72%;
   top: 12%;
   left: 14%;
-  box-shadow: 10px 12px 0 color-mix(in srgb, var(--charcoal) 14%, transparent);
+  box-shadow: 8px 12px 0 #121c24a0, 0 28px 40px #10192350;
 }
 .scene-artwork .time-dial {
   width: 78%;
   top: 8%;
   left: 11%;
-  box-shadow: 10px 12px 0 color-mix(in srgb, var(--charcoal) 14%, transparent);
+  box-shadow: 8px 12px 0 #121c24a0, 0 24px 40px #10192350, inset 0 0 0 7px #e2ebf255;
 }
 .activity-illustration {
   position: relative;
@@ -1466,7 +1475,14 @@ em {
   aspect-ratio: 1;
   left: 9%;
   top: 8%;
-  border: 1px solid color-mix(in srgb, var(--charcoal) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--silver) 22%, transparent);
+  border-radius: 50%;
+}
+.illustration-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border: 1px dashed color-mix(in srgb, var(--silver) 14%, transparent);
   border-radius: 50%;
 }
 .tech-device {
@@ -1493,7 +1509,10 @@ em {
 .device-screen {
   position: absolute;
   inset: 29px 15px 28px;
-  border-top: 1px solid var(--art-mid);
+  color: var(--charcoal);
+  border: 1px solid color-mix(in srgb, var(--charcoal) 14%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--mist) 75%, var(--silver));
   padding: 10px 5px;
 }
 .device-type {
@@ -1503,16 +1522,19 @@ em {
   line-height: 1.25;
   letter-spacing: -0.07em;
   color: var(--charcoal);
+  transform-origin: left center;
 }
 .device-rule {
   display: block;
   height: 3px;
-  width: 85%;
+  width: 88%;
+  margin-top: 14px;
+  transform-origin: left center;
   background: var(--art-mid);
-  margin-top: 9px;
 }
 .device-rule.short {
-  width: 55%;
+  width: 57%;
+  margin-top: 9px;
 }
 .device-button {
   position: absolute;
@@ -1539,7 +1561,7 @@ em {
   background: var(--silver);
 }
 .square-dark {
-  background: var(--art-mid);
+  background: var(--charcoal);
 }
 .game-piece {
   position: absolute;
@@ -1584,6 +1606,19 @@ em {
   font-weight: 400;
   color: var(--charcoal);
   line-height: 1;
+}
+.dial-tick {
+  position: absolute;
+  top: 3%;
+  left: calc(50% - 1px);
+  width: 2px;
+  height: 94%;
+}
+.dial-tick::before {
+  content: "";
+  display: block;
+  height: 5px;
+  background: var(--art-mid);
 }
 .dial-twelve {
   top: 8%;
@@ -1634,7 +1669,7 @@ em {
   left: calc(50% - 5px);
 }
 .activity-chapter {
-  min-height: 52svh;
+  min-height: 46svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1644,9 +1679,25 @@ em {
 .activity-chapter:first-child {
   border-top: 0;
 }
-.activity-chapter > .section-label {
+.chapter-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.chapter-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+}
+.chapter-kicker .section-label {
   color: var(--accent);
-  margin-bottom: 16px;
+  margin: 0;
 }
 .activity-chapter h3 {
   font-family: var(--font-newsreader), Georgia, serif;
@@ -1720,7 +1771,8 @@ em {
     max-width: 560px;
     aspect-ratio: 1.5;
     overflow: hidden;
-    background: var(--art-ground);
+    background-color: var(--charcoal);
+    color: var(--mist);
     margin-bottom: 30px;
   }
   .activity-mobile-art .activity-illustration {
@@ -1742,8 +1794,8 @@ em {
     padding: 6px 4px;
   }
   .activity-mobile-art .device-rule {
+    margin-top: 7px;
     height: 2px;
-    margin-top: 6px;
   }
   .activity-mobile-art .game-board {
     top: 18%;
@@ -1772,5 +1824,10 @@ em {
   }
   .activity-mobile-art .device-type {
     font-size: 36px;
+  }
+}
+@media (max-height: 650px) {
+  .activity-stage .device-screen {
+    padding: 8px 10px;
   }
 }

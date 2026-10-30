@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GenerationIllustration } from "@/components/GenerationIllustration";
+import { generationContent } from "@/lib/content";
 gsap.registerPlugin(ScrollTrigger);
 export function Showcase() {
   const root = useRef<HTMLElement>(null);
@@ -12,35 +13,29 @@ export function Showcase() {
       const ctx = gsap.context(() => {
         const timeline = gsap.timeline({
           scrollTrigger: {
-            trigger: root.current,
+            trigger: root.current?.querySelector(".generation-composition"),
             start: "top 85%",
-            end: "center 45%",
-            scrub: 0.7,
+            end: "top top+=120",
+            scrub: 0.45,
             invalidateOnRefresh: true,
           },
         });
         timeline
           .from(
             ".generation-student",
-            { xPercent: -14, rotate: -5, duration: 0.9, ease: "none" },
+            { xPercent: -10, rotate: -4, duration: 1, ease: "none" },
             0,
           )
           .from(
             ".generation-senior",
-            { xPercent: 14, rotate: 5, duration: 0.9, ease: "none" },
-            0,
-          )
-          .from(".connection-word", { y: 8, duration: 0.9, ease: "none" }, 0)
-          .from(
-            ".generation-art",
-            { y: 10, autoAlpha: 0.7, duration: 0.9, ease: "none" },
+            { xPercent: 10, rotate: 4, duration: 1, ease: "none" },
             0,
           )
           .fromTo(
             ".connection-trace",
             { attr: { "stroke-dashoffset": 1 } },
-            { attr: { "stroke-dashoffset": 0 }, duration: 0.45, ease: "none" },
-            0.45,
+            { attr: { "stroke-dashoffset": 0 }, duration: 0.3, ease: "none" },
+            0.7,
           );
       }, root);
       return () => ctx.revert();
@@ -50,6 +45,7 @@ export function Showcase() {
   return (
     <section
       ref={root}
+      id="generations"
       className="connection-section site-pad"
       aria-labelledby="connection-title"
     >
@@ -61,31 +57,27 @@ export function Showcase() {
             <em>A world to share.</em>
           </h2>
           <p>
-            Students share digital know-how.
-            <br />
-            Seniors share stories and experience.
+            Every visit is a chance to help—and to learn from each other.
           </p>
         </div>
         <div className="generation-composition">
-          <div className="generation-panel generation-student">
-            <span>Something to give</span>
-            <p>Students</p>
-            <GenerationIllustration generation="students" />
-            <small>Patient tech help. A fresh perspective.</small>
-          </div>
-          <div className="generation-panel generation-senior">
-            <span>Something to share</span>
-            <p>Seniors</p>
-            <GenerationIllustration generation="seniors" />
-            <small>Stories. Experience. Good company.</small>
-          </div>
+          {(["students", "seniors"] as const).map((generation) => {
+            const content = generationContent[generation];
+            return (
+              <div
+                key={generation}
+                className={`generation-panel generation-${generation === "students" ? "student" : "senior"}`}
+              >
+                <h3 className="generation-title">{content.title}</h3>
+                <p className="generation-description">{content.description}</p>
+                <GenerationIllustration generation={generation} />
+              </div>
+            );
+          })}
           <span className="connection-word" aria-hidden="true">
             together.
           </span>
         </div>
-        <p className="connection-footnote">
-          Tech help, conversation, and friendships that go both ways.
-        </p>
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-export type PhotoKey = "hero" | "connection" | "community" | "students";
+export type PhotoKey = "hero" | "connection" | "community" | "students" | "gathering";
 
 type Photograph = {
   src: string;
@@ -29,5 +29,11 @@ export const photographs: Record<PhotoKey, Photograph> = {
     alt: "Four students posing together in a bright lobby.",
     caption: "Our student community.",
     position: "50% 50%",
+  },
+  gathering: {
+    src: "/photos/student-gathering.jpg",
+    alt: "Six students posing together outside near a bench.",
+    caption: "Outside, together.",
+    position: "50% 45%",
   },
 };

@@ -46,6 +46,19 @@ export const heroContent = {
   photoNote: ["Tech help.", "Time together."],
 } as const;
 
+export const generationContent = {
+  students: {
+    title: "Students",
+    description:
+      "Share tech skills, build confidence, and earn volunteer hours.",
+  },
+  seniors: {
+    title: "Seniors",
+    description:
+      "Get friendly tech help, share stories, and enjoy good company.",
+  },
+} as const;
+
 export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -65,7 +78,7 @@ export const volunteerStories = [
   {
     title: "Make technology feel a little friendlier.",
     note: "Sunday Tech Helps",
-    text: "Students sit down with seniors to work through everyday technology questions, from finding a phone setting to getting comfortable with a new device. A little patience can make a difference.",
+    text: "Sit down with seniors to work through phone settings, new devices, and everyday technology questions—at their pace.",
     detail: "Sundays · Typically 1:00 pm",
     scene: "tech",
     visualLabel: "A helping hand",
@@ -73,7 +86,7 @@ export const volunteerStories = [
   {
     title: "Make space for good company.",
     note: "Shared activities",
-    text: "Board games, pumpkin carving, and serving ice cream bring students and seniors together. We share our time and talents, learn from each other, and enjoy the moment.",
+    text: "Play board games, carve pumpkins, or serve ice cream. Simple activities make room for conversation and new friendships.",
     detail: "Seasonal & special gatherings",
     scene: "games",
     visualLabel: "A shared moment",
@@ -81,7 +94,7 @@ export const volunteerStories = [
   {
     title: "Give a little time. Take away a lot.",
     note: "Flexible volunteering",
-    text: "Frequent opportunities make service easier to fit into student life. Build communication skills, earn volunteer hours, and help create a more connected community, one visit at a time.",
+    text: "Choose regular visits that fit around school. Build communication skills and earn volunteer hours, one visit at a time.",
     detail: "Submit your hours after volunteering",
     scene: "time",
     visualLabel: "Time well spent",

@@ -68,9 +68,10 @@ Until club assets are provided, the site uses clearly labeled placeholders for:
 - Contact email / advisor
 - Google Calendar embed
 
-Three club-provided originals are stored in `public/photos/`. The shared visit
-portrait leads the homepage, with two photos in the homepage gallery and all
-three selected photos on the Gallery page. Sources, descriptive alternative text,
+Four club-provided originals are stored in `public/photos/`. The shared visit
+portrait and community visit lead the homepage; the two student group photos
+close it, so no hero photo repeats below. The Gallery page shows all four.
+Sources, descriptive alternative text,
 short captions, and crop focal points live in `src/lib/photographs.ts`.
 The original files are preserved; Next.js supplies appropriately sized images.
 Empty photo slots still have a labeled artwork fallback.
@@ -84,11 +85,17 @@ the first-visit steps and identifies unavailable contact information in one note
 ### Motion
 
 The homepage has three restrained scroll moments: the hero artwork drifts within
-its frame, the students/seniors panels converge, and the volunteering illustrations
+its frame, the student/senior drawings briefly join, and the volunteering illustrations
 transition between tech help, shared activities, and time given. The volunteering
 stage uses native CSS sticky positioning alongside three readable text chapters.
+Each scene changes when its heading passes the artwork's center. Drawings crossfade
+continuously, while captions fade in sequence. Object movement follows scroll in
+both directions on desktop and mobile; there is no timed playback or added spacer.
 On smaller screens, each illustration stays with its own chapter and moves gently
 with the scroll. No scene uses GSAP pinning.
+The student/senior cards gently converge and straighten with the scroll, with
+smaller drawings and a shared tablet at their seam. Scrolling back separates them
+again; the section adds no pinned space. Reading never depends on the animation.
 Motion handles restrained section movement; GSAP owns the scroll scenes;
 Lenis shares GSAP's clock and updates ScrollTrigger. Every scene cleans up on
 navigation and responds to changes in the reduced-motion preference. With

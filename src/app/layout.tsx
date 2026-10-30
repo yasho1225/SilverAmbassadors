@@ -58,7 +58,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${manrope.variable} ${newsreader.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-background text-foreground">
+      {/* Grammarly can add body attributes before React hydrates. */}
+      <body
+        suppressHydrationWarning
+        className="flex min-h-full flex-col bg-background text-foreground"
+      >
         <SmoothScroll>
           <a
             href="#main-content"

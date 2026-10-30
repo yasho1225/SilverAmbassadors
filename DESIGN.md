@@ -25,8 +25,8 @@ fallback for empty photo slots.
 Mist blue and silver share cool undertones. Graphite supplies contrast for
 type and controls. Surface variations are subtle mixes of the light colors,
 while illustration shadows give silver its material character. Large page
-surfaces stay light. The overlapping “together.” word uses a single graphite
-fill and a fine silver edge, without a background box or color blending.
+surfaces stay light. The “together.” sign-off sits below the two cards in solid
+graphite, with no outline, background box, or color blending.
 
 ## Motion
 
@@ -45,6 +45,16 @@ activity overview without replaying it. Supporting pages share a consistent
 introduction, heading scale, and spacing. Two photographs close the homepage;
 the Gallery page shows the three selected originals. The footer groups all
 pages and the two social destinations without a duplicate members column.
+
+The hero directly identifies students helping seniors connect, and explains
+phone help, technology questions, games, and regular visits. It pairs this with real
+club photos. A smaller photograph overlaps the main image below the faces;
+the volunteering action and typical Sunday time remain clear. In the generation
+scene, one student and one senior sit close to a shared tablet. Their bent arms
+and the tabletop join across the card seam without stretched limbs.
+The picture joins as the cards converge during normal page scrolling, without
+holding the section in place or adding scroll distance. Reduced motion uses a
+static version.
 
 ## Anti-patterns
 

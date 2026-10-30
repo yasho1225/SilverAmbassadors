@@ -5,11 +5,15 @@ export function PhotoPlaceholder({
   variant = "connection",
   className = "",
   sizes = "(max-width: 767px) calc(100vw - 40px), (max-width: 1439px) 45vw, 620px",
+  position,
+  eager = asset === "hero",
 }: {
   asset: PhotoKey;
   variant?: "connection" | "orbit" | "arch";
   className?: string;
   sizes?: string;
+  position?: string;
+  eager?: boolean;
 }) {
   const photo = photographs[asset];
   return (
@@ -21,10 +25,11 @@ export function PhotoPlaceholder({
           src={photo.src}
           alt={photo.alt}
           fill
-          preload={asset === "hero"}
+          loading={eager ? "eager" : "lazy"}
+          fetchPriority={asset === "hero" ? "high" : undefined}
           sizes={sizes}
           className="object-cover"
-          style={{ objectPosition: photo.position }}
+          style={{ objectPosition: position ?? photo.position }}
         />
       ) : (
         <>

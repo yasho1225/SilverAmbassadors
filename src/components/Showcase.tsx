@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { GenerationIllustration } from "@/components/GenerationIllustration";
 gsap.registerPlugin(ScrollTrigger);
 export function Showcase() {
   const root = useRef<HTMLElement>(null);
@@ -21,15 +22,26 @@ export function Showcase() {
         timeline
           .from(
             ".generation-student",
-            { xPercent: -14, rotate: -5, ease: "none" },
+            { xPercent: -14, rotate: -5, duration: 0.9, ease: "none" },
             0,
           )
           .from(
             ".generation-senior",
-            { xPercent: 14, rotate: 5, ease: "none" },
+            { xPercent: 14, rotate: 5, duration: 0.9, ease: "none" },
             0,
           )
-          .from(".connection-word", { y: -12, ease: "none" }, 0);
+          .from(".connection-word", { y: 8, duration: 0.9, ease: "none" }, 0)
+          .from(
+            ".generation-art",
+            { y: 10, autoAlpha: 0.7, duration: 0.9, ease: "none" },
+            0,
+          )
+          .fromTo(
+            ".connection-trace",
+            { attr: { "stroke-dashoffset": 1 } },
+            { attr: { "stroke-dashoffset": 0 }, duration: 0.45, ease: "none" },
+            0.45,
+          );
       }, root);
       return () => ctx.revert();
     });
@@ -49,28 +61,30 @@ export function Showcase() {
             <em>A world to share.</em>
           </h2>
           <p>
-            Different experiences.
+            Students share digital know-how.
             <br />
-            The same need to connect.
+            Seniors share stories and experience.
           </p>
         </div>
         <div className="generation-composition">
           <div className="generation-panel generation-student">
             <span>Something to give</span>
             <p>Students</p>
-            <small>Time. Talent. A fresh perspective.</small>
+            <GenerationIllustration generation="students" />
+            <small>Patient tech help. A fresh perspective.</small>
           </div>
           <div className="generation-panel generation-senior">
             <span>Something to share</span>
             <p>Seniors</p>
-            <small>Stories. Experience. A new friendship.</small>
+            <GenerationIllustration generation="seniors" />
+            <small>Stories. Experience. Good company.</small>
           </div>
           <span className="connection-word" aria-hidden="true">
             together.
           </span>
         </div>
         <p className="connection-footnote">
-          The best part is what we learn from each other.
+          Tech help, conversation, and friendships that go both ways.
         </p>
       </div>
     </section>

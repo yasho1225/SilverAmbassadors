@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
-import { photographs } from "@/lib/photographs";
+import { heroContent } from "@/lib/content";
+
 gsap.registerPlugin(ScrollTrigger);
 export function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -13,17 +14,24 @@ export function Hero() {
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {
-        gsap.to(".hero-art-inner", {
-          yPercent: 9,
-          scale: 1.07,
+        const scrollTrigger = {
+          trigger: root.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.6,
+          invalidateOnRefresh: true,
+        };
+        gsap.to(".hero-main-photo .hero-art-inner", {
+          yPercent: 5,
+          scale: 1.04,
           ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 0.6,
-            invalidateOnRefresh: true,
-          },
+          scrollTrigger,
+        });
+        gsap.to(".hero-secondary-photo", {
+          y: -18,
+          rotate: -3,
+          ease: "none",
+          scrollTrigger,
         });
       }, root);
       return () => ctx.revert();
@@ -32,55 +40,51 @@ export function Hero() {
   }, []);
   return (
     <section ref={root} className="hero site-pad" aria-labelledby="hero-title">
-      <div className="site-container-wide">
-        <div className="hero-topline">
-          <span>Student volunteers. Senior connections.</span>
-          <span>Alpharetta, Georgia</span>
-        </div>
-        <div className="hero-grid">
-          <div className="hero-copy">
-            <h1 id="hero-title" className="hero-title">
-              Students
-              <br />
-              helping
-              <br />
-              <em>seniors.</em>
-            </h1>
-            <p className="hero-description">
-              A student-led volunteering community in Alpharetta. We bring high
-              school students and seniors together through tech help, games, and
-              shared activities.
-            </p>
-            <Link href="#volunteering" className="text-link">
-              Explore volunteering <ArrowUpRight size={19} aria-hidden="true" />
+      <div className="site-container-wide hero-grid">
+        <div className="hero-copy">
+          <p className="hero-eyebrow">
+            <span aria-hidden="true" />
+            {heroContent.eyebrow}
+          </p>
+          <h1 id="hero-title" className="hero-title">
+            <span>{heroContent.headline[0]}</span>
+            <em>{heroContent.headline[1]}</em>
+          </h1>
+          <p className="hero-description">{heroContent.description}</p>
+          <div className="hero-actions">
+            <Link href="#volunteering" className="hero-primary-link">
+              {heroContent.primaryAction}
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </Link>
+            <Link href="#mission" className="hero-mission-link">
+              {heroContent.secondaryAction}
+              <ArrowUpRight size={15} aria-hidden="true" />
             </Link>
           </div>
-          <div className="hero-art">
+          <p className="hero-visit-note">{heroContent.visitNote}</p>
+        </div>
+        <div className="hero-photo-story">
+          <div className="hero-main-photo">
             <div className="hero-art-inner">
-              <PhotoPlaceholder asset="hero" variant="connection" />
-            </div>
-            <div className="art-caption">
-              <span>
-                {photographs.hero.src
-                  ? photographs.hero.caption
-                  : "A space for shared moments"}
-              </span>
-              <span>
-                {photographs.hero.src
-                  ? "Silver Ambassadors"
-                  : "Photography coming soon"}
-              </span>
+              <PhotoPlaceholder
+                asset="hero"
+                position="50% 88%"
+                sizes="(max-width: 767px) 80vw, (max-width: 1439px) 38vw, 475px"
+              />
             </div>
           </div>
-        </div>
-        <div className="hero-bottom">
-          <a href="#mission" className="scroll-link">
-            <ArrowDown size={15} aria-hidden="true" /> A small introduction
-          </a>
-          <p>Different generations. Common ground.</p>
-          <span className="hero-seal" aria-hidden="true">
-            SA / AHS
-          </span>
+          <div className="hero-secondary-photo">
+            <PhotoPlaceholder
+              asset="community"
+              eager
+              sizes="(max-width: 767px) 55vw, (max-width: 1439px) 25vw, 340px"
+            />
+          </div>
+          <p className="hero-photo-note">
+            {heroContent.photoNote[0]}
+            <br />
+            <em>{heroContent.photoNote[1]}</em>
+          </p>
         </div>
       </div>
     </section>

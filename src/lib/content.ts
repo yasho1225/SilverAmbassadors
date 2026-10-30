@@ -35,6 +35,17 @@ export const site = {
   },
 } as const;
 
+export const heroContent = {
+  eyebrow: "Alpharetta High School · Student volunteers",
+  headline: ["Students helping", "seniors connect."],
+  description:
+    "We help local seniors use their phones, work through technology questions, and enjoy games and conversation during regular visits.",
+  primaryAction: "Explore volunteering",
+  secondaryAction: "Our mission",
+  visitNote: "Sunday Tech Helps · Typically 1:00 pm",
+  photoNote: ["Tech help.", "Time together."],
+} as const;
+
 export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
